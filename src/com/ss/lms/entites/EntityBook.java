@@ -4,18 +4,14 @@ public class EntityBook {
 	
 	private Integer bookId;
 	private String title;
-	private Integer authorId;
-	private Integer publisherId;
+	private EntityAuthor author;
+	private EntityPublisher publisher;
 	
-	public EntityBook() {
-		
-	}
-	
-	public EntityBook(Integer bookId, String title, Integer authorId, Integer publisherId) {
+	public EntityBook(Integer bookId, String title, EntityAuthor author, EntityPublisher publisher) {
 		this.bookId = bookId;
 		this.title = title;
-		this.authorId = authorId;
-		this.publisherId = publisherId;
+		this.author = author;
+		this.publisher = publisher;
 	}
 
 	/**
@@ -49,31 +45,33 @@ public class EntityBook {
 	/**
 	 * @return the authorId
 	 */
-	public Integer getAuthorId() {
-		return authorId;
+	public EntityAuthor getAuthor() {
+		return author;
 	}
 
 	/**
 	 * @param authorId the authorId to set
 	 */
-	public void setAuthorId(Integer authorId) {
-		this.authorId = authorId;
+	public void setAuthor(EntityAuthor author) {
+		this.author= author;
+	}
+	
+	/**
+	 * @return the publisher
+	 */
+	public EntityPublisher getPublisher() {
+		return publisher;
 	}
 
 	/**
-	 * @return the pubisherId
+	 * @param publisher the publisher to set
 	 */
-	public Integer getPubisherId() {
-		return publisherId;
+	public void setPublisher(EntityPublisher publisher) {
+		this.publisher = publisher;
 	}
 
-	/**
-	 * @param pubisherId the pubisherId to set
-	 */
-	public void setPubisherId(Integer pubisherId) {
-		this.publisherId = pubisherId;
+	public EntityBook() {
+		
 	}
-
-
 	
 }

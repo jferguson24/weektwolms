@@ -4,65 +4,64 @@ import java.sql.Date;
 
 public class EntityBookLoan {
 	
-	Integer bookId;
-	Integer branchId;
-	Integer cardNo;
+	EntityBook book;
+	EntityLibraryBranch branch;
+	EntityBorrower borrower;
 	Date dateOut;
 	Date dueDate;
 	
-	public EntityBookLoan() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public EntityBookLoan(Integer bookId, Integer branchId, Integer cardNo,
-			Date dateOut,Date dueDate) {
-		this.bookId = bookId;
-		this.branchId = branchId;
-		this.cardNo = cardNo;
+	public EntityBookLoan(EntityBook book, EntityLibraryBranch branch, EntityBorrower borrower, Date dateOut,Date dueDate) {
+		this.book = book;
+		this.branch = branch;
+		this.borrower = borrower;
 		this.dateOut = dateOut;
 		this.dueDate = dueDate;
 	}
-
+	
 	/**
-	 * @return the bookId
+	 * @return the book
 	 */
-	public Integer getBookId() {
-		return bookId;
+	public EntityBook getBook() {
+		return book;
 	}
 
 	/**
-	 * @param bookId the bookId to set
+	 * @param book the book to set
 	 */
-	public void setBookId(Integer bookId) {
-		this.bookId = bookId;
+	public void setBook(EntityBook book) {
+		this.book = book;
 	}
 
 	/**
-	 * @return the branchId
+	 * @return the branch
 	 */
-	public Integer getBranchId() {
-		return branchId;
+	public EntityLibraryBranch getBranch() {
+		return branch;
 	}
 
 	/**
-	 * @param branchId the branchId to set
+	 * @param branch the branch to set
 	 */
-	public void setBranchId(Integer branchId) {
-		this.branchId = branchId;
+	public void setBranch(EntityLibraryBranch branch) {
+		this.branch = branch;
 	}
 
 	/**
-	 * @return the cardNo
+	 * @return the borrower
 	 */
-	public Integer getCardNo() {
-		return cardNo;
+	public EntityBorrower getBorrower() {
+		return borrower;
 	}
 
 	/**
-	 * @param cardNo the cardNo to set
+	 * @param borrower the borrower to set
 	 */
-	public void setCardNo(Integer cardNo) {
-		this.cardNo = cardNo;
+	public void setBorrower(EntityBorrower borrower) {
+		this.borrower = borrower;
+	}
+
+	public EntityBookLoan() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -2,46 +2,46 @@ package com.ss.lms.entites;
 
 public class EntityBookCopy {
 
-	Integer bookId;
-	Integer branchId;
+	EntityBook book;
+	EntityLibraryBranch branch;
 	Integer noOfCopies;
 	
 	public EntityBookCopy() {
 		
 	}
 	
-	public EntityBookCopy(Integer bookId, Integer branchId, Integer noOfCopies) {
-		this.bookId = bookId;
-		this.branchId = branchId;
+	public EntityBookCopy(EntityBook book, EntityLibraryBranch branch, Integer noOfCopies) {
+		this.book = book;
+		this.branch = branch;
 		this.noOfCopies = noOfCopies;
 	}
-
+	
 	/**
-	 * @return the bookId
+	 * @return the book
 	 */
-	public Integer getBookId() {
-		return bookId;
+	public EntityBook getBook() {
+		return book;
 	}
 
 	/**
-	 * @param bookId the bookId to set
+	 * @param book the book to set
 	 */
-	public void setBookId(Integer bookId) {
-		this.bookId = bookId;
+	public void setBook(EntityBook book) {
+		this.book = book;
 	}
 
 	/**
-	 * @return the branchId
+	 * @return the branch
 	 */
-	public Integer getBranchId() {
-		return branchId;
+	public EntityLibraryBranch getBranch() {
+		return branch;
 	}
 
 	/**
-	 * @param branchId the branchId to set
+	 * @param branch the branch to set
 	 */
-	public void setBranchId(Integer branchId) {
-		this.branchId = branchId;
+	public void setBranch(EntityLibraryBranch branch) {
+		this.branch = branch;
 	}
 
 	/**
