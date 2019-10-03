@@ -4,14 +4,23 @@ import java.util.Scanner;
 
 import com.ss.lms.service.Service;
 
-public interface Presentation 
+public abstract class Presentation 
 {
-	public static final Scanner scanner = new Scanner(System.in);
-	public static final Service service = null;
+	protected final Scanner scanner;
+	protected final Service service;
 	
-	public void menu();
+	public Presentation(Service service) 
+	{
+		this.scanner = new Scanner(System.in);
+		this.service = service;
+		this.menu();
+		this.scanner.close();
+		this.service.closeConnection();
+	}
 	
-	default public String getStringFieldFromUser(String fieldName) 
+	public abstract void menu();
+	
+	public String getStringFieldFromUser(String fieldName) 
 	{
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
 		do
@@ -21,7 +30,7 @@ public interface Presentation
 		while(scanner.hasNextLine());
 	}
 	
-	default public Integer getIntegerFieldFromUser() 
+	public Integer getIntegerFieldFromUser() 
 	{
 		while(true) 
 		{
