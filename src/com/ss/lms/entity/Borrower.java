@@ -1,18 +1,18 @@
 
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityBorrower {
+public class Borrower {
 
 	Integer cardNo;
 	String name;
 	String address;
 	String phone;
 	
-	public EntityBorrower(){
+	public Borrower(){
 		
 	}
 	
-	public EntityBorrower (Integer cardNo, String name, String address,
+	public Borrower (Integer cardNo, String name, String address,
 			String phone) {
 		this.cardNo = cardNo;
 		this.name = name;

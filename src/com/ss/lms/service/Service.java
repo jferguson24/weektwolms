@@ -1,15 +1,14 @@
 package com.ss.lms.service;
 
-import com.ss.lms.entites.*;
-
 import java.sql.SQLException;
 import java.util.*;
 
 import com.ss.lms.dataaccess.DataAccess;
+import com.ss.lms.entity.*;
 
 public abstract class Service 
 {
-	public  DataAccess dataAccess;
+	public DataAccess dataAccess;
 
 	public Service(DataAccess dataAccess) 
 	{
@@ -25,31 +24,31 @@ public abstract class Service
 		}
 	}
 	
-	public ArrayList<EntityAuthor> getAllAuthors()
+	public ArrayList<Author> getAllAuthors()
 	{
-		return dataAccess.selectAllAuthors();
+		return null;//dataAccess.selectAllAuthors();
 	}
 
-	public ArrayList<EntityPublisher> getAllPublishers()
+	public ArrayList<Publisher> getAllPublishers()
 	{
-		return dataAccess.selectAllPublishers();
+		return null;//dataAccess.selectAllPublishers();
 	}
 	
-	public ArrayList<EntityBook> getAllBooks()
+	public ArrayList<Book> getAllBooks()
 	{
-		return dataAccess.selectAllBooks();
+		return null;//dataAccess.selectAllBooks();
 	}
 	
-	public Integer getNumberOfCopies(EntityBookCopy bookCopy) 
+	public Integer getNumberOfCopies(BookCopy bookCopy) 
 	{
-		return dataAccess.selectNumberOfCopies();
+		return null;//dataAccess.selectNumberOfCopies();
 	}
 	
-	public ArrayList<EntityLibraryBranch> getAllBranches()
+	public ArrayList<LibraryBranch> getAllBranches()
 	{
-		return dataAccess.selectAllBranches();
+		return null;//dataAccess.selectAllBranches();
 	}
 	
-	public abstract EntityBook getBook();
+	public abstract Book getBook();
 	
 }

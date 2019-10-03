@@ -1,16 +1,16 @@
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityBookCopy {
+public class BookCopy {
 
-	EntityBook book;
-	EntityLibraryBranch branch;
+	Book book;
+	LibraryBranch branch;
 	Integer noOfCopies;
 	
-	public EntityBookCopy() {
+	public BookCopy() {
 		
 	}
 	
-	public EntityBookCopy(EntityBook book, EntityLibraryBranch branch, Integer noOfCopies) {
+	public BookCopy(Book book, LibraryBranch branch, Integer noOfCopies) {
 		this.book = book;
 		this.branch = branch;
 		this.noOfCopies = noOfCopies;
@@ -19,28 +19,28 @@ public class EntityBookCopy {
 	/**
 	 * @return the book
 	 */
-	public EntityBook getBook() {
+	public Book getBook() {
 		return book;
 	}
 
 	/**
 	 * @param book the book to set
 	 */
-	public void setBook(EntityBook book) {
+	public void setBook(Book book) {
 		this.book = book;
 	}
 
 	/**
 	 * @return the branch
 	 */
-	public EntityLibraryBranch getBranch() {
+	public LibraryBranch getBranch() {
 		return branch;
 	}
 
 	/**
 	 * @param branch the branch to set
 	 */
-	public void setBranch(EntityLibraryBranch branch) {
+	public void setBranch(LibraryBranch branch) {
 		this.branch = branch;
 	}
 

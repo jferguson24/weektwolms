@@ -1,16 +1,16 @@
 
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityAuthor {
+public class Author {
 	
 	private Integer authorId;
 	private String authorName;
 	
-	public EntityAuthor(){
+	public Author(){
 		
 	}
 	
-	public EntityAuthor(Integer authorId, String authorName) {
+	public Author(Integer authorId, String authorName) {
 		this.authorId = authorId;
 		this.authorName = authorName;
 	}

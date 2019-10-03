@@ -1,13 +1,13 @@
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityBook {
+public class Book {
 	
 	private Integer bookId;
 	private String title;
-	private EntityAuthor author;
-	private EntityPublisher publisher;
+	private Author author;
+	private Publisher publisher;
 	
-	public EntityBook(Integer bookId, String title, EntityAuthor author, EntityPublisher publisher) {
+	public Book(Integer bookId, String title, Author author, Publisher publisher) {
 		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
@@ -45,32 +45,32 @@ public class EntityBook {
 	/**
 	 * @return the authorId
 	 */
-	public EntityAuthor getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param authorId the authorId to set
 	 */
-	public void setAuthor(EntityAuthor author) {
+	public void setAuthor(Author author) {
 		this.author= author;
 	}
 	
 	/**
 	 * @return the publisher
 	 */
-	public EntityPublisher getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 
 	/**
 	 * @param publisher the publisher to set
 	 */
-	public void setPublisher(EntityPublisher publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 
-	public EntityBook() {
+	public Book() {
 		
 	}
 	

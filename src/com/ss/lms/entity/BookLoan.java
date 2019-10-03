@@ -1,16 +1,16 @@
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
 import java.sql.Date;
 
-public class EntityBookLoan {
+public class BookLoan {
 	
-	EntityBook book;
-	EntityLibraryBranch branch;
-	EntityBorrower borrower;
+	Book book;
+	LibraryBranch branch;
+	Borrower borrower;
 	Date dateOut;
 	Date dueDate;
 	
-	public EntityBookLoan(EntityBook book, EntityLibraryBranch branch, EntityBorrower borrower, Date dateOut,Date dueDate) {
+	public BookLoan(Book book, LibraryBranch branch, Borrower borrower, Date dateOut,Date dueDate) {
 		this.book = book;
 		this.branch = branch;
 		this.borrower = borrower;
@@ -21,46 +21,46 @@ public class EntityBookLoan {
 	/**
 	 * @return the book
 	 */
-	public EntityBook getBook() {
+	public Book getBook() {
 		return book;
 	}
 
 	/**
 	 * @param book the book to set
 	 */
-	public void setBook(EntityBook book) {
+	public void setBook(Book book) {
 		this.book = book;
 	}
 
 	/**
 	 * @return the branch
 	 */
-	public EntityLibraryBranch getBranch() {
+	public LibraryBranch getBranch() {
 		return branch;
 	}
 
 	/**
 	 * @param branch the branch to set
 	 */
-	public void setBranch(EntityLibraryBranch branch) {
+	public void setBranch(LibraryBranch branch) {
 		this.branch = branch;
 	}
 
 	/**
 	 * @return the borrower
 	 */
-	public EntityBorrower getBorrower() {
+	public Borrower getBorrower() {
 		return borrower;
 	}
 
 	/**
 	 * @param borrower the borrower to set
 	 */
-	public void setBorrower(EntityBorrower borrower) {
+	public void setBorrower(Borrower borrower) {
 		this.borrower = borrower;
 	}
 
-	public EntityBookLoan() {
+	public BookLoan() {
 		// TODO Auto-generated constructor stub
 	}
 

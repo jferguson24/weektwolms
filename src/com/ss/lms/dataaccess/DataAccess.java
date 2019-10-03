@@ -2,9 +2,10 @@ package com.ss.lms.dataaccess;
 
 import java.sql.*;
 import java.util.ArrayList;
-import com.ss.lms.entites.*;
 
-public abstract class DataAccess 
+import com.ss.lms.entity.*;
+
+public abstract class DataAccess<T>
 {
 	Connection con;
 	
@@ -17,16 +18,12 @@ public abstract class DataAccess
     {
         con.close();
     }
-	
-	public abstract ArrayList<EntityLibraryBranch> selectAllBranches();
 
-	public abstract ArrayList<EntityAuthor> selectAllAuthors();
+    public abstract void insert(T entity);
 
-	public abstract ArrayList<EntityPublisher> selectAllPublishers();
-
-	public abstract ArrayList<EntityBook> selectAllBooks();
-
-	public abstract Integer selectNumberOfCopies();
-
-
+    public abstract ArrayList<T> find(T entity);
+    
+    public abstract void update(T entity);
+    
+    public abstract void delete(T entity);
 }

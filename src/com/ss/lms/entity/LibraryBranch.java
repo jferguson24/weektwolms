@@ -1,16 +1,16 @@
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityLibraryBranch {
+public class LibraryBranch {
 
 	private Integer branchId;
 	private String branchName;
 	private String branchAddress;
 	
-	public EntityLibraryBranch() {
+	public LibraryBranch() {
 		
 	}
 	
-	public EntityLibraryBranch(Integer branchId, String branchName, String branchAddress) {
+	public LibraryBranch(Integer branchId, String branchName, String branchAddress) {
 		this.branchId = branchId;
 		this.branchName = branchName;
 		this.branchAddress = branchAddress;

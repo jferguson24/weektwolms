@@ -1,15 +1,15 @@
-package com.ss.lms.entites;
+package com.ss.lms.entity;
 
-public class EntityPublisher {
+public class Publisher {
 	
 	Integer publisherId;
 	String publisherName;
 	String publisherAddress;
 	String publisherPhone;
 	
-	public EntityPublisher() {}
+	public Publisher() {}
 	
-	public EntityPublisher(Integer publisherId, String publisher, 
+	public Publisher(Integer publisherId, String publisher, 
 			String publisherAddress, String publisherPhone) {
 		
 	}
