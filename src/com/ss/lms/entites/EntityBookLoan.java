@@ -1,4 +1,4 @@
-package com.ss.lms.entities;
+package com.ss.lms.entites;
 
 import java.sql.Date;
 
