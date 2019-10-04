@@ -1,36 +1,60 @@
 package com.ss.lms.presentation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-import com.ss.lms.service.Service;
+import com.ss.lms.service.*;
 
 public abstract class Presentation 
 {
 	protected final Scanner scanner;
-	protected final Service service;
+	protected ServiceAdmin administrator;
+	protected ServiceLibrarian librarian;
+	protected ServiceBorrower borrower;
 	
-	public Presentation(Service service) 
+	public Presentation(ServiceAdmin administrator)
 	{
 		this.scanner = new Scanner(System.in);
-		this.service = service;
+		this.administrator = administrator;
 		this.menu();
 		this.scanner.close();
-		this.service.closeConnection();
+		this.administrator.closeConnection();
+	}
+	
+	public Presentation(ServiceLibrarian librarian)
+	{
+		this.scanner = new Scanner(System.in);
+		this.librarian = librarian;
+		this.menu();
+		this.scanner.close();
+		this.librarian.closeConnection();
+	}
+	
+	public Presentation(ServiceBorrower borrower)
+	{
+		this.scanner = new Scanner(System.in);
+		this.borrower = borrower;
+		this.menu();
+		this.scanner.close();
+		this.borrower.closeConnection();
 	}
 	
 	public abstract void menu();
 	
+	// Forces the user to input a String. replaces "N/A" with "%"
 	public String getStringFieldFromUser(String fieldName) 
 	{
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
 		do
 		{
-			return scanner.nextLine();
+			return scanner.nextLine().replaceAll("N/A", "%");
 		}
 		while(scanner.hasNextLine());
 	}
 	
-	public Integer getIntegerFieldFromUser() 
+	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
+	public Integer getIntegerFieldFromUser(String fieldName) 
 	{
 		while(true) 
 		{
@@ -40,7 +64,7 @@ public abstract class Presentation
 			}
 			else if("N/A".equals(scanner.next())) 
 			{
-				return Integer.MAX_VALUE;
+				return -1;
 			}
 			else if("quit".equals(scanner.next())) 
 			{
@@ -48,11 +72,21 @@ public abstract class Presentation
 			}
 			else
 			{
-				System.out.println("Publisher ID must be an integer");
+				System.out.println(fieldName + " must be an integer");
 			}
 		}
 	}
 	
-	
-	
+	// returns a string representation of a 2d array, with brackets
+	public static String make2DArrayListLegible(ArrayList<ArrayList<String>> input) 
+	{	
+		StringBuilder output = new StringBuilder();
+
+		input.stream().forEach
+		(
+			row -> output.append(Arrays.toString(row.toArray()) + "\n")
+		);
+		
+		return output.toString();
+	}
 }
