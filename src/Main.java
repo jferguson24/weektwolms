@@ -1,30 +1,37 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.ss.lms.dataaccess.*;
-import com.ss.lms.presentation.*;
-import com.ss.lms.service.*;
+import com.ss.lms.presentation.PresentationAdmin;
+import com.ss.lms.presentation.PresentationBorrower;
+import com.ss.lms.presentation.PresentationLibrarian;
 
+/**
+ * 
+ */
+
+/**
+ * @author sj
+ *
+ */
 public class Main {
 
 	/**
 	 * @param args
 	 */
-    private static Scanner scanner = new Scanner( System.in );
-//    static PresentationLibrarian libMenu;
-//    static PresentationAdmin adminMenu;
-//    static PresentationBorrower borrowerMenu;
 	
-	public static void main(String[] args) {
+	static Scanner scanner;
+    static PresentationLibrarian libMenu;
+    static PresentationAdmin adminMenu;
+    static PresentationBorrower borrowerMenu;
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		System.out.println("Hi");
-		try {
-			startMenu();
-		}
-		catch(ClassNotFoundException|SQLException e)
-		{
-			System.out.println("Exc");
-			e.printStackTrace();
-		}
+		scanner = new Scanner(System.in);
+		
+		startMenu();
+	
+		System.out.println("Exc");
+	
 	}
 	//
 	public static void startMenu() throws ClassNotFoundException, SQLException {
@@ -41,7 +48,7 @@ public class Main {
 				
 				switch(input) {
 				case "1":
-//					libMenu = new PresentationLibrarian();
+					libMenu = new PresentationLibrarian();
 					//libMenu.start();
 					check = true;
 					break;
@@ -64,5 +71,4 @@ public class Main {
 		}
 	}
 }
-
 

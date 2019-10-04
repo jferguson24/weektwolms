@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/nicolae/git/WeeklyAssignments/WeeklyAssignmentOne/commons-lang3-3.9/commons-lang3-3.9.jar"/>
-	<classpathentry kind="lib" path="/home/nicolae/git/WeeklyAssignments/WeeklyAssignmentOne/commons-lang3-3.9/commons-scaffold_1_0.jar"/>
 	<classpathentry kind="lib" path="/Library/Smoothstack/Libraries/commons-lang3-3.9.jar"/>
 	<classpathentry kind="lib" path="/Users/sj/Downloads/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48.jar"/>
 	<classpathentry kind="output" path="bin"/>

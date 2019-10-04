@@ -21,9 +21,9 @@ public class PresentationLibrarian extends Presentation {
 	public PresentationLibrarian() throws SQLException, ClassNotFoundException {
 		super(new UserLibrarian(new BookDataAccess(), new LibraryBranchDataAccess(), new BookCopyDataAccess()));
 		
-		scanner = new Scanner( System.in );
+		//scanner = new Scanner( System.in );
 		
-		menu();
+		//menu();
 		
 	}
 	//
@@ -33,15 +33,16 @@ public class PresentationLibrarian extends Presentation {
 			System.out.println("\n\nLibrarian Menu.");
 			System.out.println("1. Enter a branch you manage");
 			System.out.println("2. Quit to previous");
+			int input = getIntegerFieldFromUser("Selection");
 			boolean check = false;
 			while (check == false) {
-				String input = scanner.nextLine();
 				switch(input) {
-				case "1":
+				case 1:
+					//TODO service layer get branches
 					branches();
 					check = true;
 					break;
-				case "2":
+				case 2:
 					return;
 				default:
 					System.out.println("Enter a valid choice.");
@@ -54,10 +55,10 @@ public class PresentationLibrarian extends Presentation {
 	public void branches(){
 		while(true) {
 			ArrayList<LibraryBranch> branches;
-
-			branches = librarian.readLibraryBranch(new LibraryBranch(-1,"%","%"));
 			System.out.println("Choose your branch:");
+			
 			int i = 1;
+			branches = librarian.readLibraryBranch(new LibraryBranch(-1,"%","%"));
 			for(LibraryBranch branch : branches) {
 				System.out.println(i + ") " + branch.getBranchName() + ", " + branch.getBranchAddress());
 				i++;
@@ -68,15 +69,9 @@ public class PresentationLibrarian extends Presentation {
 			
 
 			System.out.println("Enter your branch:");
-			int branchId = 0;
-			while(!scanner.hasNextInt()) {
-				System.out.println("Please enter a valid Integer.");
-				System.out.print("Enter your branch: ");
-			    scanner.next();
-			}
-
-			branchId = scanner.nextInt();
-			scanner.nextLine();
+			int branchId = getIntegerFieldFromUser("Branch ID");
+			
+			super.scanner.nextLine();
 			if(branchId == i) {
 				return;
 			}
@@ -86,6 +81,7 @@ public class PresentationLibrarian extends Presentation {
 					branchOptions(branch);
 				}
 			}
+			return;
 		}
 	}
 	
@@ -98,17 +94,17 @@ public class PresentationLibrarian extends Presentation {
 			System.out.println("3) Quit to previous");
 			boolean check = false;
 			while (check == false) {
-				String input = scanner.nextLine();
+				int input = getIntegerFieldFromUser("Selection");
 				switch(input) {
-				case "1":
+				case 1:
 					branchUpdate(branch);
 					check = true;
 					break;
-				case "2":
-					copies(branch.getBranchId());
+				case 2:
+					copies(branch);
 					check = true;
 					break;
-				case "3":
+				case 3:
 					return;
 				default:
 					System.out.println("Invalid input.");
@@ -123,48 +119,39 @@ public class PresentationLibrarian extends Presentation {
 		System.out.println("You have chosen to update the Branch with Branch Id: " + branch.getBranchId() + " and Branch Name: " + branch.getBranchName());
 		System.out.println("Enter 'quit' at any prompt to cancel operation.");
 		System.out.println("Please enter new branch name or enter N/A for no change:");
-		String name = scanner.nextLine();
-		if("quit".equals(name)) {
+		String input = getStringFieldFromUser("branch name");
+		if("quit".equals(input)) {
 			return;
 		}
 		System.out.println("Please enter new branch address or enter N/A for no change:");
-		String address = scanner.nextLine();
-		if("quit".equals(address)) {
+		String input2 = getStringFieldFromUser("branch name");
+		if("quit".equals(input)) {
 			return;
 		}
-		if(!"N/A".equals(name) && !"N/A".equals(address)) {
-			System.out.println("Updating Name and Address.");
-			if(librarian.updateLibrary(branch.getBranchId(), name, address)) {
-				System.out.println("Update Successful");
-			}
-		}
-		else if(!"N/A".equals(address)) {
-			System.out.println("Updating Address.");
-			if(librarian.updateLibraryAddress(branch.getBranchId(), address)) {
-				System.out.println("Update Successful");
-			}
-		}
-		else if(!"N/A".equals(name)) {
-			System.out.println("Updating Name.");
-			if(librarian.updateLibraryName(branch.getBranchId(), name)) {
-				System.out.println("Update Successful");
-			}
-		}
-		else {
-			System.out.println("Nothing to update.");
-		}
+		
+		branch.setBranchName(input);
+		branch.setBranchAddress(input2);
+//		if(!"N/A".equals(name) && !"N/A".equals(address)) {
+		System.out.println("Updating Name and Address.");
+		librarian.updateLibraryBranch(branch);
+		
+		System.out.println("Update Successful");
 	}
 	
-	public void copies(int branchId) {
+	public void copies(LibraryBranch branch) {
 		System.out.println("Pick the Book you want to add copies of, to your branch:");
 		while(true) {
-			ArrayList<Book> copies = librarian.getBookEntities();
-
+			Author author = new Author(-1, "%");
+			Publisher publisher = new Publisher(-1, "%", "%", "%");
+			Book book = new Book(-1,"%",author, publisher);
+			BookCopy bookCopy = new BookCopy(book ,branch, -1);
+			ArrayList<BookCopy> copies = librarian.readBookCopy(bookCopy);
+			
 			//Choosing which book you want to add copies of
 			System.out.println("Choose your Book:");
 			int i = 1;
-			for(Book book : copies) {
-				System.out.println(i + ") " + book.getTitle() + " by " + librarian.getAuthorName(book));
+			for(BookCopy copy : copies) {
+				System.out.println(i + ") " + copy.getBook().getTitle() + " by " + copy.getBook().getAuthor().getAuthorName());
 				i++;
 			}
 			System.out.println(i + ") Quit to previous");
@@ -172,13 +159,13 @@ public class PresentationLibrarian extends Presentation {
 			
 			//Getting a valid integer book ID
 			int bookId = 0;
-			while(!scanner.hasNextInt()) {
+			while(!super.scanner.hasNextInt()) {
 				System.out.println("Please enter a valid Integer.");
 				System.out.print("Enter your book: ");
-			    scanner.next();
+			    super.scanner.next();
 			}
-			bookId = scanner.nextInt();
-			scanner.nextLine();
+			bookId = super.scanner.nextInt();
+			super.scanner.nextLine();
 			
 			//Creating a book with the information given to pass the supporting functions
 
@@ -187,28 +174,28 @@ public class PresentationLibrarian extends Presentation {
 				return;
 			}
 			//If the entered value is within the available id's then it will go on to add copies
-			if(bookId <= copies.size()) {
-				addCopies(copies.get(bookId-1), branchId);
-			}
+//			if(bookId <= copies.size()) {
+//				addCopies(copies.get(bookId-1), branchId);
+//			}
 		}
 	}
 	
 	//addCopies gets the new number of copies desired and calls the service to update the database
 	public void addCopies(Book book, int branchId) {
-		System.out.println("Existing number of books: " + librarian.getNumberOfCopies(book, branchId));
-		System.out.println("Enter new number of copies: ");
-		int numCopies= 0;
-		//Gets a valid integer for the new number of copies
-		while(!scanner.hasNextInt()) {
-			System.out.println("Please enter a valid Integer.");
-			System.out.print("Enter your book: ");
-		    scanner.next();
-		}
-
-		numCopies = scanner.nextInt();
-		scanner.nextLine();
-		librarian.changeCopies(book, branchId, numCopies);
-		
+//		System.out.println("Existing number of books: " + librarian.getNumberOfCopies(book, branchId));
+//		System.out.println("Enter new number of copies: ");
+//		int numCopies= 0;
+//		//Gets a valid integer for the new number of copies
+//		while(!scanner.hasNextInt()) {
+//			System.out.println("Please enter a valid Integer.");
+//			System.out.print("Enter your book: ");
+//		    scanner.next();
+//		}
+//
+//		numCopies = scanner.nextInt();
+//		scanner.nextLine();
+//		librarian.changeCopies(book, branchId, numCopies);
+//		
 	}
 	
 }

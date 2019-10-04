@@ -37,7 +37,7 @@ public interface ServiceLibrarian
 	 * 
 	 *************************************************/
 	
-	public void updateLibraryBranch(Publisher libraryBranch);
+	public void updateLibraryBranch(LibraryBranch libraryBranch);
 	
 	public void updateBookCopy(BookLoan bookCopy);
 	

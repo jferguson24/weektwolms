@@ -9,7 +9,7 @@ import com.ss.lms.service.*;
 
 public abstract class Presentation 
 {
-	protected final Scanner scanner;
+	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
 	protected ServiceBorrower borrower;
@@ -19,7 +19,6 @@ public abstract class Presentation
 		this.scanner = new Scanner(System.in);
 		this.administrator = administrator;
 		this.menu();
-		this.scanner.close();
 		this.administrator.closeConnection();
 	}
 	
@@ -28,7 +27,6 @@ public abstract class Presentation
 		this.scanner = new Scanner(System.in);
 		this.librarian = librarian;
 		this.menu();
-		this.scanner.close();
 		this.librarian.closeConnection();
 	}
 	
@@ -37,7 +35,6 @@ public abstract class Presentation
 		this.scanner = new Scanner(System.in);
 		this.borrower = borrower;
 		this.menu();
-		this.scanner.close();
 		this.borrower.closeConnection();
 	}
 	
@@ -49,7 +46,7 @@ public abstract class Presentation
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
 		do
 		{
-			return scanner.nextLine().replaceAll("N/A", "%");
+			return getNextLine().replaceAll("N/A", "%");
 		}
 		while(scanner.hasNextLine());
 	}
@@ -90,4 +87,16 @@ public abstract class Presentation
 		
 		return output.toString();
 	}
+	
+    /*
+     * This function returns the next line while skipping over the next line feed, return carriage, etc
+     * */
+    public String getNextLine() 
+    {
+        // regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
+        // this tells scanner to skip past the next new line for all operating systems
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        return scanner.nextLine();
+    }
+    
 }

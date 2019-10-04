@@ -54,7 +54,8 @@ public class UserLibrarian implements ServiceLibrarian{
 		// TODO Auto-generated method stub
 		ArrayList<LibraryBranch> branches = null;
 		try {
-			return new ArrayList<LibraryBranch>(libraryBranchDao.find(libraryBranch));
+			branches = new ArrayList<LibraryBranch>(libraryBranchDao.find(libraryBranch));
+			return branches;
 		}
 		catch(SQLException e) {
 			System.out.println("Invalid Query");
@@ -69,8 +70,22 @@ public class UserLibrarian implements ServiceLibrarian{
 	}
 
 	@Override
-	public void updateLibraryBranch(Publisher libraryBranch) {
+	public void updateLibraryBranch(LibraryBranch libraryBranch) {
 		// TODO Auto-generated method stub
+		try {
+			LibraryBranch oldBranch = libraryBranchDao.find(new LibraryBranch(libraryBranch.getBranchId(), "%", "%")).get(0);
+
+			if(libraryBranch.getBranchAddress().equals("%")) {
+				libraryBranch.setBranchAddress(oldBranch.getBranchAddress());
+			}
+			if(libraryBranch.getBranchName().contentEquals("%")) {
+				libraryBranch.setBranchName(oldBranch.getBranchName());
+			}
+			libraryBranchDao.update(libraryBranch);		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
