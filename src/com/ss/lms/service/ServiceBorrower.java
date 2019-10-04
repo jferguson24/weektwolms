@@ -9,7 +9,7 @@ import com.ss.lms.entity.*;
 public interface ServiceBorrower
 {
 	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<Borrower> borrowerDao = null;
+	public DataAccess<UserBorrower> borrowerDao = null;
 	public DataAccess<BookCopy> bookCopyDao = null;
 	public DataAccess<BookLoan> bookLoanDao = null;
 	
@@ -44,7 +44,7 @@ public interface ServiceBorrower
 
 	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch);
 	
-	public ArrayList<Borrower> readBorrower(Borrower borrower);
+	public ArrayList<UserBorrower> readBorrower(UserBorrower borrower);
 
 	public ArrayList<BookLoan> readBookLoan(BookLoan bookLoan);
 

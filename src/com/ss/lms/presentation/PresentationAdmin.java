@@ -3,7 +3,7 @@ package com.ss.lms.presentation;
 import java.util.Scanner;
 
 import com.ss.lms.entity.*;
-import com.ss.lms.service.Administrator;
+import com.ss.lms.service.UserAdmin;
 import com.ss.lms.service.ServiceAdmin;
 
 import java.sql.Date;
@@ -14,7 +14,7 @@ public class PresentationAdmin extends Presentation
 	
 	public PresentationAdmin() 
 	{
-		super(new Administrator());
+		super(new UserAdmin());
 	}
 	
 	public void menu() 
@@ -200,8 +200,9 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
+					//
 					// read borrower
-					administrator.readBorrower(userBorrower);
+					administrator.readBorrower(userBorrower).toString();
 					break;
 					
 				case "6": // Book Loans table

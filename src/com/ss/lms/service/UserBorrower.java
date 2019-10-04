@@ -2,28 +2,32 @@ package com.ss.lms.service;
 
 import java.util.ArrayList;
 
-import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopy;
 import com.ss.lms.entity.BookLoan;
 import com.ss.lms.entity.LibraryBranch;
-import com.ss.lms.entity.Publisher;
 
-public class Librarian implements ServiceLibrarian{
+public class UserBorrower implements ServiceBorrower {
 
 	@Override
-	public void createBookCopy(BookCopy bookCopy) {
+	public void createBookLoan(BookLoan bookLoan) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public ArrayList<Book> readBook(Book book) {
+	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch) {
+	public ArrayList<UserBorrower> readBorrower(UserBorrower borrower) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<BookLoan> readBookLoan(BookLoan bookLoan) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,19 +39,7 @@ public class Librarian implements ServiceLibrarian{
 	}
 
 	@Override
-	public void updateLibraryBranch(Publisher libraryBranch) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateBookCopy(BookLoan bookCopy) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteBookCopy(BookLoan bookCopy) {
 		// TODO Auto-generated method stub
 		
 	}
