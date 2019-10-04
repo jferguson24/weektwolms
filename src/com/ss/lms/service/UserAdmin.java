@@ -1,7 +1,9 @@
 package com.ss.lms.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.ss.lms.dataaccess.*;
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopy;
@@ -10,8 +12,49 @@ import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
 
-public class UserAdmin implements ServiceAdmin{
-
+public class UserAdmin implements ServiceAdmin
+{
+	private DataAccess<Author> authorDao;
+	private DataAccess<Publisher> publisherDao;
+	private DataAccess<Book> bookDao;
+	private DataAccess<LibraryBranch> libraryBranchDao;
+	private DataAccess<Borrower> borrowerDao;
+	private DataAccess<BookCopy> bookCopyDao;
+	private DataAccess<BookLoan> bookLoanDao;
+	
+	public UserAdmin(
+			AuthorDataAccess authorDao, PublisherDataAccess publisherDao, BookDataAccess bookDao,
+			LibraryBranchDataAccess libraryDao, BorrowerDataAccess borrowerDao,
+			BookCopyDataAccess bookCopyDao, BookLoanDataAccess bookLoanDao) 
+	{
+		// "jdbc:mysql://localhost:3306/library","root",""
+		this.authorDao = authorDao;
+		this.publisherDao = publisherDao;
+		this.bookDao = bookDao;
+		this.libraryBranchDao = libraryDao;
+		this.borrowerDao = borrowerDao;
+		this.bookCopyDao = bookCopyDao;
+		this.bookLoanDao = bookLoanDao;
+	}
+	
+	public void closeConnection() 
+	{
+		try 
+		{
+			authorDao.close();
+			publisherDao.close();
+			bookDao.close();
+			libraryBranchDao.close();
+			borrowerDao.close();
+			bookCopyDao.close();
+			bookLoanDao.close();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void createAuthor(Author author) {
 		// TODO Auto-generated method stub

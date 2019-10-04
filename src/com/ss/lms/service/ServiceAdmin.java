@@ -1,38 +1,18 @@
 package com.ss.lms.service;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import com.ss.lms.dataaccess.*;
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookCopy;
+import com.ss.lms.entity.BookLoan;
+import com.ss.lms.entity.Borrower;
+import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 
 public interface ServiceAdmin
 {
-	public DataAccess<Author> authorDao = null;
-	public DataAccess<Publisher> publisherDao = null;
-	public DataAccess<Book> bookDao = null;
-	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<UserBorrower> borrowerDao = null;
-	public DataAccess<BookCopy> bookCopyDao = null;
-	public DataAccess<BookLoan> bookLoanDao = null;
-	
-	default public void closeConnection() 
-	{
-		try 
-		{
-			authorDao.close();
-			publisherDao.close();
-			bookDao.close();
-			libraryBranchDao.close();
-			borrowerDao.close();
-			bookCopyDao.close();
-			bookLoanDao.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-	}
+	public void closeConnection();
 	
 	/*************************************************
 	 * 

@@ -10,8 +10,8 @@ import com.ss.lms.entity.Borrower;
 
 public class BorrowerDataAccess extends DataAccess<Borrower>  {
 
-	public BorrowerDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BorrowerDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

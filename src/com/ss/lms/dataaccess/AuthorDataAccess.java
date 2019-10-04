@@ -11,9 +11,9 @@ import com.ss.lms.entity.Publisher;
 public class AuthorDataAccess extends DataAccess<Author> 
 {
 
-	public AuthorDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
+	public AuthorDataAccess() throws SQLException, ClassNotFoundException 
 	{
-		super(connectionInfo);
+		super();
 	}
 
 	@Override

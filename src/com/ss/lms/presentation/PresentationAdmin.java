@@ -2,19 +2,30 @@ package com.ss.lms.presentation;
 
 import java.util.Scanner;
 
+import com.ss.lms.dataaccess.AuthorDataAccess;
+import com.ss.lms.dataaccess.BookCopyDataAccess;
+import com.ss.lms.dataaccess.BookDataAccess;
+import com.ss.lms.dataaccess.BookLoanDataAccess;
+import com.ss.lms.dataaccess.BorrowerDataAccess;
+import com.ss.lms.dataaccess.LibraryBranchDataAccess;
+import com.ss.lms.dataaccess.PublisherDataAccess;
 import com.ss.lms.entity.*;
 import com.ss.lms.service.UserAdmin;
-import com.ss.lms.service.ServiceAdmin;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class PresentationAdmin extends Presentation
 {
 	Scanner scanner;
 	
-	public PresentationAdmin() 
+	public PresentationAdmin() throws ClassNotFoundException, SQLException 
 	{
-		super(new UserAdmin());
+		super(new UserAdmin(
+				new AuthorDataAccess(), new PublisherDataAccess(), new BookDataAccess(),
+				new LibraryBranchDataAccess(), new BorrowerDataAccess(),
+				new BookCopyDataAccess(), new BookLoanDataAccess()
+				));
 	}
 	
 	public void menu() 

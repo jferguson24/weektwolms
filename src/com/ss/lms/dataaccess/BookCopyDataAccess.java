@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import com.ss.lms.entity.*;
 
 public class BookCopyDataAccess extends DataAccess<BookCopy> {
-	public BookCopyDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BookCopyDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	//BookCopy has

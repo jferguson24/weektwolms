@@ -17,8 +17,8 @@ import com.ss.lms.entity.Publisher;
  *
  */
 public class BookDataAccess extends DataAccess<Book>{
-	public BookDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BookDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
