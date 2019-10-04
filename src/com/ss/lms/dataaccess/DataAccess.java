@@ -1,9 +1,7 @@
 package com.ss.lms.dataaccess;
 
 import java.sql.*;
-import java.util.ArrayList;
-
-import com.ss.lms.entity.*;
+import java.util.List;
 
 public abstract class DataAccess<T>
 {
@@ -19,11 +17,13 @@ public abstract class DataAccess<T>
         con.close();
     }
 
-    public abstract void insert(T entity);
+    public abstract void insert(T entity) throws SQLException;
 
-    public abstract ArrayList<T> find(T entity);
+    public abstract List<T> find(T entity) throws SQLException;
     
-    public abstract void update(T entity);
+    public abstract void update(T entity) throws SQLException;
     
-    public abstract void delete(T entity);
+    public abstract void delete(T entity) throws SQLException;
+    
+    public abstract List<T> packageResultSet(ResultSet result) throws SQLException;
 }

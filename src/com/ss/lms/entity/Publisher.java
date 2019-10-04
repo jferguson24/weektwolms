@@ -1,6 +1,6 @@
 package com.ss.lms.entity;
 
-public class Publisher {
+public class Publisher{
 	
 	Integer publisherId;
 	String publisherName;
