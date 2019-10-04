@@ -12,7 +12,7 @@ public interface ServiceAdmin
 	public DataAccess<Publisher> publisherDao = null;
 	public DataAccess<Book> bookDao = null;
 	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<Borrower> borrowerDao = null;
+	public DataAccess<UserBorrower> borrowerDao = null;
 	public DataAccess<BookCopy> bookCopyDao = null;
 	public DataAccess<BookLoan> bookLoanDao = null;
 	
@@ -68,7 +68,7 @@ public interface ServiceAdmin
 	
 	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch);
 	
-	public ArrayList<Borrower> readBorrower(Borrower borrower);
+	public ArrayList<Borrower> readBorrower(Borrower userBorrower);
 
 	public ArrayList<BookLoan> readBookLoan(BookLoan bookLoan);
 
@@ -88,7 +88,7 @@ public interface ServiceAdmin
 
 	public void updateLibraryBranch(Publisher libraryBranch);
 
-	public void updateBorrower(Borrower borrower);
+	public void updateBorrower(UserBorrower borrower);
 
 	public void updateBookLoan(BookLoan bookLoan);
 
@@ -108,7 +108,7 @@ public interface ServiceAdmin
 
 	public void deleteLibraryBranch(Publisher libraryBranch);
 
-	public void deleteBorrower(Borrower borrower);
+	public void deleteBorrower(UserBorrower borrower);
 
 	public void deleteBookLoan(BookLoan bookLoan);
 

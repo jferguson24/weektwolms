@@ -6,10 +6,11 @@ import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopy;
 import com.ss.lms.entity.BookLoan;
+import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
 
-public class Administrator implements ServiceAdmin{
+public class UserAdmin implements ServiceAdmin{
 
 	@Override
 	public void createAuthor(Author author) {
@@ -78,7 +79,7 @@ public class Administrator implements ServiceAdmin{
 	}
 
 	@Override
-	public ArrayList<Borrower> readBorrower(Borrower borrower) {
+	public ArrayList<Borrower> readBorrower(Borrower userBorrower) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -120,7 +121,7 @@ public class Administrator implements ServiceAdmin{
 	}
 
 	@Override
-	public void updateBorrower(Borrower borrower) {
+	public void updateBorrower(UserBorrower borrower) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -162,7 +163,7 @@ public class Administrator implements ServiceAdmin{
 	}
 
 	@Override
-	public void deleteBorrower(Borrower borrower) {
+	public void deleteBorrower(UserBorrower borrower) {
 		// TODO Auto-generated method stub
 		
 	}
