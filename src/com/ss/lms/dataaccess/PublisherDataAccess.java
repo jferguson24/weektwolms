@@ -46,6 +46,8 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 				+ "AND publisherAddress LIKE ?" // index 3
 				+ "AND publisherAddress LIKE ?;"; // index 4
 		
+		
+		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
 		query.setString(2, entity.getPublisherName());
@@ -82,16 +84,10 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	{
 		PreparedStatement query;
 		String sql = "DELETE FROM tbl_publisher WHERE "
-				+ "publisherId = ?, " // index 1
-				+ "publisherName = ?, " // index 2
-				+ "publisherAddress = ?, " // index 3
-				+ "publisherPhone = ?;"; // index 4
+				+ "publisherId = ?;"; // index 1
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
-		query.setString(2, entity.getPublisherName());
-		query.setString(3, entity.getPublisherAddress());
-		query.setString(4, entity.getPublisherPhone());
 		
 		query.executeUpdate();
 	}
