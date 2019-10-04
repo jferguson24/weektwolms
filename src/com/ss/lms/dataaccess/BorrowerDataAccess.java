@@ -32,17 +32,26 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 	}
 
 	@Override
-	public ArrayList<Borrower> find(Borrower entity) {
-		ArrayList<Borrower> borrower =  new ArrayList<>();
+	public ArrayList<Borrower> find(Borrower entity) throws SQLException {
+		//ArrayList<Borrower> borrower =  new ArrayList<>();
+		ResultSet result;
+		PreparedStatement query;
 		
-		return null;
+		String sql = "select cardNo, name from tbl_borrower where cardNo = ?";
+				
+		query = con.prepareStatement(sql);
+		query.setInt(1, entity.getCardNo());
+		
+		result = query.executeQuery();	
+					
+		return packageResultSet(result);
 	}
 
 	@Override
 	public void update(Borrower entity) throws SQLException {
 		PreparedStatement query;
 		String sql;
-		sql = "update tbl_borrower set borrowerName = ? where cardNo = ?";
+		sql = "update tbl_borrower set name = ? where cardNo = ?";
 			
 		query = con.prepareStatement(sql);
 		query.setString(1,entity.getName());
@@ -63,9 +72,22 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 	}
 
 	@Override
-	public List<Borrower> packageResultSet(ResultSet result) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Borrower> packageResultSet(ResultSet result) throws SQLException {
+		ArrayList<Borrower>  borrowerSet = new ArrayList<>();
+		Borrower borrower;
+		while(result.next()) {
+			
+			borrower  = new Borrower();
+			borrower.setAddress(result.getString("address"));
+			borrower.setCardNo(result.getInt("cardNo"));
+			borrower.setName(result.getString("name"));
+			borrower.setPhone(result.getString("phone"));
+			borrowerSet.add(borrower);
+		}
+		
+		
+		
+		return borrowerSet;
 	}
 
 }
