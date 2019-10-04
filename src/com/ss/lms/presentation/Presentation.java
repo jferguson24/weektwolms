@@ -9,7 +9,7 @@ import com.ss.lms.service.*;
 
 public abstract class Presentation 
 {
-	protected final Scanner scanner;
+	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
 	protected ServiceBorrower borrower;
@@ -17,6 +17,7 @@ public abstract class Presentation
 	public Presentation(ServiceAdmin administrator)
 	{
 		this.scanner = new Scanner(System.in);
+		System.err.println("Scanner made!");
 		this.administrator = administrator;
 		this.menu();
 		this.scanner.close();
@@ -49,9 +50,9 @@ public abstract class Presentation
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
 		do
 		{
-			return scanner.nextLine().replaceAll("N/A", "%");
+			return getNextLine().replaceAll("N/A", "%").trim();
 		}
-		while(scanner.hasNextLine());
+		while(this.scanner.hasNextLine());
 	}
 	
 	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
@@ -59,21 +60,22 @@ public abstract class Presentation
 	{
 		while(true) 
 		{
-			if(scanner.hasNextInt()) 
+			while(scanner.hasNext()) 
 			{
-				return scanner.nextInt();
-			}
-			else if("N/A".equals(scanner.next())) 
-			{
-				return -1;
-			}
-			else if("quit".equals(scanner.next())) 
-			{
-				return Integer.MIN_VALUE;
-			}
-			else
-			{
+				if(scanner.hasNextInt()) 
+				{
+					return scanner.nextInt();
+				}
+				if("N/A".equals(scanner.next().trim())) 
+				{
+					return -1;
+				}
+				if("quit".equals(scanner.next().trim())) 
+				{
+					return Integer.MIN_VALUE;
+				}
 				System.out.println(fieldName + " must be an integer");
+				getNextLine();
 			}
 		}
 	}
@@ -89,5 +91,16 @@ public abstract class Presentation
 		);
 		
 		return output.toString();
+	}
+	
+	/*
+	 * This function returns the next line while skipping over the next line feed, return carriage, etc
+	 * */
+	public String getNextLine() 
+	{
+		// regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
+		// this tells scanner to skip past the next new line for all operating systems
+		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+		return scanner.nextLine();
 	}
 }

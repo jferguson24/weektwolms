@@ -21,7 +21,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	{
 		PreparedStatement query;
 		String sql = "INSERT INTO tbl_publisher(publisherId,publisherName,publisherAddress,publisherPhone) "
-				+ "VALUES ?, ?, ?, ?;";
+				+ "VALUES (?, ?, ?, ?);";
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -40,12 +40,10 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		PreparedStatement query;
 
 		String sql = "SELECT * FROM tbl_publisher "
-				+ "WHERE publisherId = ?" // index 1
-				+ "AND publisherName LIKE ?" // index 2
-				+ "AND publisherAddress LIKE ?" // index 3
+				+ "WHERE publisherId = ? " // index 1
+				+ "AND publisherName LIKE ? " // index 2
+				+ "AND publisherAddress LIKE ? " // index 3
 				+ "AND publisherAddress LIKE ?;"; // index 4
-		
-		
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -53,6 +51,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		query.setString(3, entity.getPublisherAddress());
 		query.setString(4, entity.getPublisherPhone());
 		
+		System.out.println(query.toString());
 		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
@@ -63,7 +62,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	public void update(Publisher entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "UPDATE tbl_publisher SET "
+		String sql = "UPDATE library.tbl_publisher SET "
 				+ "publisherName = ?, " // index 1
 				+ "publisherAddress = ?, " // index 2
 				+ "publisherPhone = ? " // index 3

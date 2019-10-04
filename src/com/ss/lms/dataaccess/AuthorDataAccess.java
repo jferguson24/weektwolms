@@ -20,13 +20,14 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public void insert(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "INSERT INTO tbl_author(authorId,authorName) "
-				+ "VALUES ?, ?;";
+		String sql = "INSERT INTO library.tbl_author(authorId,authorName) "
+				+ "VALUES (?, ?);";
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
 		query.setString(2, entity.getAuthorName());
-		
+
+		System.out.println("insert: " + sql);
 		query.executeUpdate();
 	}
 
@@ -37,14 +38,15 @@ public class AuthorDataAccess extends DataAccess<Author>
 		ResultSet result;
 		PreparedStatement query;
 
-		String sql = "SELECT * FROM tbl_author"
-				+ "WHERE authorId = ?" // index 1
+		String sql = "SELECT * FROM library.tbl_author "
+				+ "WHERE authorId = ? " // index 1
 				+ "AND authorName LIKE ?;"; // index 2
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
 		query.setString(2, entity.getAuthorName());
-		
+
+		System.out.println("find: " + sql);
 		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
@@ -55,14 +57,15 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public void update(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "UPDATE tbl_author SET "
+		String sql = "UPDATE library.tbl_author SET "
 				+ "authorName = ? " // index 1
-				+ "WHERE publisherId = ?;"; // index 2
+				+ "WHERE authorId = ?;"; // index 2
 		
 		query = con.prepareStatement(sql);
+		query.setInt(2, entity.getAuthorId());
 		query.setString(1, entity.getAuthorName());
-		query.setInt(4, entity.getAuthorId());
-		
+
+		System.out.println("update: " + sql);
 		query.executeUpdate();
 	}
 
@@ -70,12 +73,13 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public void delete(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "DELETE FROM tbl_author WHERE "
+		String sql = "DELETE FROM library.tbl_author WHERE "
 				+ "authorId = ?;"; // index 1
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
-		
+
+		System.out.println("delete: " + sql);
 		query.executeUpdate();
 	}
 

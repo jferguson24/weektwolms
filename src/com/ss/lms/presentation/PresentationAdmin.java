@@ -1,5 +1,6 @@
 package com.ss.lms.presentation;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.ss.lms.dataaccess.AuthorDataAccess;
@@ -65,7 +66,6 @@ public class PresentationAdmin extends Presentation
 					}
 					
 					// TODO consider returning a boolean to let the user know the operation was successful or not
-					// create entity
 					administrator.createAuthor(userAuthor);
 					break;
 					
@@ -81,7 +81,6 @@ public class PresentationAdmin extends Presentation
 					}
 
 					// TODO consider returning a boolean to let the user know the operation was successful or not
-					// create entity
 					administrator.createPublisher(userPublisher);
 					break;
 					
@@ -97,7 +96,6 @@ public class PresentationAdmin extends Presentation
 					}
 					
 					// TODO consider returning a boolean to let the user know the operation was successful or not
-					// create entity
 					administrator.createBook(userBook);
 					break;
 				case "4": // Library Branches table
@@ -111,7 +109,6 @@ public class PresentationAdmin extends Presentation
 					}
 					
 					// TODO consider returning a boolean to let the user know the operation was successful or not
-					// create entity
 					administrator.createLibraryBranch(userLibraryBranch);
 					break;
 					
@@ -126,7 +123,6 @@ public class PresentationAdmin extends Presentation
 					}
 
 					// TODO consider returning a boolean to let the user know the operation was successful or not
-					// create entity
 					administrator.createBorrower(userBorrower);
 					break;
 					
@@ -136,6 +132,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "0": // return to operation select
+					continue;
 				}
 				break; // once operation is done, return to operation select
 				
@@ -155,8 +152,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read author
-					administrator.readAuthor(userAuthor);
+					administrator.readAuthor(userAuthor).stream().forEach(row -> System.out.println(row));
 					break;
 					
 				case "2": // Publishers table
@@ -169,7 +165,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read publisher
 					administrator.readPublisher(userPublisher);
 					break;
 					
@@ -183,7 +178,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read book
 					administrator.readBook(userBook);
 					break;
 					
@@ -197,7 +191,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read library branch
 					administrator.readLibraryBranch(userLibraryBranch);
 					break;
 					
@@ -211,7 +204,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read borrower
 					administrator.readBorrower(userBorrower).toString();
 					break;
 					
@@ -225,7 +217,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// read book loan
 					administrator.readBookLoan(userBookLoan);
 					break;
 					
@@ -246,39 +237,103 @@ public class PresentationAdmin extends Presentation
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
 					{
+						System.out.println("I hit the break!");
 						break;
 					}
 					
 					// TODO should be in business logic
-					if(userAuthor.getAuthorId() == Integer.MAX_VALUE) 
+					if(userAuthor.getAuthorId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
 						break;
 					}
 					
-					// read author
 					administrator.updateAuthor(userAuthor);
-					
 					break;
 					
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
+					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					
+					// the user quit somewhere in the process
+					if(userPublisher== null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userPublisher.getPublisherId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
+						break;
+					}
+					
+					
+					administrator.updatePublisher(userPublisher);
 					break;
 					
 				case "3": // Books table
 					System.out.println("Books table selected");
+					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					
+					// the user quit somewhere in the process
+					if(userBook == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userBook.getBookId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
+						break;
+					}
+					administrator.updateBook(userBook);
 					break;
 					
 				case "4": // Library Branches table
 					System.out.println("Library Branches table selected");
+					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					
+					// the user quit somewhere in the process
+					if(userLibraryBranch == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userLibraryBranch.getBranchId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
+						break;
+					}
+					
+					administrator.updateLibraryBranch(userLibraryBranch);
 					break;
 					
 				case "5": // Borrower table
 					System.out.println("Borrower table selected");
+					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					
+					// the user quit somewhere in the process
+					if(userBorrower == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userBorrower.getCardNo() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
+						break;
+					}
+					
+					administrator.updateBorrower(userBorrower);
 					break;
 					
 				case "6": // Book Loans table TODO only update due date.
 					System.out.println("Book Loans table selected");
+					
 					break;
 					
 				case "0": // return to operation select
@@ -612,16 +667,5 @@ public class PresentationAdmin extends Presentation
 			System.out.println("Invalid Input.");
 			
 		}while(true);
-	}
-	
-	/*
-	 * This function returns the next line while skipping over the next line feed, return carriage, etc
-	 * */
-	private String getNextLine() 
-	{
-		// regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
-		// this tells scanner to skip past the next new line for all operating systems
-		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-		return scanner.nextLine();
 	}
 }
