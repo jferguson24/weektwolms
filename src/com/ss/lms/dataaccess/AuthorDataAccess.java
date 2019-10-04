@@ -83,7 +83,7 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public ArrayList<Author> packageResultSet(ResultSet result) throws SQLException 
 	{
 		ArrayList<Author> output = new ArrayList<Author>();
-		Author publisher;
+		Author author;
 		
 		// TODO why dont this work? 
 		// output.addAll(ResultSetUtils.getCollection(new Publisher(), result));
@@ -91,12 +91,12 @@ public class AuthorDataAccess extends DataAccess<Author>
 		
 		while(result.next()) 
 		{
-			publisher = new Author();
+			author = new Author();
 			
-			publisher.setAuthorId(result.getInt("authorId")); // get pk
-			publisher.setAuthorName(result.getString("authorName")); // get name
+			author.setAuthorId(result.getInt("authorId")); // get pk
+			author.setAuthorName(result.getString("authorName")); // get name
 			
-			output.add(publisher);
+			output.add(author);
 		}
 		
 		return output;

@@ -42,20 +42,19 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 	public ArrayList<BookLoan> find(BookLoan entity) throws SQLException {
 		PreparedStatement query;
 		String sql;
-		sql = "select * from tbl_book_loans where bookId LIKE ? and branchId Like ? and cardNo Like ?";
+		ResultSet result;
+		sql = "select * from tbl_book_loans where bookId = ? and branchId = ? and cardNo = ?";
 				 
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1,entity.getBook().getBookId());
 		query.setInt(2,entity.getBranch().getBranchId());
 		query.setInt(3,entity.getBorrower().getCardNo());
-		query.executeUpdate();
+		
+		result = query.executeQuery();
 		
 		
-		ArrayList<BookLoan> bookLoans = new ArrayList<>();	
-		
-		
-		return null ;
+		return packageResultSet(result) ;
 	}
 	/*
 	 * Return book
@@ -108,20 +107,35 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 			branch.setBranchAddress(result.getString("branchAddress"));
 			branch.setBranchName(result.getString("branchAddress"));
 			
+			Publisher publisher = new Publisher();
+			publisher.setPublisherId(result.getInt("publisherId")); // get pk
+			publisher.setPublisherName(result.getString("publisherName")); // get name
+			publisher.setPublisherAddress(result.getString("publisherAddress")); // get address
+			publisher.setPublisherPhone(result.getString("publisherPhone")); // get phone
+			
+			Author author = new Author();
+			author.setAuthorId(result.getInt("authorId")); // get pk
+			author.setAuthorName(result.getString("authorName")); // get name
+			
+			
 			Book book = new Book();
 			book.setAuthor(author);
-			book.setBookId(bookId);
+			book.setBookId(result.getInt("bookId"));
 			book.setPublisher(publisher);
-			book.setTitle(title);
+			book.setTitle(result.getString("authorName"));
 			
 			
 			Borrower borrower = new Borrower();
+			borrower.setAddress(result.getString("address"));
+			borrower.setCardNo(result.getInt("cardNo"));
+			borrower.setName(result.getString("name"));
+			borrower.setPhone(result.getString("phone"));
 			
 			
 			BookLoan bookLoan = new BookLoan();
-			bookLoan.getBook().setBookId(result.getInt("bookId"));
-			bookLoan.getBranch().setBranchId(result.getInt("branchId"));		
-			bookLoan.getBorrower().setCardNo(result.getInt("cardNo"));		
+			bookLoan.setBook(book);
+			bookLoan.setBranch(branch);		
+			bookLoan.setBorrower(borrower);		
 			bookLoan.setDateOut(result.getDate("dateOut"));		
 			bookLoan.setDueDate(result.getDate("dueDate"));		
 			bookLoans.add(bookLoan);
