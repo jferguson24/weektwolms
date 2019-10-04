@@ -109,10 +109,10 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 			branch.setBranchName(result.getString("branchAddress"));
 			
 			Book book = new Book();
-			book.setAuthor(author);
-			book.setBookId(bookId);
-			book.setPublisher(publisher);
-			book.setTitle(title);
+//			book.setAuthor(author);
+//			book.setBookId(bookId);
+//			book.setPublisher(publisher);
+//			book.setTitle(title);
 			
 			
 			Borrower borrower = new Borrower();

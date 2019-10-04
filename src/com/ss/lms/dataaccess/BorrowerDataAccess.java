@@ -1,8 +1,10 @@
 package com.ss.lms.dataaccess;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ss.lms.entity.Borrower;
 
@@ -58,6 +60,12 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 		query = con.prepareStatement(sql);
 		query.setInt(1,entity.getCardNo());
 		query.executeUpdate();
+	}
+
+	@Override
+	public List<Borrower> packageResultSet(ResultSet result) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
