@@ -8,8 +8,8 @@ import com.ss.lms.entity.*;
 
 public class BookLoanDataAccess extends DataAccess<BookLoan> {
 
-	public BookLoanDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BookLoanDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	/*
