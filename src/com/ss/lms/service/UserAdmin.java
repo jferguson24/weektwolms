@@ -37,7 +37,7 @@ public class UserAdmin implements ServiceAdmin{
 	}
 
 	@Override
-	public void createBorrower(UserBorrower borrower) {
+	public void createBorrower(Borrower borrower) {
 		// TODO Auto-generated method stub
 		
 	}

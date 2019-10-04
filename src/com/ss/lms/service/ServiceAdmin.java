@@ -48,7 +48,7 @@ public interface ServiceAdmin
 	
 	public void createLibraryBranch(LibraryBranch userLibraryBranch);
 
-	public void createBorrower(UserBorrower borrower);
+	public void createBorrower(Borrower borrower);
 
 	public void createBookLoan(BookLoan bookLoan);
 	
