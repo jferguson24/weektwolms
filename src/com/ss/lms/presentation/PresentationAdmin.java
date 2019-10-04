@@ -136,7 +136,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("Authors table selected");
-					uthor userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field");
+					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field");
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -392,6 +392,9 @@ public class PresentationAdmin extends Presentation
 	private Book createEntityBook(String note) 
 	{
 		Book userBook = new Book();
+		userBook.setAuthor(new Author());
+		userBook.setPublisher(new Publisher());
+		
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
@@ -419,7 +422,7 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
-		userBook.setAuthorId(allIntegerInput);
+		userBook.getAuthor().setAuthorId(allIntegerInput);
 		
 		// Getting publisher ID
 		allIntegerInput = getIntegerFieldFromUser("Publisher ID");
@@ -427,7 +430,7 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
-		userBook.setPubisherId(allIntegerInput);
+		userBook.getPublisher().setPublisherId(allIntegerInput);
 		
 		return userBook;
 	}
@@ -517,6 +520,10 @@ public class PresentationAdmin extends Presentation
 	private BookLoan createEntityBookLoan(String note) 
 	{
 		BookLoan userBookLoan = new BookLoan();
+		userBookLoan.setBook(new Book());
+		userBookLoan.setBranch(new LibraryBranch());
+		userBookLoan.setBorrower(new Borrower());;
+		
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
@@ -527,7 +534,7 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
-		userBookLoan.setBookId(allIntegerInput);
+		userBookLoan.getBook().setBookId(allIntegerInput);
 		
 		// Getting Branch ID
 		allIntegerInput = getIntegerFieldFromUser("Branch ID");
@@ -535,7 +542,7 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
-		userBookLoan.setBranchId(allIntegerInput);
+		userBookLoan.getBranch().setBranchId(allIntegerInput);
 		
 		// Getting card number
 		allIntegerInput = getIntegerFieldFromUser("Card Number");
@@ -543,11 +550,11 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
-		userBookLoan.setCardNo(allIntegerInput);
+		userBookLoan.getBorrower().setCardNo(allIntegerInput);
 		
 		// cannot change dateOut
 		// TODO properly handle not changing the date
-//		userBookLoan.setDateOut(java.sql.Date.);
+		userBookLoan.setDateOut(null);
 		
 		// Getting due date
 		allStringInput.setLength(0); // empty the buffer before input
