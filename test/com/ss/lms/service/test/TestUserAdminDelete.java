@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ss.lms.service.*;
 
-class TestUserAdminUpdate 
+class TestUserAdminDelete 
 {
 	private static ServiceAdmin admin = new UserAdmin(null, null, null, null, null, null, null);
 	
