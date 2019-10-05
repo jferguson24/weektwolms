@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import com.ss.lms.entity.*;
 
 public class BookCopyDataAccess extends DataAccess<BookCopy> {
-	public BookCopyDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BookCopyDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	//BookCopy has
@@ -30,6 +30,8 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(1, entity.getBook().getBookId());
 		query.setInt(2, entity.getBranch().getBranchId());
 		query.setInt(3, entity.getNoOfCopies());
+		
+		System.out.println(query);
 		
 		query.executeUpdate();
 	}
@@ -57,8 +59,7 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 			strNoOfCopies = ("noOfCopies > ? ");
 		}
 		
-		
-		sql = "select * from tbl_book_copy "
+		sql = "select * from tbl_book_copies "
 				+ "where " + strBookId 
 				+ "and " + strBranchId  
 				+ "and " + strNoOfCopies;
@@ -66,6 +67,9 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(1, findBookId);
 		query.setInt(2, findBranchId);
 		query.setInt(3, findNoOfCopies);
+		
+
+		//System.out.println(query);
 		
 		result = query.executeQuery();
 			
@@ -84,10 +88,10 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 						+ " and branchId = ? ";
 
 		query = con.prepareStatement(sql);
-		query.setInt(1, entity.getBook().getBookId());
-		query.setInt(2, entity.getBranch().getBranchId());
-		query.setInt(3, entity.getNoOfCopies());
-		
+		query.setInt(2, entity.getBook().getBookId());
+		query.setInt(3, entity.getBranch().getBranchId());
+		query.setInt(1, entity.getNoOfCopies());
+		System.out.println("Update query: " + query);
 		query.executeUpdate();
 	}
 
@@ -96,12 +100,14 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_book_copy where branchId = ?"
+		sql = "delete from tbl_book_copies where branchId = ?"
 				+ " and bookId = ?;";
 		query = con.prepareStatement(sql);
 
-		query.setInt(1, entity.getBook().getBookId());
-		query.setInt(2, entity.getBranch().getBranchId());
+		query.setInt(2, entity.getBook().getBookId());
+		query.setInt(1, entity.getBranch().getBranchId());
+		
+		//System.out.println(query);
 		
 		query.executeUpdate();
 	}
@@ -112,21 +118,33 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
     	String sql;
     	ArrayList<BookCopy> bookCopyList = new ArrayList<BookCopy>();
 		while(result.next()) { 
-			sql = "select * from tbl_author, tbl_book where bookId = ? and authorId = authId";
+			sql = "select authorId, authorName from tbl_author, tbl_book where bookId = ? and authorId = authId;";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
-			ResultSet resultAuthor = query.executeQuery();
+			
+			query.executeQuery();
+			ResultSet resultAuthor = query.getResultSet();
+			resultAuthor.next();
+
+
 			Author author = new Author(resultAuthor.getInt(1), resultAuthor.getString(2));
-			sql = "select * from tbl_publisher, tbl_book where bookId = ? and authorId = authId";
+			sql = "select * from tbl_publisher, tbl_book where bookId = ? and publisherId = pubId;";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
+
+			//System.out.println(query);
 			ResultSet resultPublisher = query.executeQuery();
+			resultPublisher.next();
 			Publisher publisher = new Publisher(resultPublisher.getInt(1), resultPublisher.getString(2),
 						resultPublisher.getString(3), resultPublisher.getString(4));
-			sql = "select * from tbl_book where bookId = ?";
+			sql = "select * from tbl_book where bookId = ?;";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
-			Book book = new Book(result.getInt(1),result.getString(2), author, publisher);
+
+			//System.out.println(query);
+			ResultSet resultBook = query.executeQuery();
+			resultBook.next();
+			Book book = new Book(resultBook.getInt(1),resultBook.getString(2), author, publisher);
 			LibraryBranch branch = new LibraryBranch(result.getInt(1),result.getString(2),result.getString(3));
 			BookCopy bookCopy = new BookCopy(book, branch, result.getInt(3));
 			bookCopyList.add(bookCopy); 
