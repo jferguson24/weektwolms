@@ -186,10 +186,14 @@ public class PresentationLibrarian extends Presentation {
 	//addCopies gets the new number of copies desired and calls the service to update the database
 	public void addCopies(Book book, LibraryBranch branch) {
 		BookCopy bookCopy = new BookCopy(book, branch, -1);
-		if(librarian.readBookCopy(bookCopy).size() == 0)
+		int noOfCopies;
+		if(librarian.readBookCopy(bookCopy).size() == 0) {
+			noOfCopies = 0;
 			System.out.println("Existing number of books: 0");
+		}
 		else {
-			System.out.println("Existing number of books: " + librarian.readBookCopy(bookCopy).get(0).getNoOfCopies());
+			noOfCopies = librarian.readBookCopy(bookCopy).get(0).getNoOfCopies();
+			System.out.println("Existing number of books: " + noOfCopies);
 		}
 		System.out.println("Enter new number of copies: ");
 		int numCopies= 0;
@@ -202,19 +206,22 @@ public class PresentationLibrarian extends Presentation {
 
 		numCopies = super.scanner.nextInt();
 		super.scanner.nextLine();
-		//System.out.println("Number of Copies: " + bookCopy.getNoOfCopies());
-		bookCopy.setNoOfCopies(numCopies);
+		System.out.println("Number of Copies: " + noOfCopies);
+		System.out.println("Entered Copies: " + numCopies);
+		//bookCopy.setNoOfCopies(numCopies);
 		if(numCopies == 0) {
-			//System.out.println("Deleting bookCopy.");
+			System.out.println("Deleting bookCopy.");
 			librarian.deleteBookCopy(bookCopy);
 		}
-		else if (bookCopy.getNoOfCopies() > 0) {
-			//System.out.println("Updating bookCopy to have this many books: " + numCopies);
+		else if (noOfCopies > 0 && numCopies > 0) {
+			System.out.println("Updating bookCopy to have this many books: " + numCopies);
 			//System.out.println("bookCopy has: " + bookCopy.getNoOfCopies());
+			bookCopy.setNoOfCopies(numCopies);
 			librarian.updateBookCopy(bookCopy);
 		}
 		else {
-			//System.out.println("Creating bookCopy.");
+			System.out.println("Creating bookCopy.");
+			bookCopy.setNoOfCopies(numCopies);
 			librarian.createBookCopy(bookCopy);
 		}
 	}
