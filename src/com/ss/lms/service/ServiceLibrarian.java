@@ -3,27 +3,13 @@ package com.ss.lms.service;
 import java.sql.SQLException;
 import java.util.*;
 
-import com.ss.lms.dataaccess.*;
 import com.ss.lms.entity.*;
 
 public interface ServiceLibrarian
 {
-	public DataAccess<Book> bookDao = null;
-	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<BookCopy> bookCopyDao = null;
 	
-	default public void closeConnection() 
-	{
-		try 
-		{
-			libraryBranchDao.close();
-			bookCopyDao.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-	}
+	public void closeConnection() ;
+
 	
 	/*************************************************
 	 * 
@@ -51,9 +37,9 @@ public interface ServiceLibrarian
 	 * 
 	 *************************************************/
 	
-	public void updateLibraryBranch(Publisher libraryBranch);
+	public void updateLibraryBranch(LibraryBranch libraryBranch);
 	
-	public void updateBookCopy(BookLoan bookCopy);
+	public void updateBookCopy(BookCopy bookCopy);
 	
 	/*************************************************
 	 * 
@@ -61,5 +47,5 @@ public interface ServiceLibrarian
 	 * 
 	 *************************************************/
 	
-	public void deleteBookCopy(BookLoan bookCopy);
+	public void deleteBookCopy(BookCopy bookCopy);
 }

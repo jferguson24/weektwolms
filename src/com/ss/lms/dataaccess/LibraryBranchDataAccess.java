@@ -34,8 +34,44 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 	@Override
 	public ArrayList<LibraryBranch> find(LibraryBranch entity) throws SQLException {
 		// TODO Auto-generated method stub
+		String sql;
+		int findBranchId = entity.getBranchId();
+		String findBranchName = entity.getBranchName();
+		String findBranchAddress = entity.getBranchAddress();
+		String strBranchId = "branchId = ? ";
+		String strBranchName = "branchName LIKE ? ";
+		String strBranchAddress = "branchAddress LIKE ? "; 
+
+		ResultSet result;
+		PreparedStatement query;
+		if(findBranchId == -1) {
+			strBranchId = ("branchId > ? ");
+		}
+		if(findBranchName == "%") {
+			strBranchName = ("branchName LIKE ? ");
+		}
+		if(findBranchAddress == "%") {
+			strBranchAddress = ("branchAddress LIKE ?");
+		}
+		//System.out.println("Hello2");
+//		System.out.println("select * from tbl_book_copy "
+//				+ "where " + findBranchId 
+//				+ "and " + findBranchName 
+//				+ "and " + findBranchAddress);
+
+		sql = "select * from tbl_library_branch "
+				+ "where " + strBranchId 
+				+ "and " + strBranchName  
+				+ "and " + strBranchAddress;
+		query = con.prepareStatement(sql);
+		query.setInt(1, findBranchId);
+		query.setString(2, findBranchName);
+		query.setString(3, findBranchAddress);
+		//System.out.println(query.toString());
 
 		return null;
+			
+		return packageResultSet(result);
 	}
 
 	@Override
