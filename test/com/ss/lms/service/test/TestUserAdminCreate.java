@@ -30,12 +30,50 @@ class TestUserAdminCreate
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	static void tearDownAfterClass() throws Exception 
+	{
+		admin.closeConnection();
 	}
 
 	@Test
-	final void test() {
+	final void testUpdateAuthor() {
+		fail("Not yet implemented"); // TODO
+	}
+	
+	@Test
+	final void testUpdatePublisher() {
+		fail("Not yet implemented"); // TODO
+	}
+	
+	@Test
+	final void testUpdateBook() {
+		fail("Not yet implemented"); // TODO
+	}
+	
+	@Test
+	final void testUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
