@@ -13,7 +13,7 @@ public class AuthorDataAccess extends DataAccess<Author>
 
 	public AuthorDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
 	{
-		super(connectionInfo);
+		super();
 	}
 
 	@Override

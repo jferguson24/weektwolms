@@ -14,7 +14,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	// TODO handle Integer.MAX_VALUE cases.
 	public PublisherDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
 	{
-		super(connectionInfo);
+		super();
 	}
 
 	@Override

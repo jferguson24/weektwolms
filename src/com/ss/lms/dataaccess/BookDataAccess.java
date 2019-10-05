@@ -13,12 +13,12 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Publisher;
 
 /**
- * @author sj
+ * 
  *
  */
 public class BookDataAccess extends DataAccess<Book>{
 	public BookDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
