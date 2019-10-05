@@ -71,7 +71,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
 //					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: Enter \"-1\" for automatic primary key generation.", false);
+					Author userAuthor = createEntityAuthor("", false);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -87,7 +87,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
 //					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher = createEntityPublisher("Note: Enter \"-1\" for automatic primary key generation.", false);
+					Publisher userPublisher = createEntityPublisher("", false);
 
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -108,7 +108,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nPublishersTable:");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: Enter \"-1\" for automatic primary key generation.", false);
+					Book userBook = createEntityBook("", false);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -123,7 +123,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
 //					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter \"-1\" for automatic primary key generation.", false);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -139,7 +139,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
 //					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower= createEntityBorrower("Note: Enter \"-1\" for automatic primary key generation.", false);
+					Borrower userBorrower= createEntityBorrower("", false);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -312,7 +312,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nPublishers Table:");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -415,7 +415,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > AUTHOR************************************************************************************/");
 					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -437,7 +437,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > PUBLISHER************************************************************************************/");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher= createEntityPublisher("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -459,7 +459,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BOOK************************************************************************************/");
 					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -481,7 +481,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BRANCH************************************************************************************/");
 					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -503,7 +503,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BORROWER************************************************************************************/");
 					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower = createEntityBorrower("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 

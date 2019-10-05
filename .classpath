@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/home/nicolae/git/WeeklyAssignments/WeeklyAssignmentOne/commons-lang3-3.9/commons-lang3-3.9.jar"/>
 	<classpathentry kind="lib" path="/home/nicolae/Documents/workspace-spring-tool-suite-4-4.4.0.RELEASE/Libraries/MariaDB 2.5.0/mariadb-java-client-2.5.0.jar"/>
 	<classpathentry kind="lib" path="/home/nicolae/Documents/workspace-spring-tool-suite-4-4.4.0.RELEASE/Libraries/mysql-connector-java/mysql-connector-java-8.0.16/mysql-connector-java-8.0.16.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
