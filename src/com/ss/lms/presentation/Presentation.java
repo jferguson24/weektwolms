@@ -20,7 +20,6 @@ public abstract class Presentation
 		System.err.println("Scanner made!");
 		this.administrator = administrator;
 		this.menu();
-		this.scanner.close();
 		this.administrator.closeConnection();
 	}
 	
@@ -29,7 +28,6 @@ public abstract class Presentation
 		this.scanner = new Scanner(System.in);
 		this.librarian = librarian;
 		this.menu();
-		this.scanner.close();
 		this.librarian.closeConnection();
 	}
 	
@@ -38,7 +36,6 @@ public abstract class Presentation
 		this.scanner = new Scanner(System.in);
 		this.borrower = borrower;
 		this.menu();
-		this.scanner.close();
 		this.borrower.closeConnection();
 	}
 	

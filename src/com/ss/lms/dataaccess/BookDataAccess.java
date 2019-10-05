@@ -43,17 +43,28 @@ public class BookDataAccess extends DataAccess<Book>{
 
 	@Override
 	public ArrayList<Book> find(Book entity) throws SQLException{
+		//System.out.println("Hello." + entity.getPublisher().getPublisherId());
 		// TODO Auto-generated method stub
 		String sql;
 		int findBookId = entity.getBookId();
+		//System.out.println("bookId: "+ findBookId);
+		
 		String findTitle = entity.getTitle();
+		//System.out.println("findTitle: "+ findTitle);
+		
 		int findAuthor = entity.getAuthor().getAuthorId();
+		//System.out.println("findAuthor: "+ findAuthor);
+		
 		int findPublisher = entity.getPublisher().getPublisherId();
+		//System.out.println("findPublisher: "+ findPublisher);
+		
 		String strBookId = "bookId = ? ";
 		String strTitle = "title LIKE ? ";
 		String strAuthor = "authId = ? "; 
 		String strPub = "pubId = ? ";
 
+		//System.out.println("Try this1.");
+		
 		ResultSet result;
 		PreparedStatement query;
 		if(findBookId == -1) {
@@ -68,18 +79,24 @@ public class BookDataAccess extends DataAccess<Book>{
 		if(findPublisher == -1) {
 			strPub = ("pubId > ?");
 		}
+
+		//System.out.println("Try this.");
 		
-		
-		sql = "select * from tbl_book_copy "
+		sql = "select * from tbl_book "
 				+ "where " + strBookId 
 				+ "and " + strTitle  
 				+ "and " + strAuthor
 				+ "and " + strPub;
+
+		//System.out.println("Hello2");
+		
 		query = con.prepareStatement(sql);
 		query.setInt(1, findBookId);
 		query.setString(2, findTitle);
 		query.setInt(3, findAuthor);
 		query.setInt(4, findPublisher);
+		
+		//System.out.println(query.toString());
 		
 		result = query.executeQuery();
 			
@@ -160,12 +177,17 @@ public class BookDataAccess extends DataAccess<Book>{
 			sql = "select * from tbl_author, tbl_book where bookId = ? and authorId = authId";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
+			//System.out.println(query.toString());
 			ResultSet resultAuthor = query.executeQuery();
+			resultAuthor.next();
 			Author author = new Author(resultAuthor.getInt(1), resultAuthor.getString(2));
-			sql = "select * from tbl_publisher, tbl_book where bookId = ? and authorId = authId";
+			sql = "select * from tbl_publisher, tbl_book where bookId = ? and publisherId = pubId";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
+
+			//System.out.println(query.toString());
 			ResultSet resultPublisher = query.executeQuery();
+			resultPublisher.next();
 			Publisher publisher = new Publisher(resultPublisher.getInt(1), resultPublisher.getString(2),
 						resultPublisher.getString(3), resultPublisher.getString(4));
 //			sql = "select * from tbl_book where bookId = ?";
