@@ -14,8 +14,6 @@ public interface ServiceAdmin
 {
 	public void closeConnection();
 	
-	public <T> Integer generatePrimaryKey(DataAccess<T> T);
-	
 	/*************************************************
 	 * 
 	 * ALL CREATE OPERATIONS

@@ -37,10 +37,20 @@ public class AuthorDataAccess extends DataAccess<Author>
 		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
-
-		String sql = "SELECT * FROM library.tbl_author "
-				+ "WHERE authorId = ? " // index 1
-				+ "AND authorName LIKE ?;"; // index 2
+		String sql;
+		
+		if(entity.getAuthorId() == -1) 
+		{
+			sql = "SELECT * FROM library.tbl_author "
+					+ "WHERE authorId > ? " // index 1
+					+ "AND authorName LIKE ?;"; // index 2
+		}
+		else 
+		{
+			sql = "SELECT * FROM library.tbl_author "
+					+ "WHERE authorId = ? " // index 1
+					+ "AND authorName LIKE ?;"; // index 2
+		}
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());

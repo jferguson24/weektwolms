@@ -38,12 +38,26 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
-
-		String sql = "SELECT * FROM tbl_publisher "
-				+ "WHERE publisherId = ? " // index 1
-				+ "AND publisherName LIKE ? " // index 2
-				+ "AND publisherAddress LIKE ? " // index 3
-				+ "AND publisherAddress LIKE ?;"; // index 4
+		String sql;
+		
+		if(entity.getPublisherId() == -1) 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId > ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
+		else 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId = ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
+		
+		
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());

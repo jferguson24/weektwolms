@@ -1,6 +1,7 @@
 package com.ss.lms.presentation;
 
-import java.util.Arrays;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.ss.lms.dataaccess.AuthorDataAccess;
@@ -10,11 +11,13 @@ import com.ss.lms.dataaccess.BookLoanDataAccess;
 import com.ss.lms.dataaccess.BorrowerDataAccess;
 import com.ss.lms.dataaccess.LibraryBranchDataAccess;
 import com.ss.lms.dataaccess.PublisherDataAccess;
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookLoan;
+import com.ss.lms.entity.Borrower;
+import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 import com.ss.lms.service.UserAdmin;
-
-import java.sql.Date;
-import java.sql.SQLException;
 
 public class PresentationAdmin extends Presentation
 {
@@ -165,7 +168,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readPublisher(userPublisher);
+					administrator.readPublisher(userPublisher).stream().forEach(row -> System.out.println(row));;
 					break;
 					
 				case "3": // Books table
@@ -178,7 +181,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBook(userBook);
+					administrator.readBook(userBook).stream().forEach(row -> System.out.println(row));;
 					break;
 					
 				case "4": // Library Branches table
@@ -191,7 +194,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readLibraryBranch(userLibraryBranch);
+					administrator.readLibraryBranch(userLibraryBranch).stream().forEach(row -> System.out.println(row));;
 					break;
 					
 				case "5": // Borrower table
@@ -204,7 +207,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBorrower(userBorrower).toString();
+					administrator.readBorrower(userBorrower).stream().forEach(row -> System.out.println(row));;
 					break;
 					
 				case "6": // Book Loans table
@@ -217,7 +220,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBookLoan(userBookLoan);
+					administrator.readBookLoan(userBookLoan).stream().forEach(row -> System.out.println(row));;
 					break;
 					
 				case "0": // return to operation select

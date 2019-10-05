@@ -63,7 +63,7 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 	}
 
 	@Override
-	public List<Borrower> packageResultSet(ResultSet result) throws SQLException {
+	public ArrayList<Borrower> packageResultSet(ResultSet result) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
