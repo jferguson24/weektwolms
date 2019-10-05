@@ -26,8 +26,7 @@ public class AuthorDataAccess extends DataAccess<Author>
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
 		query.setString(2, entity.getAuthorName());
-
-		System.out.println("insert: " + sql);
+		
 		query.executeUpdate();
 	}
 
@@ -56,8 +55,6 @@ public class AuthorDataAccess extends DataAccess<Author>
 		query.setInt(1, entity.getAuthorId());
 		query.setString(2, entity.getAuthorName());
 
-		System.out.println("find: " + sql);
-		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
 		return packageResultSet(result);
@@ -75,7 +72,6 @@ public class AuthorDataAccess extends DataAccess<Author>
 		query.setInt(2, entity.getAuthorId());
 		query.setString(1, entity.getAuthorName());
 
-		System.out.println("update: " + sql);
 		query.executeUpdate();
 	}
 
@@ -89,7 +85,6 @@ public class AuthorDataAccess extends DataAccess<Author>
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
 
-		System.out.println("delete: " + sql);
 		query.executeUpdate();
 	}
 

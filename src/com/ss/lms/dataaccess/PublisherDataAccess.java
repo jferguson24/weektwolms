@@ -65,8 +65,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		query.setString(3, entity.getPublisherAddress());
 		query.setString(4, entity.getPublisherPhone());
 		
-		System.out.println(query.toString());
-		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
 		return packageResultSet(result);

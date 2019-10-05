@@ -382,13 +382,13 @@ public class UserAdmin implements ServiceAdmin
 		try 
 		{
 			// Make sure the new Ids exist
-			if(authorDao.find(new Author( book.getAuthor().getAuthorId(), "%")).size() != 1)
+			if(authorDao.find(new Author( book.getAuthor().getAuthorId(), "%")).size() < 1)
 			{
 				System.out.println("Unique Author ID for " + book.getAuthor().getAuthorId() + " couldn't be found.");
 				return;
 			}
 			
-			if(publisherDao.find(new Publisher( book.getPublisher().getPublisherId(), "%", "%", "%")).size() != 1)
+			if(publisherDao.find(new Publisher( book.getPublisher().getPublisherId(), "%", "%", "%")).size() < 1)
 			{
 				System.out.println("Unique Publisher ID for " + book.getPublisher().getPublisherId() + " couldn't be found.");
 				return;
@@ -407,21 +407,23 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				switch(book.getTitle()) 
+				{
+				case "%":
+					book.setTitle(oldData.get(0).getTitle());
+				}
+				
 				switch(book.getAuthor().getAuthorId()) 
 				{
 				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
-					book.getAuthor().setAuthorId(oldData.get(0).getAuthor().getAuthorId());
-					book.getAuthor().setAuthorName("%");
+					book.setAuthor(oldData.get(0).getAuthor());
 					break;
 				}
 				
 				switch(book.getPublisher().getPublisherId())
 				{
 				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
-					book.getPublisher().setPublisherId(oldData.get(0).getPublisher().getPublisherId());
-					book.getPublisher().setPublisherName("%");
-					book.getPublisher().setPublisherAddress("%");
-					book.getPublisher().setPublisherPhone("%");
+					book.setPublisher(oldData.get(0).getPublisher());
 					break;
 				}
 			}
