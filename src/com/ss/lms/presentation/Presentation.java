@@ -44,6 +44,7 @@ public abstract class Presentation
 	public String getStringFieldFromUser(String fieldName) 
 	{
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
+		
 		do
 		{
 			return getNextLine().replaceAll("N/A", "%").trim();
@@ -51,27 +52,37 @@ public abstract class Presentation
 		while(this.scanner.hasNextLine());
 	}
 	
-	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
+	// Forces the user to input an integer, "N/A" maps to -1, "quit" maps to Integer.MIN_VALUE
 	public Integer getIntegerFieldFromUser(String fieldName) 
 	{
+		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
+		String line;
+		Integer output;
+		
 		while(true) 
 		{
-			while(scanner.hasNext()) 
+			line = getNextLine().trim();
+			
+			try 
 			{
-				if(scanner.hasNextInt()) 
-				{
-					return scanner.nextInt();
-				}
-				if("N/A".equals(scanner.next().trim())) 
-				{
-					return -1;
-				}
-				if("quit".equals(scanner.next().trim())) 
+				output = Integer.parseInt(line);
+				System.out.println("Found: " + output);
+				return output;
+			}
+			catch(NumberFormatException e) 
+			{
+				if("quit".equals(line)) 
 				{
 					return Integer.MIN_VALUE;
 				}
-				System.out.println(fieldName + " must be an integer");
-				getNextLine();
+				
+				if("N/A".equals(line)) 
+				{
+					return -1;
+				}
+				
+				System.out.println("Input not recognized.");
+				continue;
 			}
 		}
 	}

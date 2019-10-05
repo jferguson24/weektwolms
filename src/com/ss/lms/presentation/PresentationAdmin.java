@@ -40,11 +40,20 @@ public class PresentationAdmin extends Presentation
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
+		// these objects are used purely as input to DAO find functions which will return the entire contents of the table
+		final Author findAllAuthors = new Author(-1, "%");
+		final Publisher findAllPublishers = new Publisher(-1, "%", "%", "%");
+		final Book findAllBooks = new Book(-1, "%", findAllAuthors, findAllPublishers);
+		final LibraryBranch findAllLibraryBranches = new LibraryBranch(-1, "%", "%");
+		final Borrower findAllBorrowers = new Borrower(-1, "%", "%", "%");
+		final BookLoan findAllBookLoans= new BookLoan(findAllBooks, findAllLibraryBranches, findAllBorrowers, Date.valueOf("0001-01-01"), Date.valueOf("0001-01-01"));
+		
 		do 
 		{
 			String operation = "";
 			String tableSelection = "";
 			
+			System.out.println("/*MAIN > ADMIN > OPERATIONS************************************************************************************/");
 			System.out.println("Select the operation you would like to do.");
 			System.out.println("1. Create\n2. Read\n3. Update\n4. Delete\n0. Quit to user selection");
 			
@@ -53,13 +62,15 @@ public class PresentationAdmin extends Presentation
 			switch(operation) 
 			{
 			case "1":// CREATE operation
-				System.out.println("Create operation selected.");
+				System.out.println("/*MAIN > ADMIN > CREATE************************************************************************************/");
 				tableSelection = selectTable();
 				
 				switch(tableSelection) 
 				{
 				case "1": // Authors table
-					System.out.println("Authors table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
+					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					
 					Author userAuthor = createEntityAuthor("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
@@ -73,7 +84,8 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "2": // Publishers table
-					System.out.println("Publishers table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
+					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher = createEntityPublisher("Note: Enter \"-1\" for automatic primary key generation.", false);
 
@@ -88,7 +100,8 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "3": // Books table
-					System.out.println("Books table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > BOOK************************************************************************************/");
+					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
@@ -102,7 +115,9 @@ public class PresentationAdmin extends Presentation
 					administrator.createBook(userBook);
 					break;
 				case "4": // Library Branches table
-					System.out.println("Library Branches table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
+					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
@@ -116,7 +131,9 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "5": // Borrower table
-					System.out.println("Borrowers table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
+					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					
 					Borrower userBorrower= createEntityBorrower("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
@@ -130,7 +147,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "6": // Book Loans table
-					System.out.println("Book Loans table selected");
+					System.out.println("/*MAIN > ADMIN > CREATE > LOAN************************************************************************************/");
 					System.out.println("Admin cannot create a Book Loan.\nQuitting to operation selection");
 					break;
 					
@@ -140,13 +157,13 @@ public class PresentationAdmin extends Presentation
 				break; // once operation is done, return to operation select
 				
 			case "2": // READ operation
-				System.out.println("Read operation selected.");
+				System.out.println("/*MAIN > ADMIN > READ************************************************************************************/");
 				tableSelection = selectTable();
 				
 				switch(tableSelection) 
 				{
 				case "1": // Authors table
-					System.out.println("Authors table selected");
+					System.out.println("/*MAIN > ADMIN > READ > AUTHOR************************************************************************************/");
 					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
@@ -172,7 +189,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "3": // Books table
-					System.out.println("Books table selected");
+					System.out.println("/*MAIN > ADMIN > READ > BOOK************************************************************************************/");
 					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
@@ -185,7 +202,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "4": // Library Branches table
-					System.out.println("Library Branches table selected");
+					System.out.println("/*MAIN > ADMIN > READ > BRANCH************************************************************************************/");
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
@@ -198,7 +215,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "5": // Borrower table
-					System.out.println("Borrower table selected");
+					System.out.println("/*MAIN > ADMIN > READ > BORROWER************************************************************************************/");
 					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
@@ -211,7 +228,7 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "6": // Book Loans table
-					System.out.println("Book Loan table selected");
+					System.out.println("/*MAIN > ADMIN > READ > LOAN************************************************************************************/");
 					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
@@ -228,13 +245,15 @@ public class PresentationAdmin extends Presentation
 				}
 				break;
 			case "3": // UPDATE operation
-				System.out.println("Update operation selected.");
+				System.out.println("/*MAIN > ADMIN > UPDATE************************************************************************************/");
 				tableSelection = selectTable();
 				
 				switch(tableSelection) 
 				{
 				case "1": // Authors table
-					System.out.println("Authors table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > AUTHOR************************************************************************************/");
+					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					
 					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
@@ -255,7 +274,9 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "2": // Publishers table
-					System.out.println("Publishers table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > PUBLISHER************************************************************************************/");
+					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					
 					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
@@ -276,7 +297,9 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "3": // Books table
-					System.out.println("Books table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > BOOK************************************************************************************/");
+					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					
 					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
@@ -295,7 +318,9 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "4": // Library Branches table
-					System.out.println("Library Branches table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > BRANCH************************************************************************************/");
+					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					
 					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
@@ -315,7 +340,9 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "5": // Borrower table
-					System.out.println("Borrower table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > BORROWER************************************************************************************/");
+					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					
 					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
@@ -335,8 +362,27 @@ public class PresentationAdmin extends Presentation
 					break;
 					
 				case "6": // Book Loans table TODO only update due date.
-					System.out.println("Book Loans table selected");
+					System.out.println("/*MAIN > ADMIN > UPDATE > LOAN************************************************************************************/");
+					//administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
 					
+					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date", true);
+					
+					// the user quit somewhere in the process
+					if(userBookLoan == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userBookLoan.getBook().getBookId() == -1 ||
+						userBookLoan.getBranch().getBranchId()== -1 ||
+						userBookLoan.getBorrower().getCardNo() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
+						break;
+					}
+					
+					administrator.updateBookLoan(userBookLoan);
 					break;
 					
 				case "0": // return to operation select
@@ -344,33 +390,123 @@ public class PresentationAdmin extends Presentation
 				}
 				break;
 			case "4": // DELETE operation
-				System.out.println("Delete operation selected.");
+				System.out.println("/*MAIN > ADMIN > DELETE************************************************************************************/");
 				tableSelection = selectTable();
 				
 				switch(tableSelection) 
 				{
 				case "1": // Authors table
-					System.out.println("Authors table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > AUTHOR************************************************************************************/");
+					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					
+					Author userAuthor = createEntityAuthor("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					
+					// the user quit somewhere in the process
+					if(userAuthor == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userAuthor.getAuthorId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
+						break;
+					}
+					
+					administrator.deleteAuthor(userAuthor);
 					break;
 					
 				case "2": // Publishers table
-					System.out.println("Publishers table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > PUBLISHER************************************************************************************/");
+					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					
+					Publisher userPublisher= createEntityPublisher("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					
+					// the user quit somewhere in the process
+					if(userPublisher == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userPublisher.getPublisherId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
+						break;
+					}
+					
+					administrator.deletePublisher(userPublisher);
 					break;
 					
 				case "3": // Books table
-					System.out.println("Books table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > BOOK************************************************************************************/");
+					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					
+					Book userBook = createEntityBook("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					
+					// the user quit somewhere in the process
+					if(userBook == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userBook.getBookId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
+						break;
+					}
+					
+					administrator.deleteBook(userBook);
 					break;
 					
 				case "4": // Library Branches table
-					System.out.println("Library Branches table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > BRANCH************************************************************************************/");
+					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					
+					// the user quit somewhere in the process
+					if(userLibraryBranch == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userLibraryBranch.getBranchId() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
+						break;
+					}
+					
+					administrator.deleteLibraryBranch(userLibraryBranch);
 					break;
 					
 				case "5": // Borrower table
-					System.out.println("Borrower table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > BORROWER************************************************************************************/");
+					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					
+					Borrower userBorrower = createEntityBorrower("Note: The Book ID you enter will determine which borrower will be deleted", true);
+					
+					// the user quit somewhere in the process
+					if(userBorrower == null) 
+					{
+						break;
+					}
+					
+					// TODO should be in business logic
+					if(userBorrower.getCardNo() == -1) 
+					{
+						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
+						break;
+					}
+					
+					administrator.deleteBorrower(userBorrower);
 					break;
 					
 				case "6": // Book Loans table
-					System.out.println("Book Loans table selected");
+					System.out.println("/*MAIN > ADMIN > DELETE > LOAN************************************************************************************/");
 					System.out.println("Admin cannot delete a Book Loan.\nQuitting to operation selection");
 					break;
 					
@@ -693,6 +829,7 @@ public class PresentationAdmin extends Presentation
 		
 		return userBookLoan;
 	}
+	
 	/*
 	 * This function prompts the admin with all the tables in the db and returns their selection
 	 * */
