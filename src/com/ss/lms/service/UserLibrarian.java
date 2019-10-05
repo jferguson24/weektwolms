@@ -66,7 +66,16 @@ public class UserLibrarian implements ServiceLibrarian{
 	@Override
 	public ArrayList<BookCopy> readBookCopy(BookCopy bookCopy) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Reading Book Copies");
+		ArrayList<BookCopy> copies = null;
+		try {
+			copies = new ArrayList<BookCopy>(bookCopyDao.find(bookCopy));
+			return copies;
+		}
+		catch(SQLException e) {
+			System.out.println("Invalid Query");
+		}
+		return copies;
 	}
 
 	@Override
