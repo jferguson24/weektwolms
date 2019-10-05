@@ -69,7 +69,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+//					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
 					Author userAuthor = createEntityAuthor("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
@@ -85,7 +85,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+//					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher = createEntityPublisher("Note: Enter \"-1\" for automatic primary key generation.", false);
 
@@ -101,7 +101,12 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > CREATE > BOOK************************************************************************************/");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nAuthors Table:");
+					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nPublishersTable:");
+					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
@@ -116,7 +121,7 @@ public class PresentationAdmin extends Presentation
 					break;
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+//					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
@@ -132,7 +137,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+//					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower= createEntityBorrower("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
@@ -298,7 +303,14 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > UPDATE > BOOK************************************************************************************/");
+					System.out.println("\nBooks Table:");
 					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+
+					System.out.println("\nAuthors Table:");
+					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nPublishers Table:");
+					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
@@ -319,6 +331,8 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > UPDATE > BRANCH************************************************************************************/");
+
+					System.out.println("\nBranches Table:");
 					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
@@ -341,6 +355,8 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > UPDATE > BORROWER************************************************************************************/");
+
+					System.out.println("\nBorrowers Table:");
 					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
@@ -363,7 +379,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "6": // Book Loans table TODO only update due date.
 					System.out.println("/*MAIN > ADMIN > UPDATE > LOAN************************************************************************************/");
-					//administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
+					administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
 					
 					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date", true);
 					
