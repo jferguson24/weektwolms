@@ -6,14 +6,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ss.lms.service.*;
+class TestUserAdminUpdate {
 
-class TestUserAdminUpdate 
-{
-	private static ServiceAdmin admin = new UserAdmin(null, null, null, null, null, null, null);
-	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception{
+	static void setUpBeforeClass() throws Exception {
 	}
 
 	@AfterAll

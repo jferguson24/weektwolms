@@ -6,14 +6,27 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.ss.lms.dataaccess.AuthorDataAccess;
+import com.ss.lms.dataaccess.BookCopyDataAccess;
+import com.ss.lms.dataaccess.BookDataAccess;
+import com.ss.lms.dataaccess.BookLoanDataAccess;
+import com.ss.lms.dataaccess.BorrowerDataAccess;
+import com.ss.lms.dataaccess.LibraryBranchDataAccess;
+import com.ss.lms.dataaccess.PublisherDataAccess;
 import com.ss.lms.service.*;
 
 class TestUserAdminCreate 
 {
-	private static ServiceAdmin admin = new UserAdmin(null, null, null, null, null, null, null);
+	private static ServiceAdmin admin;
 	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception{
+	static void setUpBeforeClass() throws Exception
+	{
+		admin = new UserAdmin(
+				new AuthorDataAccess(), new PublisherDataAccess(), new BookDataAccess(),
+				new LibraryBranchDataAccess(), new BorrowerDataAccess(),
+				new BookCopyDataAccess(), new BookLoanDataAccess()
+				);
 	}
 
 	@AfterAll
