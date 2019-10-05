@@ -9,9 +9,12 @@ public class Publisher{
 	
 	public Publisher() {}
 	
-	public Publisher(Integer publisherId, String publisher, 
+	public Publisher(Integer publisherId, String publisherName, 
 			String publisherAddress, String publisherPhone) {
-		
+		this.publisherId = publisherId;
+		this.publisherName = publisherName;
+		this.publisherAddress = publisherAddress;
+		this.publisherPhone = publisherPhone;
 	}
 
 	/**

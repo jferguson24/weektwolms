@@ -39,7 +39,7 @@ public interface ServiceLibrarian
 	
 	public void updateLibraryBranch(LibraryBranch libraryBranch);
 	
-	public void updateBookCopy(BookLoan bookCopy);
+	public void updateBookCopy(BookCopy bookCopy);
 	
 	/*************************************************
 	 * 
@@ -47,5 +47,5 @@ public interface ServiceLibrarian
 	 * 
 	 *************************************************/
 	
-	public void deleteBookCopy(BookLoan bookCopy);
+	public void deleteBookCopy(BookCopy bookCopy);
 }

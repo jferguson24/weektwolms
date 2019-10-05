@@ -40,13 +40,26 @@ public class UserLibrarian implements ServiceLibrarian{
 	@Override
 	public void createBookCopy(BookCopy bookCopy) {
 		// TODO Auto-generated method stub
-		
+		try {
+			bookCopyDao.insert(bookCopy);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public ArrayList<Book> readBook(Book book) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Book> books = null;
+		try {
+			books = new ArrayList<Book>(bookDao.find(book));
+			return books;
+		}
+		catch(SQLException e) {
+			System.out.println("Invalid Query");
+		}
+		return books;
 	}
 
 	@Override
@@ -99,15 +112,25 @@ public class UserLibrarian implements ServiceLibrarian{
 	}
 
 	@Override
-	public void updateBookCopy(BookLoan bookCopy) {
+	public void updateBookCopy(BookCopy bookCopy) {
 		// TODO Auto-generated method stub
-		
+		try {
+			bookCopyDao.update(bookCopy);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deleteBookCopy(BookLoan bookCopy) {
+	public void deleteBookCopy(BookCopy bookCopy) {
 		// TODO Auto-generated method stub
-		
+		try {
+			bookCopyDao.delete(bookCopy);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

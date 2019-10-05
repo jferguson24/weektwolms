@@ -53,7 +53,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		if(findBranchAddress == "%") {
 			strBranchAddress = ("branchAddress LIKE ?");
 		}
-		
+		//System.out.println("Hello2");
 //		System.out.println("select * from tbl_book_copy "
 //				+ "where " + findBranchId 
 //				+ "and " + findBranchName 
@@ -67,7 +67,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		query.setInt(1, findBranchId);
 		query.setString(2, findBranchName);
 		query.setString(3, findBranchAddress);
-		System.out.println(query.toString());
+		//System.out.println(query.toString());
 		
 		result = query.executeQuery();
 			
@@ -108,7 +108,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		query.setString(2, newBranchAddress);
 		query.setInt(3, entity.getBranchId());
 		
-		System.out.println(query.toString());
+		//System.out.println(query.toString());
 		query.executeUpdate();
 	}
 

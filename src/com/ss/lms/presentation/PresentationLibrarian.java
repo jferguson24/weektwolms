@@ -124,7 +124,7 @@ public class PresentationLibrarian extends Presentation {
 			return;
 		}
 		System.out.println("Please enter new branch address or enter N/A for no change:");
-		String input2 = getStringFieldFromUser("branch name");
+		String input2 = getStringFieldFromUser("branch address");
 		if("quit".equals(input)) {
 			return;
 		}
@@ -144,14 +144,17 @@ public class PresentationLibrarian extends Presentation {
 			Author author = new Author(-1, "%");
 			Publisher publisher = new Publisher(-1, "%", "%", "%");
 			Book book = new Book(-1,"%",author, publisher);
-			BookCopy bookCopy = new BookCopy(book ,branch, -1);
-			ArrayList<BookCopy> copies = librarian.readBookCopy(bookCopy);
-			
+			ArrayList<Book> allBooks = librarian.readBook(book);
+			//LibraryBranch libraryBranch = librarian.readLibraryBranch(new LibraryBranch(-1,"%","%"));
+			//BookCopy allBooks = new BookCopy(book, libraryBranch, -1);
+			//BookCopy bookCopy = new BookCopy(book ,branch, -1);
+			//ArrayList<BookCopy> copies = librarian.readBookCopy(bookCopy);
+			//ArrayList<LibraryBranch> branches = new ArrayList<LibraryBranch>();
 			//Choosing which book you want to add copies of
 			System.out.println("Choose your Book:");
 			int i = 1;
-			for(BookCopy copy : copies) {
-				System.out.println(i + ") " + copy.getBook().getTitle() + " by " + copy.getBook().getAuthor().getAuthorName());
+			for(Book aBook : allBooks) {
+				System.out.println(i + ") " + aBook.getTitle() + " by " + aBook.getAuthor().getAuthorName());
 				i++;
 			}
 			System.out.println(i + ") Quit to previous");
@@ -174,28 +177,46 @@ public class PresentationLibrarian extends Presentation {
 				return;
 			}
 			//If the entered value is within the available id's then it will go on to add copies
-//			if(bookId <= copies.size()) {
-//				addCopies(copies.get(bookId-1), branchId);
-//			}
+			if(bookId <= allBooks.size()) {
+				addCopies(allBooks.get(bookId-1), branch);
+			}
 		}
 	}
 	
 	//addCopies gets the new number of copies desired and calls the service to update the database
-	public void addCopies(Book book, int branchId) {
-//		System.out.println("Existing number of books: " + librarian.getNumberOfCopies(book, branchId));
-//		System.out.println("Enter new number of copies: ");
-//		int numCopies= 0;
-//		//Gets a valid integer for the new number of copies
-//		while(!scanner.hasNextInt()) {
-//			System.out.println("Please enter a valid Integer.");
-//			System.out.print("Enter your book: ");
-//		    scanner.next();
-//		}
-//
-//		numCopies = scanner.nextInt();
-//		scanner.nextLine();
-//		librarian.changeCopies(book, branchId, numCopies);
-//		
+	public void addCopies(Book book, LibraryBranch branch) {
+		BookCopy bookCopy = new BookCopy(book, branch, -1);
+		if(librarian.readBookCopy(bookCopy).size() == 0)
+			System.out.println("Existing number of books: 0");
+		else {
+			System.out.println("Existing number of books: " + librarian.readBookCopy(bookCopy).get(0).getNoOfCopies());
+		}
+		System.out.println("Enter new number of copies: ");
+		int numCopies= 0;
+		//Gets a valid integer for the new number of copies
+		while(!super.scanner.hasNextInt()) {
+			System.out.println("Please enter a valid Integer.");
+			System.out.print("Enter your book: ");
+		    super.scanner.next();
+		}
+
+		numCopies = super.scanner.nextInt();
+		super.scanner.nextLine();
+		//System.out.println("Number of Copies: " + bookCopy.getNoOfCopies());
+		bookCopy.setNoOfCopies(numCopies);
+		if(numCopies == 0) {
+			//System.out.println("Deleting bookCopy.");
+			librarian.deleteBookCopy(bookCopy);
+		}
+		else if (bookCopy.getNoOfCopies() > 0) {
+			//System.out.println("Updating bookCopy to have this many books: " + numCopies);
+			//System.out.println("bookCopy has: " + bookCopy.getNoOfCopies());
+			librarian.updateBookCopy(bookCopy);
+		}
+		else {
+			//System.out.println("Creating bookCopy.");
+			librarian.createBookCopy(bookCopy);
+		}
 	}
 	
 }

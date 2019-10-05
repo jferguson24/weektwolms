@@ -31,6 +31,8 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(2, entity.getBranch().getBranchId());
 		query.setInt(3, entity.getNoOfCopies());
 		
+		System.out.println(query);
+		
 		query.executeUpdate();
 	}
 
@@ -67,7 +69,7 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(3, findNoOfCopies);
 		
 
-		System.out.println(query);
+		//System.out.println(query);
 		
 		result = query.executeQuery();
 			
@@ -86,10 +88,10 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 						+ " and branchId = ? ";
 
 		query = con.prepareStatement(sql);
-		query.setInt(1, entity.getBook().getBookId());
-		query.setInt(2, entity.getBranch().getBranchId());
-		query.setInt(3, entity.getNoOfCopies());
-		
+		query.setInt(2, entity.getBook().getBookId());
+		query.setInt(3, entity.getBranch().getBranchId());
+		query.setInt(1, entity.getNoOfCopies());
+		//System.out.println("Update query: " + query);
 		query.executeUpdate();
 	}
 
@@ -98,12 +100,14 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_book_copy where branchId = ?"
+		sql = "delete from tbl_book_copies where branchId = ?"
 				+ " and bookId = ?;";
 		query = con.prepareStatement(sql);
 
-		query.setInt(1, entity.getBook().getBookId());
-		query.setInt(2, entity.getBranch().getBranchId());
+		query.setInt(2, entity.getBook().getBookId());
+		query.setInt(1, entity.getBranch().getBranchId());
+		
+		//System.out.println(query);
 		
 		query.executeUpdate();
 	}
@@ -128,7 +132,7 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
 
-			System.out.println(query);
+			//System.out.println(query);
 			ResultSet resultPublisher = query.executeQuery();
 			resultPublisher.next();
 			Publisher publisher = new Publisher(resultPublisher.getInt(1), resultPublisher.getString(2),
@@ -137,7 +141,7 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
 
-			System.out.println(query);
+			//System.out.println(query);
 			ResultSet resultBook = query.executeQuery();
 			resultBook.next();
 			Book book = new Book(resultBook.getInt(1),resultBook.getString(2), author, publisher);
