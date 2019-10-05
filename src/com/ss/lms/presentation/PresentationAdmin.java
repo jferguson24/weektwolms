@@ -60,7 +60,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("Authors table selected");
-					Author userAuthor = createEntityAuthor("Note: Enter \"-1\" for automatic primary key generation.");
+					Author userAuthor = createEntityAuthor("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -75,7 +75,7 @@ public class PresentationAdmin extends Presentation
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
 					
-					Publisher userPublisher = createEntityPublisher("Note: Enter \"-1\" for automatic primary key generation.");
+					Publisher userPublisher = createEntityPublisher("Note: Enter \"-1\" for automatic primary key generation.", false);
 
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -90,7 +90,7 @@ public class PresentationAdmin extends Presentation
 				case "3": // Books table
 					System.out.println("Books table selected");
 					
-					Book userBook = createEntityBook("Note: Enter \"-1\" for automatic primary key generation.");
+					Book userBook = createEntityBook("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -103,7 +103,7 @@ public class PresentationAdmin extends Presentation
 					break;
 				case "4": // Library Branches table
 					System.out.println("Library Branches table selected");
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter \"-1\" for automatic primary key generation.");
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -117,7 +117,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("Borrowers table selected");
-					Borrower userBorrower= createEntityBorrower("Note: Enter \"-1\" for automatic primary key generation.");
+					Borrower userBorrower= createEntityBorrower("Note: Enter \"-1\" for automatic primary key generation.", false);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -147,7 +147,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("Authors table selected");
-					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field");
+					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -160,7 +160,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
-					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field");
+					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -173,7 +173,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("Books table selected");
-					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field");
+					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -186,7 +186,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("Library Branches table selected");
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field");
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -194,12 +194,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readLibraryBranch(userLibraryBranch).stream().forEach(row -> System.out.println(row));;
+					administrator.readLibraryBranch(userLibraryBranch).stream().forEach(row -> System.out.println(row));
 					break;
 					
 				case "5": // Borrower table
 					System.out.println("Borrower table selected");
-					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field");
+					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -212,7 +212,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "6": // Book Loans table
 					System.out.println("Book Loan table selected");
-					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field");
+					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field", true);
 					
 					// the user quit somewhere in the process
 					if(userBookLoan == null) 
@@ -235,7 +235,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("Authors table selected");
-					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -256,7 +256,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
-					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher== null) 
@@ -277,7 +277,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("Books table selected");
-					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					Book userBook = createEntityBook("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -296,7 +296,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("Library Branches table selected");
-					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -316,7 +316,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("Borrower table selected");
-					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is");
+					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -386,20 +386,29 @@ public class PresentationAdmin extends Presentation
 	}
 	
 	// TODO document these functions properly
-	private Author createEntityAuthor(String note) 
+	private Author createEntityAuthor(String note, boolean getPrimaryKey) 
 	{
 		Author userAuthor = new Author();
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
 		System.out.println("\n" + note);
-		// Getting ID
-		allIntegerInput = getIntegerFieldFromUser("Author ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		
+		if(getPrimaryKey) 
 		{
-			return null; 
+			// Getting ID
+			allIntegerInput = getIntegerFieldFromUser("Author ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null; 
+			}
+			userAuthor.setAuthorId(allIntegerInput);
 		}
-		userAuthor.setAuthorId(allIntegerInput);
+		else 
+		{
+			userAuthor.setAuthorId(-1);
+		}
+		
 		
 		// Getting name
 		allStringInput.setLength(0); // empty the buffer before input
@@ -413,20 +422,28 @@ public class PresentationAdmin extends Presentation
 		return userAuthor;
 	}
 	
-	private Publisher createEntityPublisher(String note) 
+	private Publisher createEntityPublisher(String note, boolean getPrimaryKey) 
 	{
 		Publisher userPublisher = new Publisher();
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 
 		System.out.println("\n" + note);
-		// Getting ID
-		allIntegerInput = getIntegerFieldFromUser("Publisher ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		
+		if(getPrimaryKey) 
 		{
-			return null;
+			// Getting ID
+			allIntegerInput = getIntegerFieldFromUser("Publisher ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherId(allIntegerInput);
 		}
-		userPublisher.setPublisherId(allIntegerInput);
+		else 
+		{
+			userPublisher.setPublisherId(-1);
+		}
 		
 		// Getting name
 		allStringInput.setLength(0); // empty the buffer before input
@@ -458,7 +475,7 @@ public class PresentationAdmin extends Presentation
 		return userPublisher;
 	}
 	
-	private Book createEntityBook(String note) 
+	private Book createEntityBook(String note, boolean getPrimaryKey) 
 	{
 		Book userBook = new Book();
 		userBook.setAuthor(new Author());
@@ -468,13 +485,21 @@ public class PresentationAdmin extends Presentation
 		Integer allIntegerInput;
 		
 		System.out.println("\n" + note);
-		// Getting ID
-		allIntegerInput = getIntegerFieldFromUser("Book ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		
+		if(getPrimaryKey) 
 		{
-			return null;
+			// Getting ID
+			allIntegerInput = getIntegerFieldFromUser("Book ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBook.setBookId(allIntegerInput);
 		}
-		userBook.setBookId(allIntegerInput);
+		else 
+		{
+			userBook.setBookId(-1);
+		}
 		
 		// Getting name
 		allStringInput.setLength(0); // empty the buffer before input
@@ -504,20 +529,29 @@ public class PresentationAdmin extends Presentation
 		return userBook;
 	}
 	
-	private LibraryBranch createEntityLibraryBranch(String note) 
+	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey) 
 	{
 		LibraryBranch userLibraryBranch = new LibraryBranch();
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
 		System.out.println("\n" + note);
-		// Getting ID
-		allIntegerInput = getIntegerFieldFromUser("Library Branch ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		
+		if(getPrimaryKey) 
 		{
-			return null;
+			// Getting ID
+			allIntegerInput = getIntegerFieldFromUser("Library Branch ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userLibraryBranch.setBranchId(allIntegerInput);
 		}
-		userLibraryBranch.setBranchId(allIntegerInput);
+		else 
+		{
+			userLibraryBranch.setBranchId(-1);
+		}
+		
 		
 		// Getting name
 		allStringInput.setLength(0); // empty the buffer before input
@@ -540,21 +574,29 @@ public class PresentationAdmin extends Presentation
 		return userLibraryBranch;
 	}
 
-	private Borrower createEntityBorrower(String note) 
+	private Borrower createEntityBorrower(String note, boolean getPrimaryKey) 
 	{
 		Borrower userBorrower= new Borrower();
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
 		System.out.println("/n" + note);
-		// Getting ID
-		System.out.println("Note: Enter \"-1\" for automatic primary key generation.");
-		allIntegerInput = getIntegerFieldFromUser("Borrower Card Number");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+
+		if(getPrimaryKey) 
 		{
-			return null;
+			// Getting ID
+			allIntegerInput = getIntegerFieldFromUser("Borrower Card Number");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBorrower.setCardNo(allIntegerInput);
 		}
-		userBorrower.setCardNo(allIntegerInput);
+		else 
+		{
+			userBorrower.setCardNo(-1);
+		}
+
 		
 		// Getting name
 		allStringInput.setLength(0); // empty the buffer before input
@@ -586,7 +628,7 @@ public class PresentationAdmin extends Presentation
 		return userBorrower;
 	}
 	
-	private BookLoan createEntityBookLoan(String note) 
+	private BookLoan createEntityBookLoan(String note, boolean onlyAskIdsAndDueDate) 
 	{
 		BookLoan userBookLoan = new BookLoan();
 		userBookLoan.setBook(new Book());
@@ -622,17 +664,31 @@ public class PresentationAdmin extends Presentation
 		userBookLoan.getBorrower().setCardNo(allIntegerInput);
 		
 		// cannot change dateOut
-		// TODO properly handle not changing the date
-		userBookLoan.setDateOut(null);
-		
+		userBookLoan.setDateOut(Date.valueOf("0001-01-01"));
+
 		// Getting due date
 		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Due Date (YYYY-MM-DD)"));
-		if("quit".equals(allStringInput.toString())) 
+		
+		// get year:
+		Integer year = getIntegerFieldFromUser("Due Year (YYYY)");
+		if(year == Integer.MIN_VALUE) 
 		{
 			return null;
 		}
-		// TODO proper date input checking
+		// get month
+		Integer month = getIntegerFieldFromUser("Due Month (MM)");
+		if(month == Integer.MIN_VALUE) 
+		{
+			return null;
+		}
+		// get day
+		Integer day = getIntegerFieldFromUser("Due Day (DD)");
+		if(day == Integer.MIN_VALUE) 
+		{
+			return null;
+		}
+		allStringInput.append(year + "-" + month + "-" + day);
+		
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
 		
 		return userBookLoan;

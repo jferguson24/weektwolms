@@ -17,7 +17,6 @@ public abstract class Presentation
 	public Presentation(ServiceAdmin administrator)
 	{
 		this.scanner = new Scanner(System.in);
-		System.err.println("Scanner made!");
 		this.administrator = administrator;
 		this.menu();
 		this.administrator.closeConnection();

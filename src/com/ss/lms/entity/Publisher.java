@@ -18,6 +18,12 @@ public class Publisher{
 		this.publisherPhone = publisherPhone;
 	}
 
+	@Override
+	public String toString() 
+	{
+		return publisherId + "\t" + publisherName + "\t" + publisherAddress + "\t" + publisherPhone;
+	}
+	
 	/**
 	 * @return the publisherId
 	 */
