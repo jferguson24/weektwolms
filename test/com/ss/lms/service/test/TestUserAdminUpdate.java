@@ -41,14 +41,13 @@ class TestUserAdminUpdate
 	{
 		admin = new UserAdmin(
 				new AuthorDataAccess(), new PublisherDataAccess(), new BookDataAccess(),
-				new LibraryBranchDataAccess(), new BorrowerDataAccess(),
-				new BookCopyDataAccess(), new BookLoanDataAccess()
+				new LibraryBranchDataAccess(), new BorrowerDataAccess(), new BookLoanDataAccess()
 				);
 		
 		admin.createAuthor(author);
 		admin.createPublisher(publisher);
 		admin.createLibraryBranch(branch);
-//		admin.createBorrower(borrower);
+		admin.createBorrower(borrower);
 		admin.createBook(book);
 	}
 
@@ -58,7 +57,7 @@ class TestUserAdminUpdate
 		admin.deleteAuthor(author);
 		admin.deletePublisher(publisher);
 		admin.deleteLibraryBranch(branch);
-//		admin.deleteBorrower(borrower);
+		admin.deleteBorrower(borrower);
 		admin.deleteBook(book);
 		
 		admin.closeConnection();
@@ -272,13 +271,42 @@ class TestUserAdminUpdate
 //		newData.forEach(row -> System.out.println(row));
 
 		// check if the newData is the same as oldData
-		 assertEquals(newData,oldData);
+		assertEquals(newData,oldData);
+		// I beleive assertEquals might have trouble with the types of line feeds, which is why it doesnt work it some cases
 	}
 	
-//	final void updateBookLoan() 
-//	{
-//		admin.updateBookLoan(loan);
-//		//TODO Auto-generated method stub
-//		
-//	}
+	final void updateBookLoan() 
+	{
+		// save the previous data
+		ArrayList<BookLoan> oldData = admin.readBookLoan(findAllBookLoans);
+		String newDueDate = "2002-02-02";
+		
+		// change the value
+		admin.updateBookLoan(new BookLoan(loan.getBook(),loan.getBranch(),loan.getBorrower(), Date.valueOf("0001-01-01"), Date.valueOf(newDueDate)));
+		
+		// store the new version of the table
+		ArrayList<Borrower> newData = admin.readBorrower(findAllBorrowers);
+		
+		// change the value in the db back 
+		admin.updateBookLoan(loan);
+		
+		// change it in our oldData arraylist
+		oldData.forEach(row -> 
+		{
+			if(row.getBook().getBookId() == loan.getBook().getBookId() &&
+					row.getBranch().getBranchId() == loan.getBranch().getBranchId() &&
+					row.getBorrower().getCardNo()== loan.getBorrower().getCardNo()) 
+			{
+				row.setDueDate(Date.valueOf(newDueDate));
+			}
+		});
+		
+//		System.out.println("old");
+//		oldData.forEach(row -> System.out.println(row));
+//		System.out.println("new");
+//		newData.forEach(row -> System.out.println(row));
+		
+		assertEquals(oldData,newData);
+		
+	}
 }

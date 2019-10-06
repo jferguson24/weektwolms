@@ -24,8 +24,7 @@ public class UserAdmin implements ServiceAdmin
 	
 	public UserAdmin(
 			AuthorDataAccess authorDao, PublisherDataAccess publisherDao, BookDataAccess bookDao,
-			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao,
-			BookCopyDataAccess bookCopyDao, BookLoanDataAccess bookLoanDao) 
+			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao, BookLoanDataAccess bookLoanDao) 
 	{
 		this.authorDao = authorDao;
 		this.publisherDao = publisherDao;

@@ -27,8 +27,7 @@ public class PresentationAdmin extends Presentation
 	{
 		super(new UserAdmin(
 				new AuthorDataAccess(), new PublisherDataAccess(), new BookDataAccess(),
-				new LibraryBranchDataAccess(), new BorrowerDataAccess(),
-				new BookCopyDataAccess(), new BookLoanDataAccess()
+				new LibraryBranchDataAccess(), new BorrowerDataAccess(), new BookLoanDataAccess()
 				));
 	}
 	
@@ -65,7 +64,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
 //					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("", false);
+					Author userAuthor = createEntityAuthor("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -81,7 +80,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
 //					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher = createEntityPublisher("", false);
+					Publisher userPublisher = createEntityPublisher("", false, true);
 
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -102,7 +101,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nPublishers Table:");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("", false);
+					Book userBook = createEntityBook("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -117,7 +116,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
 //					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -133,7 +132,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
 //					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower= createEntityBorrower("", false);
+					Borrower userBorrower= createEntityBorrower("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -163,7 +162,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > READ > AUTHOR************************************************************************************/");
-					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -176,7 +175,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
-					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -189,7 +188,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > READ > BOOK************************************************************************************/");
-					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -202,7 +201,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > READ > BRANCH************************************************************************************/");
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -215,7 +214,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > READ > BORROWER************************************************************************************/");
-					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -253,7 +252,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > AUTHOR************************************************************************************/");
 					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -276,7 +275,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > PUBLISHER************************************************************************************/");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher== null) 
@@ -306,7 +305,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nPublishers Table:");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -329,7 +328,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nBranches Table:");
 					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -353,7 +352,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nBorrowers Table:");
 					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -419,7 +418,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > AUTHOR************************************************************************************/");
 					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true);
+					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -441,7 +440,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > PUBLISHER************************************************************************************/");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true);
+					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -463,7 +462,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BOOK************************************************************************************/");
 					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true);
+					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -485,7 +484,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BRANCH************************************************************************************/");
 					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -507,7 +506,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > DELETE > BORROWER************************************************************************************/");
 					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true);
+					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -542,7 +541,7 @@ public class PresentationAdmin extends Presentation
 	}
 	
 	// TODO document these functions properly
-	private Author createEntityAuthor(String note, boolean getPrimaryKey) 
+	private Author createEntityAuthor(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Author userAuthor = new Author();
 		StringBuffer allStringInput = new StringBuffer();
@@ -565,20 +564,26 @@ public class PresentationAdmin extends Presentation
 			userAuthor.setAuthorId(-1);
 		}
 		
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Author Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Author Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userAuthor.setAuthorName(allStringInput.toString());
 		}
-		userAuthor.setAuthorName(allStringInput.toString());
+		else 
+		{
+			userAuthor.setAuthorName("%");
+		}
 		
 		return userAuthor;
 	}
 	
-	private Publisher createEntityPublisher(String note, boolean getPrimaryKey) 
+	private Publisher createEntityPublisher(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Publisher userPublisher = new Publisher();
 		StringBuffer allStringInput = new StringBuffer();
@@ -600,38 +605,47 @@ public class PresentationAdmin extends Presentation
 		{
 			userPublisher.setPublisherId(-1);
 		}
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherName(allStringInput.toString());
+			
+			// Getting Address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherAddress(allStringInput.toString());
+			
+			// Getting Phone
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Phone"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherPhone(allStringInput.toString());
 		}
-		userPublisher.setPublisherName(allStringInput.toString());
-		
-		// Getting Address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userPublisher.setPublisherName("%");
+			userPublisher.setPublisherAddress("%");
+			userPublisher.setPublisherPhone("%");
 		}
-		userPublisher.setPublisherAddress(allStringInput.toString());
 		
-		// Getting Phone
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Phone"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userPublisher.setPublisherPhone(allStringInput.toString());
-		
+
 		return userPublisher;
 	}
 	
-	private Book createEntityBook(String note, boolean getPrimaryKey) 
+	private Book createEntityBook(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Book userBook = new Book();
 		userBook.setAuthor(new Author());
@@ -657,35 +671,45 @@ public class PresentationAdmin extends Presentation
 			userBook.setBookId(-1);
 		}
 		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Book Name"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userBook.setTitle(allStringInput.toString());
 		
-		// Getting author ID
-		allIntegerInput = getIntegerFieldFromUser("Author ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Book Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBook.setTitle(allStringInput.toString());
+			
+			// Getting author ID
+			allIntegerInput = getIntegerFieldFromUser("Author ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBook.getAuthor().setAuthorId(allIntegerInput);
+			
+			// Getting publisher ID
+			allIntegerInput = getIntegerFieldFromUser("Publisher ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBook.getPublisher().setPublisherId(allIntegerInput);
 		}
-		userBook.getAuthor().setAuthorId(allIntegerInput);
-		
-		// Getting publisher ID
-		allIntegerInput = getIntegerFieldFromUser("Publisher ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		else 
 		{
-			return null;
+			userBook.setTitle("%");
+			userBook.getAuthor().setAuthorId(-1);
+			userBook.getPublisher().setPublisherId(-1);
 		}
-		userBook.getPublisher().setPublisherId(allIntegerInput);
 		
 		return userBook;
 	}
 	
-	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey) 
+	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		LibraryBranch userLibraryBranch = new LibraryBranch();
 		StringBuffer allStringInput = new StringBuffer();
@@ -708,29 +732,37 @@ public class PresentationAdmin extends Presentation
 			userLibraryBranch.setBranchId(-1);
 		}
 		
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Library Branch Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Library Branch Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userLibraryBranch.setBranchName(allStringInput.toString());
+			
+			// Getting address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Library Branch Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userLibraryBranch.setBranchAddress(allStringInput.toString());
+			
 		}
-		userLibraryBranch.setBranchName(allStringInput.toString());
-		
-		// Getting address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Library Branch Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userLibraryBranch.setBranchName("%");
+			userLibraryBranch.setBranchAddress("%");
 		}
-		userLibraryBranch.setBranchAddress(allStringInput.toString());
 		
 		return userLibraryBranch;
 	}
 
-	private Borrower createEntityBorrower(String note, boolean getPrimaryKey) 
+	private Borrower createEntityBorrower(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Borrower userBorrower= new Borrower();
 		StringBuffer allStringInput = new StringBuffer();
@@ -753,33 +785,41 @@ public class PresentationAdmin extends Presentation
 			userBorrower.setCardNo(-1);
 		}
 
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setName(allStringInput.toString());
+			
+			// Getting address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setAddress(allStringInput.toString());
+			
+			// Getting phone number
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Phone Number"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setPhone(allStringInput.toString());
 		}
-		userBorrower.setName(allStringInput.toString());
-		
-		// Getting address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userBorrower.setName("%");
+			userBorrower.setAddress("%");
+			userBorrower.setPhone("%");
 		}
-		userBorrower.setAddress(allStringInput.toString());
-		
-		// Getting phone number
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Phone Number"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userBorrower.setPhone(allStringInput.toString());
 		
 		return userBorrower;
 	}
