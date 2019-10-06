@@ -100,9 +100,10 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 //			publisherId = result.getInt(4);
 //		}
 		
-		sql = "update tbl_library_branch set branchName = ? "
-				+ ", branchAddress = ? "
-				+ " where branchId = ? ";
+		sql = "update tbl_library_branch "
+				+ "set branchName = ?, "
+				+ "branchAddress = ? "
+				+ "where branchId = ? ";
 		query = con.prepareStatement(sql);
 		query.setString(1, newBranchName);
 		query.setString(2, newBranchAddress);
@@ -117,7 +118,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_book where bookId = ?";
+		sql = "delete from tbl_tbl_library_branch where branchId = ?";
 		query = con.prepareStatement(sql);
 
 		query.setInt(1, entity.getBranchId());

@@ -10,8 +10,8 @@ import com.ss.lms.entity.Borrower;
 
 public class BorrowerDataAccess extends DataAccess<Borrower>  {
 
-	public BorrowerDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException {
-		super(connectionInfo);
+	public BorrowerDataAccess() throws SQLException, ClassNotFoundException {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,7 +63,7 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 	}
 
 	@Override
-	public List<Borrower> packageResultSet(ResultSet result) throws SQLException {
+	public ArrayList<Borrower> packageResultSet(ResultSet result) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
