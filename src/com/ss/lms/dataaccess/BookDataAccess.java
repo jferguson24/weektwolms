@@ -37,7 +37,6 @@ public class BookDataAccess extends DataAccess<Book>{
 		query.setInt(3, entity.getAuthor().getAuthorId());
 		query.setInt(4, entity.getPublisher().getPublisherId());
 		
-		System.out.println(query.toString());
 		query.executeUpdate();
 		
 	}
@@ -153,7 +152,6 @@ public class BookDataAccess extends DataAccess<Book>{
 		query.setInt(3, publisherId);
 		query.setInt(4, entity.getBookId());
 		
-		System.out.println(query.toString());
 		query.executeUpdate();
 		
 	}

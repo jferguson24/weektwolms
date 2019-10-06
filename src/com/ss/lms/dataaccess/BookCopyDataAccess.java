@@ -31,8 +31,6 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(2, entity.getBranch().getBranchId());
 		query.setInt(3, entity.getNoOfCopies());
 		
-		System.out.println(query);
-		
 		query.executeUpdate();
 	}
 
@@ -91,7 +89,7 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		query.setInt(2, entity.getBook().getBookId());
 		query.setInt(3, entity.getBranch().getBranchId());
 		query.setInt(1, entity.getNoOfCopies());
-		System.out.println("Update query: " + query);
+
 		query.executeUpdate();
 	}
 

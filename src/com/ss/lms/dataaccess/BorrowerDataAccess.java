@@ -7,7 +7,6 @@ import com.ss.lms.entity.Borrower;
 public class BorrowerDataAccess extends DataAccess<Borrower>  {
     public BorrowerDataAccess() throws SQLException, ClassNotFoundException {
         super();
-        // TODO Auto-generated constructor stub
     }
     @Override
     public void insert(Borrower entity) throws SQLException {
@@ -60,7 +59,6 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
     }
     @Override
     public void delete(Borrower entity) throws SQLException {
-        // TODO Auto-generated method stub
         PreparedStatement query;
         String sql;
         sql = "delete from tbl_borrower where cardNo = ?";
