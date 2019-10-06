@@ -117,7 +117,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_book where bookId = ?";
+		sql = "delete from tbl_tbl_library_branch where branchId = ?";
 		query = con.prepareStatement(sql);
 
 		query.setInt(1, entity.getBranchId());

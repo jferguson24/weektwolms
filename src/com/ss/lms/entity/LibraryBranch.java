@@ -16,6 +16,12 @@ public class LibraryBranch {
 		this.branchAddress = branchAddress;
 	}
 
+	@Override
+	public String toString() 
+	{
+		return  branchId + "\t" + branchName + "\t" + branchAddress;
+	}
+	
 	/**
 	 * @return the branchId
 	 */
