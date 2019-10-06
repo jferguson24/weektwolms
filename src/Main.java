@@ -1,7 +1,8 @@
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.ss.lms.presentation.*;
+import com.ss.lms.presentation.Presentation;
+import com.ss.lms.presentation.PresentationAdmin;
+import com.ss.lms.presentation.PresentationLibrarian;
 
 public class Main {
 
