@@ -9,7 +9,7 @@ public abstract class DataAccess<T>
     Connection con;
 
     public DataAccess() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");  
+        Class.forName("com.mysql.jdbc.Driver");  
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
         // TODO get proper con info
     }
