@@ -27,7 +27,7 @@ public class BookLoanDataAccess extends DataAccess<BookLoan>
         query.setInt(1,entity.getBook().getBookId());
         query.setInt(2,entity.getBranch().getBranchId());
         query.setInt(3,entity.getBorrower().getCardNo());
-        System.out.println(query.toString());
+
         query.executeUpdate();
         //update Subtracted Copies;
         
@@ -86,7 +86,7 @@ public class BookLoanDataAccess extends DataAccess<BookLoan>
         query.setInt(3,entity.getBook().getBookId());
         query.setDate(4, entity.getDateOut());
         query.setDate(5, entity.getDueDate());
-        System.out.println(query.toString());
+
         result = query.executeQuery();
         
         return packageResultSet(result) ;
