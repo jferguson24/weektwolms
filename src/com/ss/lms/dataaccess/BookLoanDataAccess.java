@@ -96,45 +96,53 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 		ArrayList<BookLoan> bookLoans = new ArrayList<>();
 
 		while (result.next()) {
-			
+			//Author
 			sql = "select * from tbl_author, tbl_book where bookId = ? and authorId = authId";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
 			ResultSet resultAuthor = query.executeQuery();
-
+			resultAuthor.next();
 			Author author =  new Author();
 			author.setAuthorId(resultAuthor.getInt(1));
 			author.setAuthorName(resultAuthor.getString(2));
 			
-			
-			sql = "select * from tbl_publisher, tbl_book where bookId = ? and authorId = authId";
+			//Publisher
+			sql = "select * from tbl_publisher, tbl_book where bookId = ? and authId = authId";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
 			ResultSet resultPublisher = query.executeQuery();
+			resultPublisher.next();
 			Publisher publisher = new Publisher(resultPublisher.getInt(1), resultPublisher.getString(2),
 						resultPublisher.getString(3), resultPublisher.getString(4));
 			
-			
+			//Book
 			sql = "select * from tbl_book where bookId = ?";
 			query = con.prepareStatement(sql);
 			query.setInt(1, result.getInt(1));
-			
-			
-			
-			Book book = new Book();
-			book.setAuthor(author);
-			book.setBookId(result.getInt(1));
-			book.setPublisher(publisher);
-			book.setTitle(result.getString(2));
+			ResultSet resultBook = query.executeQuery();
+			resultBook.next();
+			Book book = new Book(resultBook.getInt(1),resultBook.getString(2), author, publisher);
 		
 			
+			//Borrower
+			sql = "select * from tbl_borrower where cardNo = ?";
+			query = con.prepareStatement(sql);
+			query.setInt(1, result.getInt(3));
+			ResultSet resultBorrow = query.executeQuery();
+			resultBorrow.next();
+			Borrower borrower = new Borrower(resultBorrow.getInt(1), resultBorrow.getString(2),
+					resultBorrow.getString(3),resultBorrow.getString(4));
+
 			
-			Borrower borrower = new Borrower();
-			borrower.setAddress(result.getString("address"));
-			borrower.setCardNo(result.getInt("cardNo"));
-			borrower.setName(result.getString("name"));
-			borrower.setPhone(result.getString("phone"));
+			//Library
 			
+			sql = "select * from tbl_library_branch where branchId = ? "; 
+			query = con.prepareStatement(sql);
+			query.setInt(1, result.getInt(2));
+			ResultSet resultBranch = query.executeQuery();
+			resultBranch.next();
+			LibraryBranch branch = new LibraryBranch(resultBranch.getInt(1), resultBranch.getString(2),
+					resultBranch.getString(3)); 
 			
 			BookLoan bookLoan = new BookLoan();
 			bookLoan.setBook(book);

@@ -16,7 +16,6 @@ public class UserBorrower implements ServiceBorrower {
 	
 	public UserBorrower(LibraryBranchDataAccess libraryBranchDao,BorrowerDataAccess borrowerDao,
 			BookCopyDataAccess bookCopyDao, BookLoanDataAccess bookLoanDao) {
-		
 		this.libraryBranchDao = libraryBranchDao;
 		this.borrowerDao = borrowerDao;
 		this.bookCopyDao =  bookCopyDao;
@@ -59,7 +58,13 @@ public class UserBorrower implements ServiceBorrower {
 	@Override
 	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<LibraryBranch> branches = null;
+		try {
+				branches = new ArrayList<LibraryBranch>(libraryBranch.find(libraryBranch));
+		}
+		
+		
+		return ;
 	}
 
 	@Override
