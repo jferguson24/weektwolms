@@ -179,7 +179,7 @@ class TestUserAdminUpdate
 //		newData.forEach(row -> System.out.println(row));
 
 		// check if the newData is the same as oldData
-		// assertEquals(newData,oldData);
+//		 assertEquals(newData,oldData);
 		// assertequals does not properly compare the contents of these arraylists
 		// upon looking at the actual values, diff view showed no differences whatsoever.
 		
@@ -238,13 +238,43 @@ class TestUserAdminUpdate
 		}
 	}
 	
-//	final void updateBorrower() 
-//	{
-//		admin.updateBorrower(loan);
-//		//TODO Auto-generated method stub
-//		
-//	}
-//	
+	final void updateBorrower() 
+	{
+		// save the previous data
+		ArrayList<Borrower> oldData = admin.readBorrower(findAllBorrowers);
+		String newName = "New Borrower Name";
+		String newAddress = "New Borrower Address";
+		String newPhone = "New Borrower Phone";
+		
+		// change the value
+		admin.updateBorrower(new Borrower(borrower.getCardNo(), newName, newAddress, newPhone));
+		
+		// store the new version of the table
+		ArrayList<Borrower> newData = admin.readBorrower(findAllBorrowers);
+		
+		// change the value in the db back 
+		admin.updateBorrower(borrower);
+		
+		// change it in our oldData arraylist
+		oldData.forEach(row -> 
+		{
+			if(row.getCardNo() == borrower.getCardNo()) 
+			{
+				row.setName(newName);
+				row.setAddress(newAddress);
+				row.setPhone(newPhone);
+			}
+		});
+		
+//		System.out.println("old");
+//		oldData.forEach(row -> System.out.println(row));
+//		System.out.println("new");
+//		newData.forEach(row -> System.out.println(row));
+
+		// check if the newData is the same as oldData
+		 assertEquals(newData,oldData);
+	}
+	
 //	final void updateBookLoan() 
 //	{
 //		admin.updateBookLoan(loan);

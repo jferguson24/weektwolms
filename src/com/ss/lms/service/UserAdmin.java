@@ -535,7 +535,6 @@ public class UserAdmin implements ServiceAdmin
 	}
 
 	@Override
-	// TODO needs big testing
 	public void updateBookLoan(BookLoan bookLoan) 
 	{
 		try 
@@ -580,7 +579,7 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
-				// if the user sent a due date 0001-01-01, leave use existing data 
+				// if the user sent a due date 0001-01-01, use existing data 
 				if(Date.valueOf("0001-01-01").equals(bookLoan.getDueDate()))
 				{
 					bookLoan.setDueDate(oldData.get(0).getDueDate());

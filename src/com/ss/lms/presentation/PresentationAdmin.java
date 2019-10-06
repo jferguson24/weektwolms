@@ -99,7 +99,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("\nAuthors Table:");
 					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
 					
-					System.out.println("\nPublishersTable:");
+					System.out.println("\nPublishers Table:");
 					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("", false);
@@ -373,7 +373,17 @@ public class PresentationAdmin extends Presentation
 					
 				case "6": // Book Loans table TODO only update due date.
 					System.out.println("/*MAIN > ADMIN > UPDATE > LOAN************************************************************************************/");
+					System.out.println("\nBook Loans Table:");
 					administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nBooks Table:");
+					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nBranch Table:");
+					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					
+					System.out.println("\nBorrowers Loans Table:");
+					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
 					
 					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date", true);
 					
@@ -391,7 +401,7 @@ public class PresentationAdmin extends Presentation
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
 						break;
 					}
-					
+					System.out.println("you entered: " + userBookLoan.toString());
 					administrator.updateBookLoan(userBookLoan);
 					break;
 					
@@ -821,6 +831,13 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
+		
+		if(year == -1) 
+		{
+			userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+			return userBookLoan;
+		}
+		
 		// get month
 		Integer month = getIntegerFieldFromUser("Due Month (MM)");
 		if(month == Integer.MIN_VALUE) 
@@ -833,6 +850,7 @@ public class PresentationAdmin extends Presentation
 		{
 			return null;
 		}
+		
 		allStringInput.append(year + "-" + month + "-" + day);
 		
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
