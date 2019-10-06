@@ -8,25 +8,9 @@ import com.ss.lms.entity.*;
 
 public interface ServiceBorrower
 {
-	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<UserBorrower> borrowerDao = null;
-	public DataAccess<BookCopy> bookCopyDao = null;
-	public DataAccess<BookLoan> bookLoanDao = null;
+
+	 public void closeConnection();
 	
-	default public void closeConnection() 
-	{
-		try 
-		{
-			libraryBranchDao.close();
-			borrowerDao.close();
-			bookCopyDao.close();
-			bookLoanDao.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-	}
 	
 	/*************************************************
 	 * 

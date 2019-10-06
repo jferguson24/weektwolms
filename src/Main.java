@@ -1,18 +1,22 @@
 import java.sql.SQLException;
 
-import com.ss.lms.presentation.*;
+//import com.mysql.jdbc.Connection;
+import com.ss.lms.dataaccess.BorrowerDataAccess;
+import com.ss.lms.presentation.Presentation;
+import com.ss.lms.presentation.PresentationBorrower;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class Main {
 
-	public static void main(String[] args) 
-	{
-		try 
-		{
-			Presentation pres = new PresentationAdmin();
-		} 
-		catch (ClassNotFoundException | SQLException e) 
-		{
-			e.printStackTrace();
+	public static void main(String args[]) {
+
+		try {
+			Presentation pres = new PresentationBorrower();
+		}
+		catch(Exception e){
+		
 		}
 	}
 //	
@@ -53,4 +57,3 @@ public class Main {
 //		}
 //	}
 }
-

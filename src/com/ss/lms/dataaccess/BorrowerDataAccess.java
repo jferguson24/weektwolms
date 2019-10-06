@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import com.ss.lms.entity.Borrower;
 
@@ -37,7 +37,7 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 		ResultSet result;
 		PreparedStatement query;
 		
-		String sql = "select cardNo, name from tbl_borrower where cardNo = ?";
+		String sql = "select * from tbl_borrower where cardNo = ?";
 				
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getCardNo());
@@ -51,11 +51,13 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 	public void update(Borrower entity) throws SQLException {
 		PreparedStatement query;
 		String sql;
-		sql = "update tbl_borrower set name = ? where cardNo = ?";
+		sql = "update tbl_borrower set name = ?, address = ?, phone = ? where cardNo = ?";
 			
 		query = con.prepareStatement(sql);
 		query.setString(1,entity.getName());
-		query.setInt(2,entity.getCardNo());
+		query.setString(2,entity.getAddress());
+		query.setString(3,entity.getPhone());
+		query.setInt(4,entity.getCardNo());
 		query.executeUpdate();
 	}
 
@@ -76,9 +78,9 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
 		ArrayList<Borrower>  borrowerSet = new ArrayList<>();
 		Borrower borrower;
 		while(result.next()) {
-			
+
 			borrower  = new Borrower();
-			borrower.setAddress(result.getString("address"));
+			borrower.setAddress(result.getString(3));
 			borrower.setCardNo(result.getInt("cardNo"));
 			borrower.setName(result.getString("name"));
 			borrower.setPhone(result.getString("phone"));

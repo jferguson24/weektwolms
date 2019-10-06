@@ -13,7 +13,7 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Publisher;
 
 /**
- * @author sj
+ * 
  *
  */
 public class BookDataAccess extends DataAccess<Book>{
