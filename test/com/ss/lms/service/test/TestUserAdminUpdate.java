@@ -33,6 +33,7 @@ class TestUserAdminUpdate
 	public static LibraryBranch branch = new LibraryBranch(1000, "Testing Branch Name", "Testing Branch Address");
 	public static Borrower borrower = new Borrower(1000, "Testing Borrower Name", "Testing Borrower Address", "Testing Borrower Phone");
 	public static Book book = new Book(1000, "Testing Book Title", author, publisher);
+	public static BookLoan loan = new BookLoan(book, branch, borrower, Date.valueOf("0001-01-01"), Date.valueOf("0002-02-02"));
 	
 	
 	@BeforeAll
@@ -59,6 +60,7 @@ class TestUserAdminUpdate
 		admin.deleteLibraryBranch(branch);
 //		admin.deleteBorrower(borrower);
 		admin.deleteBook(book);
+		
 		admin.closeConnection();
 	}
 
@@ -150,6 +152,7 @@ class TestUserAdminUpdate
 		// save the previous data
 		ArrayList<Book> oldData = admin.readBook(findAllBooks);
 		String newTitle = "New Book Title";
+		
 		// change the value
 		admin.updateBook(new Book(book.getBookId(), newTitle, author, publisher));
 		
@@ -188,10 +191,64 @@ class TestUserAdminUpdate
 			}
 		}
 	}
-//	
-//	@Test
-//	final void testUpdate() {
-//		fail("Not yet implemented"); // TODO
-//	}
 	
+	@Test
+	final void testUpdateLibraryBranch() 
+	{
+		// save the previous data
+		ArrayList<LibraryBranch> oldData = admin.readLibraryBranch(findAllLibraryBranches);
+		String newName = "New Branch Name";
+		String newAddress = "New Branch Address";
+		
+		// change the value
+		admin.updateLibraryBranch(new LibraryBranch(branch.getBranchId(), newName, newAddress));
+		
+		// store the new version of the table
+		ArrayList<LibraryBranch> newData = admin.readLibraryBranch(findAllLibraryBranches);
+		
+		// change the value in the db back 
+		admin.updateLibraryBranch(branch);
+		
+		// change it in our oldData arraylist
+		oldData.forEach(row -> 
+		{
+			if(row.getBranchId() == branch.getBranchId()) 
+			{
+				row.setBranchName(newName);
+				row.setBranchAddress(newAddress);
+			}
+		});
+		
+//		System.out.println("old");
+//		oldData.forEach(row -> System.out.println(row));
+//		System.out.println("new");
+//		newData.forEach(row -> System.out.println(row));
+
+		// check if the newData is the same as oldData
+		// assertEquals(newData,oldData);
+		// assertequals does not properly compare the contents of these arraylists
+		// upon looking at the actual values, diff view showed no differences whatsoever.
+		
+		for(int i = 0; i < newData.size(); ++i) 
+		{
+			if(!oldData.get(i).toString().equals(newData.get(i).toString()))
+			{
+				fail("Mismatch:\n" + oldData.get(i).toString() + "\n" + newData.get(i).toString());
+			}
+		}
+	}
+	
+//	final void updateBorrower() 
+//	{
+//		admin.updateBorrower(loan);
+//		//TODO Auto-generated method stub
+//		
+//	}
+//	
+//	final void updateBookLoan() 
+//	{
+//		admin.updateBookLoan(loan);
+//		//TODO Auto-generated method stub
+//		
+//	}
 }

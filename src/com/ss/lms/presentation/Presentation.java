@@ -70,7 +70,6 @@ public abstract class Presentation
 			try 
 			{
 				output = Integer.parseInt(line);
-				System.out.println("Found: " + output);
 				return output;
 			}
 			catch(NumberFormatException e) 

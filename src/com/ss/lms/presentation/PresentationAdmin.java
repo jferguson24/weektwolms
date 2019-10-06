@@ -34,12 +34,6 @@ public class PresentationAdmin extends Presentation
 	
 	public void menu() 
 	{
-		// empty the buffer before any input from the user, 
-		// then a check is performed to see if they entered "quit"
-		// use a setter to the Entity being populated
-		StringBuffer allStringInput = new StringBuffer();
-		Integer allIntegerInput;
-		
 		// these objects are used purely as input to DAO find functions which will return the entire contents of the table
 		final Author findAllAuthors = new Author(-1, "%");
 		final Publisher findAllPublishers = new Publisher(-1, "%", "%", "%");

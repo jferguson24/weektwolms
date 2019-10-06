@@ -141,6 +141,23 @@ public class UserAdmin implements ServiceAdmin
 	        
 	        // assigning new key
 	        book.setBookId(newKey);
+	        
+	        // A new book much have exisiting correspinding publisher and author ID's
+	        // check the pub and auths exist
+	        
+	        ArrayList<Author> authorResult = authorDao.find(new Author(book.getAuthor().getAuthorId(), "%"));
+	        if(authorResult.size() != 1) 
+	        {
+	        	System.out.println("Unique Author ID for " + book.getAuthor().getAuthorId()+ " couldn't be found.");
+	        	return;
+	        }
+	        
+	        ArrayList<Publisher> publisherResult = publisherDao.find(new Publisher(book.getPublisher().getPublisherId(), "%", "%", "%"));
+	        if(publisherResult.size() != 1) 
+	        {
+	        	System.out.println("Unique Publisher ID for " + book.getPublisher().getPublisherId()+ " couldn't be found.");
+	        	return;
+	        }
 			
 	        // creating new book entry
 			bookDao.insert(book);
