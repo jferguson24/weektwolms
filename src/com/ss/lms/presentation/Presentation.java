@@ -7,9 +7,6 @@ import java.util.Scanner;
 import com.ss.lms.service.ServiceAdmin;
 import com.ss.lms.service.ServiceBorrower;
 import com.ss.lms.service.ServiceLibrarian;
-import com.ss.lms.service.test.*;
-
-import java.sql.Date;
 
 public abstract class Presentation 
 {
