@@ -13,13 +13,18 @@ import com.ss.lms.dataaccess.*;
 import com.ss.lms.entity.*;
 import com.ss.lms.service.*;
 
-class TestUserAdminUpdate 
+class TestAdminService 
 {
 	// why does juint force static?
 	// this doesn't seem like a good solution 
 	public static ServiceAdmin admin;
 
-	// these objects are used purely as input to DAO find functions which will return the entire contents of the table
+	/*
+	 * BOILER PLATE CODE AHEAD: SPEED CHECKED BY RADAR, SPEED LIMIT: 250 WPM
+	 * these objects are used purely as input to DAO find functions which will return the entire contents of the table
+	 * the state of these objects is still very mutable, final in this case only stops the reference from changing
+	 * for some reason JUint is enforcing my class level fields to be static.
+	 * */
 	public static Author findAllAuthors = new Author(-1, "%");
 	public static Publisher findAllPublishers = new Publisher(-1, "%", "%", "%");
 	public static LibraryBranch findAllLibraryBranches = new LibraryBranch(-1, "%", "%");
