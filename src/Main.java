@@ -1,7 +1,11 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.ss.lms.presentation.*;
+import com.ss.lms.presentation.Presentation;
+import com.ss.lms.presentation.PresentationAdmin;
+import com.ss.lms.presentation.PresentationBorrower;
+import com.ss.lms.presentation.PresentationLibrarian;
+import com.ss.lms.service.ServiceBorrower;
 
 public class Main {
 
@@ -15,6 +19,7 @@ public class Main {
 	    Presentation pres = null;
 		
 		while(true) {
+			System.out.println("/*MAIN > USERS************************************************************************************/");
 			System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
 			System.out.println("1. Librarian");
 			System.out.println("2. Administrator");
@@ -37,7 +42,7 @@ public class Main {
 					check = true;
 					break;
 				case "3":
-					//pres = new PresentationBorrower();
+					pres = new PresentationBorrower();
 					//borrowerMenu.start();
 					check = true;
 					break;
@@ -53,4 +58,3 @@ public class Main {
 	}
 
 }
-

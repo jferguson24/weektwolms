@@ -20,12 +20,6 @@ public class Borrower {
 		this.phone = phone;
 	}
 
-	@Override
-	public String toString() 
-	{
-		return  cardNo + "\t" + name + "\t" + address + "\t" + phone;
-	}
-	
 	/**
 	 * @return the cardNo
 	 */

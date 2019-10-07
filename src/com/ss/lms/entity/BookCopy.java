@@ -16,12 +16,6 @@ public class BookCopy {
 		this.noOfCopies = noOfCopies;
 	}
 	
-	@Override
-	public String toString() 
-	{
-		return book.getTitle() + "\t" + branch.getBranchName() + "\t" + noOfCopies;
-	}
-	
 	/**
 	 * @return the book
 	 */
