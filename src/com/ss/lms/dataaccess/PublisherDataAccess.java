@@ -11,9 +11,9 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 {
 	// TODO testing that any of these functions work.
 	// TODO handle Integer.MAX_VALUE cases.
-	public PublisherDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
+	public PublisherDataAccess() throws SQLException, ClassNotFoundException 
 	{
-		super(connectionInfo);
+		super();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	{
 		PreparedStatement query;
 		String sql = "INSERT INTO tbl_publisher(publisherId,publisherName,publisherAddress,publisherPhone) "
-				+ "VALUES ?, ?, ?, ?;";
+				+ "VALUES (?, ?, ?, ?);";
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -38,12 +38,24 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
-
-		String sql = "SELECT * FROM tbl_publisher "
-				+ "WHERE publisherId = ?" // index 1
-				+ "AND publisherName LIKE ?" // index 2
-				+ "AND publisherAddress LIKE ?" // index 3
-				+ "AND publisherAddress LIKE ?;"; // index 4
+		String sql;
+		
+		if(entity.getPublisherId() == -1) 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId > ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
+		else 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId = ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
 		
 		
 		
@@ -53,7 +65,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		query.setString(3, entity.getPublisherAddress());
 		query.setString(4, entity.getPublisherPhone());
 		
-		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
 		return packageResultSet(result);
@@ -63,7 +74,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	public void update(Publisher entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "UPDATE tbl_publisher SET "
+		String sql = "UPDATE library.tbl_publisher SET "
 				+ "publisherName = ?, " // index 1
 				+ "publisherAddress = ?, " // index 2
 				+ "publisherPhone = ? " // index 3

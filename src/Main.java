@@ -1,18 +1,8 @@
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.*;
 
-import com.ss.lms.presentation.PresentationAdmin;
-import com.ss.lms.presentation.PresentationBorrower;
-import com.ss.lms.presentation.PresentationLibrarian;
+import com.ss.lms.presentation.*;
 
-/**
- * 
- */
-
-/**
- * @author sj
- *
- */
 public class Main {
 
 	/**
@@ -20,21 +10,11 @@ public class Main {
 	 */
 	
 	static Scanner scanner;
-    static PresentationLibrarian libMenu;
-    static PresentationAdmin adminMenu;
-    static PresentationBorrower borrowerMenu;
+    static Presentation pres;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		System.out.println("Hi");
 		scanner = new Scanner(System.in);
 		
-		startMenu();
-	
-		System.out.println("Exc");
-	
-	}
-	//
-	public static void startMenu() throws ClassNotFoundException, SQLException {
 		while(true) {
 			System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
 			System.out.println("1. Librarian");
@@ -48,27 +28,30 @@ public class Main {
 				
 				switch(input) {
 				case "1":
-					libMenu = new PresentationLibrarian();
+					pres = new PresentationLibrarian();
 					//libMenu.start();
 					check = true;
 					break;
 				case "2":
-					//adminMenu = new PresentationAdmin();
+					pres = new PresentationAdmin();
 					//adminMenu.start();
 					check = true;
 					break;
 				case "3":
-					//borrowerMenu = new PresentationBorrower();
+					//pres = new PresentationBorrower();
 					//borrowerMenu.start();
 					check = true;
 					break;
 				case "4":
+					System.out.println("Exc");
 					return;
 				default:
 					System.out.println("Enter a valid choice.");
 				}
 			}
 		}
+	
 	}
+
 }
 
