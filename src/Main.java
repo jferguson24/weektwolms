@@ -1,5 +1,5 @@
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Scanner;
 
 import com.ss.lms.presentation.*;
 
@@ -9,11 +9,10 @@ public class Main {
 	 * @param args
 	 */
 	
-	static Scanner scanner;
-    static Presentation pres;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+	    Presentation pres = null;
 		
 		while(true) {
 			System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
@@ -44,13 +43,13 @@ public class Main {
 					break;
 				case "4":
 					System.out.println("Exc");
+					scanner.close();
 					return;
 				default:
 					System.out.println("Enter a valid choice.");
 				}
 			}
 		}
-	
 	}
 
 }
