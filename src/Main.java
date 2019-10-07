@@ -44,7 +44,6 @@ public class Main {
 					check = true;
 					break;
 				case "4":
-					System.out.println("Exc");
 					scanner.close();
 					return;
 				default:

@@ -402,7 +402,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					System.out.println("you entered: " + userBookLoan.toString());
 					administrator.updateBookLoan(userBookLoan);
 					break;
 					
@@ -937,9 +936,6 @@ public class PresentationAdmin extends Presentation
 
 		allStringInput.setLength(0); // empty the buffer before input
 		allStringInput.append(StringUtils.leftPad(year.toString(), 4, "0") + "-" + StringUtils.leftPad(month.toString(), 2, "0")  + "-" + StringUtils.leftPad(day.toString(), 2, "0"));
-
-		System.out.println("setting dueDate: " + allStringInput);
-		
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
 		
 		return userBookLoan;

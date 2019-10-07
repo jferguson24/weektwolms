@@ -149,7 +149,6 @@ public class BookLoanDataAccess extends DataAccess<BookLoan>
     @Override
     public ArrayList<BookLoan> packageResultSet(ResultSet result) throws SQLException 
     {
-        // TODO Auto-generated method stub
         String sql;
         PreparedStatement query;
         ArrayList<BookLoan> bookLoans = new ArrayList<>();
