@@ -27,34 +27,62 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 		query.setInt(1,entity.getBook().getBookId());
 		query.setInt(2,entity.getBranch().getBranchId());
 		query.setInt(3,entity.getBorrower().getCardNo());
-		System.out.println(sql);
-		query.executeUpdate();
-		//update Subtracted Copies;
-		
-		sql = "update tbl_book_copies set noOfCopies = noOfCopies-1 where branchId = ? and bookId = ?";
-		query = con.prepareStatement(sql);
-		query.setInt(1,entity.getBranch().getBranchId());
-		query.setInt(2,entity.getBook().getBookId());
-		
+		System.out.println(query.toString());
 		query.executeUpdate();
 	}
 
 	@Override
 	public ArrayList<BookLoan> find(BookLoan entity) throws SQLException {
-		PreparedStatement query;
-		String sql;
-		ResultSet result;
-		sql = "select * from tbl_book_loans where bookId = ? and branchId = ? and cardNo = ?";
-				 
-		
-		query = con.prepareStatement(sql);
-		query.setInt(1,entity.getBook().getBookId());
-		query.setInt(2,entity.getBranch().getBranchId());
-		query.setInt(3,entity.getBorrower().getCardNo());
-		
-		result = query.executeQuery();
-		
-		return packageResultSet(result) ;
+        PreparedStatement query;
+        String sql;
+        ResultSet result;
+        int cardNo =  entity.getBorrower().getCardNo();
+        int branchId = entity.getBranch().getBranchId();
+        int bookId = entity.getBook().getBookId();
+        Date dateDue = entity.getDueDate();
+        Date dateOut = entity.getDateOut();
+
+        String strBookId = "bookId = ? ";
+        String strBranchId = "branchId = ? ";
+        String strCard = "cardNo = ? ";
+        String strDueDate = "dueDate = ? ";
+        String strDateOut = "dateOut = ? ";
+        if(cardNo == -1) {
+            strCard = "cardNo > ? ";
+        }
+        if(bookId == -1) {
+            strBookId = "bookId > ? ";
+        }
+
+        if(branchId == -1) {
+            strBranchId = "branchID > ? ";
+        }
+
+        if(dateDue.equals(Date.valueOf("0001-01-01"))) {
+            strDueDate = "dueDate > ? ";
+        }
+
+        if(dateOut.equals(Date.valueOf("0001-01-01"))) {
+            strDateOut = "dateOut > ? ";
+        }   
+
+        sql = "select * from tbl_book_loans "
+                + "where " + strBranchId
+                + "and " + strCard
+                + "and " + strBookId
+                + "and " + strDateOut
+                + "and " + strDueDate;
+
+        query = con.prepareStatement(sql);
+        query.setInt(1,entity.getBranch().getBranchId());
+        query.setInt(2,entity.getBorrower().getCardNo());
+        query.setInt(3,entity.getBook().getBookId());
+        query.setDate(4, entity.getDateOut());
+        query.setDate(5, entity.getDueDate());
+        System.out.println(query.toString());
+        result = query.executeQuery();
+
+        return packageResultSet(result) ;
 	}
 	/*
 	 * Return book
@@ -77,17 +105,74 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 	@Override
 	public void delete(BookLoan entity) throws SQLException {
 		
-		PreparedStatement query;
-		String sql;
-		sql = "delete from tbl_book_loans where bookId = ? and branchId = ? and cardNo = ?";
-		 
-		
-		query = con.prepareStatement(sql);
-		query.setInt(1,entity.getBook().getBookId());
-		query.setInt(2,entity.getBranch().getBranchId());
-		query.setInt(3,entity.getBorrower().getCardNo());
-		query.executeUpdate();
-	}
+        String sqlBookId = "bookId = ?";
+
+        String sqlBranchId = " branchId = ?";
+
+        String sqlCardNo = "cardNo = ?";
+
+        
+
+        if(entity.getBook().getBookId() == -1) 
+
+        {
+
+            sqlBookId = "bookId > ?";
+
+        }
+
+        if(entity.getBranch().getBranchId() == -1) 
+
+        {
+
+            sqlBranchId = "branchId > ?";
+
+        }
+
+        if(entity.getBorrower().getCardNo() == -1) 
+
+        {
+
+            sqlCardNo = "cardNo > ?";
+
+        }
+
+        PreparedStatement query;
+
+        String sql = "delete from tbl_book_loans where " + sqlBookId 
+
+                + " and " + sqlBranchId
+
+                + " and " + sqlCardNo;
+
+        
+
+        
+
+        query = con.prepareStatement(sql);
+
+        query.setInt(1,entity.getBook().getBookId());
+
+        query.setInt(2,entity.getBranch().getBranchId());
+
+        query.setInt(3,entity.getBorrower().getCardNo());
+
+        
+
+        System.out.println("bookId to del:" + entity.getBook().getBookId());
+
+        System.out.println("branchId to del:" + entity.getBranch().getBranchId());
+
+        System.out.println("card to del:" + entity.getBorrower().getCardNo());
+
+        System.out.println(query.toString());
+
+        
+
+        query.executeUpdate();
+
+    }
+
 	@Override
 	public ArrayList<BookLoan> packageResultSet(ResultSet result) throws SQLException {
 		// TODO Auto-generated method stub

@@ -67,9 +67,8 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		query.setInt(1, findBranchId);
 		query.setString(2, findBranchName);
 		query.setString(3, findBranchAddress);
+		result = query.executeQuery();
 		//System.out.println(query.toString());
-
-		return null;
 			
 		return packageResultSet(result);
 	}

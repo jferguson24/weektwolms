@@ -606,7 +606,7 @@ public class PresentationAdmin extends Presentation
 	/*
 	 * This function returns the next line while skipping over the next line feed, return carriage, etc
 	 * */
-	private String getNextLine() 
+	public String getNextLine() 
 	{
 		// regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
 		// this tells scanner to skip past the next new line for all operating systems
