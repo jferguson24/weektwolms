@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.ss.lms.dataaccess.AuthorDataAccess;
 import com.ss.lms.dataaccess.BookCopyDataAccess;
 import com.ss.lms.dataaccess.BookDataAccess;
@@ -62,7 +64,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
-//					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+//					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					Author userAuthor = createEntityAuthor("", false, true);
 					
@@ -78,7 +80,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
-//					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+//					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher = createEntityPublisher("", false, true);
 
@@ -96,10 +98,10 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BOOK************************************************************************************/");
 					
 					System.out.println("\nAuthors Table:");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nPublishers Table:");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("", false, true);
 					
@@ -114,7 +116,7 @@ public class PresentationAdmin extends Presentation
 					break;
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
-//					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+//					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false, true);
 					
@@ -130,7 +132,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
-//					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+//					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower= createEntityBorrower("", false, true);
 					
@@ -170,7 +172,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readAuthor(userAuthor).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(userAuthor).forEach(row -> System.out.println(row));
 					break;
 					
 				case "2": // Publishers table
@@ -183,7 +185,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readPublisher(userPublisher).stream().forEach(row -> System.out.println(row));;
+					administrator.readPublisher(userPublisher).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "3": // Books table
@@ -196,7 +198,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBook(userBook).stream().forEach(row -> System.out.println(row));;
+					administrator.readBook(userBook).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "4": // Library Branches table
@@ -209,7 +211,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readLibraryBranch(userLibraryBranch).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(userLibraryBranch).forEach(row -> System.out.println(row));
 					break;
 					
 				case "5": // Borrower table
@@ -222,12 +224,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBorrower(userBorrower).stream().forEach(row -> System.out.println(row));;
+					administrator.readBorrower(userBorrower).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "6": // Book Loans table
 					System.out.println("/*MAIN > ADMIN > READ > LOAN************************************************************************************/");
-					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field");
 					
 					// the user quit somewhere in the process
 					if(userBookLoan == null) 
@@ -235,7 +237,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBookLoan(userBookLoan).stream().forEach(row -> System.out.println(row));;
+					administrator.readBookLoan(userBookLoan).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "0": // return to operation select
@@ -250,7 +252,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > UPDATE > AUTHOR************************************************************************************/");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
@@ -273,7 +275,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > UPDATE > PUBLISHER************************************************************************************/");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
@@ -297,13 +299,13 @@ public class PresentationAdmin extends Presentation
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > UPDATE > BOOK************************************************************************************/");
 					System.out.println("\nBooks Table:");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
 
 					System.out.println("\nAuthors Table:");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nPublishers Table:");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
@@ -326,7 +328,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > BRANCH************************************************************************************/");
 
 					System.out.println("\nBranches Table:");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
@@ -350,7 +352,7 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > BORROWER************************************************************************************/");
 
 					System.out.println("\nBorrowers Table:");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
@@ -370,21 +372,21 @@ public class PresentationAdmin extends Presentation
 					administrator.updateBorrower(userBorrower);
 					break;
 					
-				case "6": // Book Loans table TODO only update due date.
+				case "6":
 					System.out.println("/*MAIN > ADMIN > UPDATE > LOAN************************************************************************************/");
 					System.out.println("\nBook Loans Table:");
-					administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
+					administrator.readBookLoan(findAllBookLoans).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nBooks Table:");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nBranch Table:");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nBorrowers Loans Table:");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
-					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date", true);
+					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date");
 					
 					// the user quit somewhere in the process
 					if(userBookLoan == null) 
@@ -400,6 +402,7 @@ public class PresentationAdmin extends Presentation
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
 						break;
 					}
+					
 					System.out.println("you entered: " + userBookLoan.toString());
 					administrator.updateBookLoan(userBookLoan);
 					break;
@@ -416,7 +419,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > DELETE > AUTHOR************************************************************************************/");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true, false);
 					
@@ -438,7 +441,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > DELETE > PUBLISHER************************************************************************************/");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true, false);
 					
@@ -460,7 +463,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > DELETE > BOOK************************************************************************************/");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
 					
 					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true, false);
 					
@@ -482,7 +485,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > DELETE > BRANCH************************************************************************************/");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true, false);
 					
@@ -504,7 +507,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > DELETE > BORROWER************************************************************************************/");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true, false);
 					
@@ -824,17 +827,20 @@ public class PresentationAdmin extends Presentation
 		return userBorrower;
 	}
 	
-	private BookLoan createEntityBookLoan(String note, boolean onlyAskIdsAndDueDate) 
+	private BookLoan createEntityBookLoan(String note) 
 	{
 		BookLoan userBookLoan = new BookLoan();
-		userBookLoan.setBook(new Book());
-		userBookLoan.setBranch(new LibraryBranch());
-		userBookLoan.setBorrower(new Borrower());;
-		
+			userBookLoan.setBook(new Book());
+				userBookLoan.getBook().setAuthor(new Author());
+				userBookLoan.getBook().setPublisher(new Publisher());
+			userBookLoan.setBranch(new LibraryBranch());
+			userBookLoan.setBorrower(new Borrower());
+			
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
 		System.out.println("\n" + note);
+		
 		// Getting book ID
 		allIntegerInput = getIntegerFieldFromUser("Book ID");
 		if(allIntegerInput == Integer.MIN_VALUE) 
@@ -842,6 +848,7 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBook().setBookId(allIntegerInput);
+		System.out.println("setting bookId: " + userBookLoan.getBook().getBookId());
 		
 		// Getting Branch ID
 		allIntegerInput = getIntegerFieldFromUser("Branch ID");
@@ -850,6 +857,7 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBranch().setBranchId(allIntegerInput);
+		System.out.println("setting branchId: " + userBookLoan.getBranch().getBranchId());
 		
 		// Getting card number
 		allIntegerInput = getIntegerFieldFromUser("Card Number");
@@ -858,40 +866,80 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBorrower().setCardNo(allIntegerInput);
+		System.out.println("setting cardNo: " + userBookLoan.getBorrower().getCardNo());
 		
 		// cannot change dateOut
 		userBookLoan.setDateOut(Date.valueOf("0001-01-01"));
 
 		// Getting due date
-		allStringInput.setLength(0); // empty the buffer before input
-		
 		// get year:
-		Integer year = getIntegerFieldFromUser("Due Year (YYYY)");
-		if(year == Integer.MIN_VALUE) 
+		Integer year;
+		do 
 		{
-			return null;
+			year = getIntegerFieldFromUser("Due Year (YYYY)");
+			if(year == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			
+			if(year < 0 || year > 10000) 
+			{
+				System.out.println("Input not recognized.");
+			}
 		}
-		
-		if(year == -1) 
-		{
-			userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
-			return userBookLoan;
-		}
+		while(year < 0 || year > 10000);
 		
 		// get month
-		Integer month = getIntegerFieldFromUser("Due Month (MM)");
-		if(month == Integer.MIN_VALUE) 
+		Integer month;
+		do 
 		{
-			return null;
+			month = getIntegerFieldFromUser("Due Month (MM)");
+			if(month == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			
+			if(month < 0 || month > 13) 
+			{
+				System.out.println("Input not recognized.");
+			}
 		}
-		// get day
-		Integer day = getIntegerFieldFromUser("Due Day (DD)");
-		if(day == Integer.MIN_VALUE) 
-		{
-			return null;
-		}
+		while(month < 0 || month > 13);
 		
-		allStringInput.append(year + "-" + month + "-" + day);
+		// get day
+		Integer day; 
+		do 
+		{
+			day = getIntegerFieldFromUser("Due Day (DD)");
+			if(day == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			System.out.println("Input not recognized.");
+		}
+		while(day < 0 || day > 31);
+
+		allStringInput.setLength(0); // empty the buffer before input
+		allStringInput.append(StringUtils.leftPad(year.toString(), 4, "0") + "-" + StringUtils.leftPad(month.toString(), 2, "0")  + "-" + StringUtils.leftPad(day.toString(), 2, "0"));
+
+		System.out.println("setting dueDate: " + allStringInput);
 		
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
 		

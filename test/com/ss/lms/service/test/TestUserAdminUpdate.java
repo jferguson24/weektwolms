@@ -237,6 +237,7 @@ class TestUserAdminUpdate
 		}
 	}
 	
+	@Test
 	final void updateBorrower() 
 	{
 		// save the previous data
@@ -271,8 +272,17 @@ class TestUserAdminUpdate
 //		newData.forEach(row -> System.out.println(row));
 
 		// check if the newData is the same as oldData
-		assertEquals(newData,oldData);
+//		assertEquals(newData,oldData);
 		// I beleive assertEquals might have trouble with the types of line feeds, which is why it doesnt work it some cases
+		
+		for(int i = 0; i < newData.size(); ++i) 
+		{
+			if(!oldData.get(i).toString().equals(newData.get(i).toString()))
+			{
+				fail("Mismatch:\n" + oldData.get(i).toString() + "\n" + newData.get(i).toString());
+			}
+		}
+		
 	}
 	
 	final void updateBookLoan() 

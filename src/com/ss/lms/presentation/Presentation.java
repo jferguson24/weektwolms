@@ -90,19 +90,6 @@ public abstract class Presentation
 		}
 	}
 	
-	// returns a string representation of a 2d array, with brackets
-	public static String make2DArrayListLegible(ArrayList<ArrayList<String>> input) 
-	{	
-		StringBuilder output = new StringBuilder();
-
-		input.stream().forEach
-		(
-			row -> output.append(Arrays.toString(row.toArray()) + "\n")
-		);
-		
-		return output.toString();
-	}
-	
 	/*
 	 * This function returns the next line while skipping over the next line feed, return carriage, etc
 	 * */
