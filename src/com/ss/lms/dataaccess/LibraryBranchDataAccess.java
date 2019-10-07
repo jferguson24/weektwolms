@@ -58,7 +58,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 //				+ "where " + findBranchId 
 //				+ "and " + findBranchName 
 //				+ "and " + findBranchAddress);
-		
+
 		sql = "select * from tbl_library_branch "
 				+ "where " + strBranchId 
 				+ "and " + strBranchName  
@@ -67,9 +67,8 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		query.setInt(1, findBranchId);
 		query.setString(2, findBranchName);
 		query.setString(3, findBranchAddress);
-		//System.out.println(query.toString());
-		
 		result = query.executeQuery();
+		//System.out.println(query.toString());
 			
 		return packageResultSet(result);
 	}
@@ -100,16 +99,15 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 //			publisherId = result.getInt(4);
 //		}
 		
-		sql = "update tbl_library_branch "
-				+ "set branchName = ?, "
-				+ "branchAddress = ? "
-				+ "where branchId = ? ";
+		sql = "update tbl_library_branch set branchName = ? "
+				+ "and branchAddress = ? "
+				+ " where branchId = ?";
 		query = con.prepareStatement(sql);
 		query.setString(1, newBranchName);
 		query.setString(2, newBranchAddress);
 		query.setInt(3, entity.getBranchId());
 		
-		//System.out.println(query.toString());
+
 		query.executeUpdate();
 	}
 
@@ -118,7 +116,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_tbl_library_branch where branchId = ?";
+		sql = "delete from tbl_book where bookId = ?";
 		query = con.prepareStatement(sql);
 
 		query.setInt(1, entity.getBranchId());

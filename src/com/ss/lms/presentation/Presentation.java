@@ -13,7 +13,7 @@ public abstract class Presentation
 	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
-	protected ServiceBorrower borrower;
+	protected ServiceBorrower userBorrower;
 	
 	public Presentation(ServiceAdmin administrator)
 	{
@@ -34,26 +34,26 @@ public abstract class Presentation
 	public Presentation(ServiceBorrower borrower)
 	{
 		this.scanner = new Scanner(System.in);
-		this.borrower = borrower;
+		this.userBorrower = borrower;
 		this.menu();
-		this.borrower.closeConnection();
+		this.userBorrower.closeConnection();
 	}
 	
+
 	public abstract void menu();
 	
 	// Forces the user to input a String. replaces "N/A" with "%"
 	public String getStringFieldFromUser(String fieldName) 
 	{
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
-		
 		do
 		{
-			return getNextLine().replaceAll("N/A", "%").trim();
+			return getNextLine().replaceAll("N/A", "%");
 		}
-		while(this.scanner.hasNextLine());
+		while(scanner.hasNextLine());
 	}
 	
-	// Forces the user to input an integer, "N/A" maps to -1, "quit" maps to Integer.MIN_VALUE
+	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
 	public Integer getIntegerFieldFromUser(String fieldName) 
     {
         System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
@@ -101,14 +101,15 @@ public abstract class Presentation
 		return output.toString();
 	}
 	
-	/*
-	 * This function returns the next line while skipping over the next line feed, return carriage, etc
-	 * */
-	public String getNextLine() 
-	{
-		// regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
-		// this tells scanner to skip past the next new line for all operating systems
-		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-		return scanner.nextLine();
-	}
+    /*
+     * This function returns the next line while skipping over the next line feed, return carriage, etc
+     * */
+    public String getNextLine() 
+    {
+        // regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
+        // this tells scanner to skip past the next new line for all operating systems
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        return scanner.nextLine();
+    }
+    
 }

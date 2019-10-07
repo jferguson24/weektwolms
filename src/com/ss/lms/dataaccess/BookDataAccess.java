@@ -13,7 +13,7 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Publisher;
 
 /**
- * @author sj
+ * 
  *
  */
 public class BookDataAccess extends DataAccess<Book>{
@@ -28,7 +28,7 @@ public class BookDataAccess extends DataAccess<Book>{
 		PreparedStatement query;
 		String sql;
 		//query = con.createStatement();
-		sql = "insert into tbl_book (bookId, title, authId, pubId)"
+		sql = "insert into tbl_book (bookId, title, bookId, publisherId)"
 				+ "values (?,?,?,?);";
 
 		query = con.prepareStatement(sql);
@@ -37,7 +37,6 @@ public class BookDataAccess extends DataAccess<Book>{
 		query.setInt(3, entity.getAuthor().getAuthorId());
 		query.setInt(4, entity.getPublisher().getPublisherId());
 		
-		System.out.println(query.toString());
 		query.executeUpdate();
 		
 	}
@@ -113,7 +112,6 @@ public class BookDataAccess extends DataAccess<Book>{
 		String newTitle = entity.getTitle();
 		int authorId = entity.getAuthor().getAuthorId();
 		int publisherId = entity.getPublisher().getPublisherId();
-		
 //		sql = "select * from tbl_book "
 //				+ "where bookId = ?";
 //		query = con.prepareStatement(sql);
@@ -142,10 +140,9 @@ public class BookDataAccess extends DataAccess<Book>{
 //			//publisherId = result.getInt(4);
 //		}
 //		
-		sql = "update tbl_book set "
-				+ "title = ?, "
-				+ "authId = ?, "
-				+ "pubId = ? "  
+		sql = "update tbl_book set title = ? "
+				+ "and authId = ? "
+				+ "and publId = ? "  
 				+ "where bookId = ?";
 		query = con.prepareStatement(sql);
 		query.setString(1, newTitle);
@@ -153,7 +150,7 @@ public class BookDataAccess extends DataAccess<Book>{
 		query.setInt(3, publisherId);
 		query.setInt(4, entity.getBookId());
 		
-		System.out.println(query.toString());
+
 		query.executeUpdate();
 		
 	}

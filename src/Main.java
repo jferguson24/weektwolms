@@ -1,7 +1,11 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.ss.lms.presentation.*;
+import com.ss.lms.presentation.Presentation;
+import com.ss.lms.presentation.PresentationAdmin;
+import com.ss.lms.presentation.PresentationBorrower;
+import com.ss.lms.presentation.PresentationLibrarian;
+import com.ss.lms.service.ServiceBorrower;
 
 public class Main {
 
@@ -37,7 +41,7 @@ public class Main {
 					check = true;
 					break;
 				case "3":
-					//pres = new PresentationBorrower();
+					pres = new PresentationBorrower();
 					//borrowerMenu.start();
 					check = true;
 					break;
@@ -53,4 +57,3 @@ public class Main {
 	}
 
 }
-
