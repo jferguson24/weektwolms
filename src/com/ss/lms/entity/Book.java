@@ -13,13 +13,6 @@ public class Book {
 		this.author = author;
 		this.publisher = publisher;
 	}
-	
-	@Override
-	public String toString() 
-	{
-		return  bookId + "\t" + title + "\t" + author.getAuthorName() + "\t" + publisher.getPublisherName();
-	}
-	
 
 	/**
 	 * @return the bookId
