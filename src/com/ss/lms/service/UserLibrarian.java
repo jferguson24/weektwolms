@@ -80,7 +80,6 @@ public class UserLibrarian implements ServiceLibrarian{
 	//Reads a bookCopy by calling the data access function .find()
 	@Override
 	public ArrayList<BookCopy> readBookCopy(BookCopy bookCopy) {
-		System.out.println("Reading Book Copies");
 		ArrayList<BookCopy> copies = null;
 		try {
 			copies = new ArrayList<BookCopy>(bookCopyDao.find(bookCopy));

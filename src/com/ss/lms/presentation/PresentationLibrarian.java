@@ -26,7 +26,8 @@ public class PresentationLibrarian extends Presentation {
 	//Displays librarians choices and gets the user input
 	public void menu() {
 		while(true) {
-			System.out.println("\n\nLibrarian Menu.");
+			System.out.println("\n\n/*MAIN > LIBRARIAN *************************************************************************************");
+			System.out.println("Librarian Menu.");
 			System.out.println("1. Enter a branch you manage");
 			System.out.println("2. Quit to previous");
 			int input = getIntegerFieldFromUser("Selection");
@@ -51,6 +52,7 @@ public class PresentationLibrarian extends Presentation {
 	//branches() will allow the user to select which branch they want to interact with
 	public void branches(){
 		while(true) {
+			System.out.println("/*MAIN > LIBRARIAN > BRANCH **************************************************************************");
 			ArrayList<LibraryBranch> branches;
 			System.out.println("Choose your branch:");
 			
@@ -88,6 +90,7 @@ public class PresentationLibrarian extends Presentation {
 	//	or add copies of Book to the Branch
 	public void branchOptions(LibraryBranch branch) {
 		while(true) {
+			System.out.println("/*MAIN > LIBRARIAN > BRANCH > OPTIONS ***************************************************************");
 			System.out.println("1) Update the details of the Library");
 			System.out.println("2) Add copies of Book to the Branch");
 			System.out.println("3) Quit to previous");
@@ -117,6 +120,7 @@ public class PresentationLibrarian extends Presentation {
 	//branchUpdate() takes in the selected branch entity
 	//The user can then input changes they want to make and it will call on the service layer to update those changes
 	public void branchUpdate(LibraryBranch branch) {
+		System.out.println("/*MAIN > LIBRARIAN > BRANCH > OPTIONS > UPDATE ******************************************************");
 		System.out.println("You have chosen to update the Branch with Branch Id: " + branch.getBranchId() + " and Branch Name: " + branch.getBranchName());
 		System.out.println("Enter 'quit' at any prompt to cancel operation.");
 		System.out.println("Please enter new branch name or enter N/A for no change:");
@@ -140,6 +144,8 @@ public class PresentationLibrarian extends Presentation {
 	}
 	
 	public void copies(LibraryBranch branch) {
+		System.out.println("/*MAIN > LIBRARIAN > BRANCH > OPTIONS > COPIES *********************************************************");
+
 		System.out.println("Pick the Book you want to add copies of, to your branch:");
 		while(true) {
 			Author author = new Author(-1, "%");
@@ -163,7 +169,6 @@ public class PresentationLibrarian extends Presentation {
 			
 			//Getting a valid integer book ID
 			int bookId = getIntegerFieldFromUser("Book");
-			
 			//Creating a book with the information given to pass the supporting functions
 
 			//Checking if the entered value is the quit option
@@ -179,6 +184,8 @@ public class PresentationLibrarian extends Presentation {
 	
 	//addCopies gets the new number of copies desired and calls the service to update the database
 	public void addCopies(Book book, LibraryBranch branch) {
+		System.out.println("/*MAIN > LIBRARIAN > BRANCH > OPTIONS > COPIES > UPDATE **************************************************");
+
 		BookCopy bookCopy = new BookCopy(book, branch, -1);
 		int noOfCopies;
 		if(librarian.readBookCopy(bookCopy).size() == 0) {
@@ -189,18 +196,10 @@ public class PresentationLibrarian extends Presentation {
 			noOfCopies = librarian.readBookCopy(bookCopy).get(0).getNoOfCopies();
 			System.out.println("Existing number of books: " + noOfCopies);
 		}
-		System.out.println("Enter new number of copies: ");
-		int numCopies= 0;
-		//Gets a valid integer for the new number of copies
-		while(!super.scanner.hasNextInt()) {
-			System.out.println("Please enter a valid Integer.");
-			System.out.print("Enter your book: ");
-		    super.scanner.next();
+		int numCopies = getIntegerFieldFromUser("Number of Books");
+		if(numCopies == Integer.MIN_VALUE) {
+			return;
 		}
-
-		numCopies = super.scanner.nextInt();
-		super.scanner.nextLine();
-		
 		if(numCopies == 0) {
 			System.out.println("Deleting bookCopy.");
 			librarian.deleteBookCopy(bookCopy);
