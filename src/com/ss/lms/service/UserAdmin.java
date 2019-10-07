@@ -56,6 +56,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 	
+	/*************************************************
+	 * 
+	 * ALL CREATE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void createAuthor(Author author) 
 	{
@@ -158,6 +164,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL READ OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public ArrayList<Author> readAuthor(Author author) 
 	{
@@ -242,6 +254,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL UPDATE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void updateAuthor(Author author) 
 	{
@@ -341,7 +359,7 @@ public class UserAdmin implements ServiceAdmin
 				return;
 			}
 			
-			// 
+			// get exisitng data for the book sent in
 			ArrayList<Book> oldData = bookDao.find(new Book(
 					book.getBookId(),
 					"%",
@@ -355,6 +373,7 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(book.getTitle()) 
 				{
 				case "%":
@@ -363,14 +382,14 @@ public class UserAdmin implements ServiceAdmin
 				
 				switch(book.getAuthor().getAuthorId()) 
 				{
-				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
+				case -1:
 					book.setAuthor(oldData.get(0).getAuthor());
 					break;
 				}
 				
 				switch(book.getPublisher().getPublisherId())
 				{
-				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
+				case -1:
 					book.setPublisher(oldData.get(0).getPublisher());
 					break;
 				}
@@ -389,6 +408,7 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get existing data for the branch sent in
 			ArrayList<LibraryBranch> oldData = libraryBranchDao.find( new LibraryBranch(libraryBranch.getBranchId(), "%", "%") );
 			
 			if(oldData.size() != 1)
@@ -398,16 +418,17 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(libraryBranch.getBranchName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					libraryBranch.setBranchName(oldData.get(0).getBranchName());
 					break;
 				}
 				
 				switch(libraryBranch.getBranchAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					libraryBranch.setBranchAddress(oldData.get(0).getBranchAddress());
 					break;
 				}
@@ -426,6 +447,7 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get existing data for borrower sent in
 			ArrayList<Borrower> oldData = borrowerDao.find( new Borrower(borrower.getCardNo(), "%", "%", "%") );
 			
 			if(oldData.size() != 1)
@@ -435,23 +457,24 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(borrower.getName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setName(oldData.get(0).getName());
 					break;
 				}
 				
 				switch(borrower.getAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setAddress(oldData.get(0).getAddress());
 					break;
 				}
 				
 				switch(borrower.getPhone()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setPhone(oldData.get(0).getPhone());
 					break;
 				}
@@ -527,6 +550,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL DELETE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void deleteAuthor(Author author) 
 	{

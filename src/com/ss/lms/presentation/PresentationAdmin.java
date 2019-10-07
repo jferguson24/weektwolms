@@ -34,7 +34,11 @@ public class PresentationAdmin extends Presentation
 	
 	public void menu() 
 	{
-		// these objects are used purely as input to DAO find functions which will return the entire contents of the table
+		/*
+		 * BOILER PLATE CODE AHEAD: SPEED CHECKED BY RADAR, SPEED LIMIT: 250 WPM
+		 * these objects are used purely as input to DAO find functions which will return the entire contents of the table
+		 * the state of these objects is still very mutable, final in this case only stops the reference from changing
+		 * */
 		final Author findAllAuthors = new Author(-1, "%");
 		final Publisher findAllPublishers = new Publisher(-1, "%", "%", "%");
 		final Book findAllBooks = new Book(-1, "%", findAllAuthors, findAllPublishers);
