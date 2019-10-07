@@ -198,7 +198,7 @@ public class PresentationLibrarian extends Presentation {
 		}
 		int numCopies = getIntegerFieldFromUser("Number of Books");
 		if(numCopies == Integer.MIN_VALUE) {
-			return;
+			
 		}
 		if(numCopies == 0) {
 			System.out.println("Deleting bookCopy.");
