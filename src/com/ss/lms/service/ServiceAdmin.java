@@ -11,6 +11,7 @@ import com.ss.lms.entity.Publisher;
 
 public interface ServiceAdmin
 {
+	
 	public void closeConnection();
 	
 	/*************************************************
