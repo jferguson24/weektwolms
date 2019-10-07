@@ -61,24 +61,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Author> existing = authorDao.find(new Author(-1,"%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Author auth: existing) 
-			{
-				keys.add(auth.getAuthorId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        author.setAuthorId(newKey);
+	        author.setAuthorId(authorDao.generatePrimaryKey());
 			
 	        // creating new author entry
 			authorDao.insert(author);

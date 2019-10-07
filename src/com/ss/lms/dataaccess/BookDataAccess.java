@@ -6,6 +6,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ss.lms.entity.Author;
@@ -19,12 +20,10 @@ import com.ss.lms.entity.Publisher;
 public class BookDataAccess extends DataAccess<Book>{
 	public BookDataAccess() throws SQLException, ClassNotFoundException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void insert(Book entity) throws SQLException{
-		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
 		//query = con.createStatement();
@@ -199,4 +198,16 @@ public class BookDataAccess extends DataAccess<Book>{
 		}	
     	return bookList;
     }
+    
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(bookId) AS max FROM library.tbl_book;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
 }

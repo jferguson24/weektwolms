@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookCopy;
+import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 
 public class BookCopyDataAccess extends DataAccess<BookCopy> {
 	public BookCopyDataAccess() throws SQLException, ClassNotFoundException {
@@ -151,4 +155,11 @@ public class BookCopyDataAccess extends DataAccess<BookCopy> {
 		}	
     	return bookCopyList;
     }
+    
+	@Override // Should not be called, book copy uses a composite key.
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		System.err.println("Erroneous function call. generatePrimaryKey() in BookCopyDataAccess");
+		return null;
+	}
 }

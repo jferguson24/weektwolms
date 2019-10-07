@@ -3,6 +3,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import com.ss.lms.entity.Publisher;
@@ -126,6 +127,18 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		return output;
 	}
 
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(publisherId) AS max FROM library.tbl_publisher;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
+	
 }
 
 

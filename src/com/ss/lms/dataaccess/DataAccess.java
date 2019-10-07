@@ -27,4 +27,6 @@ public abstract class DataAccess<T>
     public abstract void delete(T entity) throws SQLException;
     
     public abstract ArrayList<T> packageResultSet(ResultSet result) throws SQLException;
+    
+    public abstract Integer generatePrimaryKey() throws SQLException;
 }

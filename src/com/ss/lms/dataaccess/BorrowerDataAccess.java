@@ -2,6 +2,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import com.ss.lms.entity.Borrower;
 public class BorrowerDataAccess extends DataAccess<Borrower>  {
@@ -81,8 +82,18 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
             borrowerSet.add(borrower);
         }
         
-        
-        
         return borrowerSet;
     }
+    
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(cardNo) AS max FROM library.tbl_borrower;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
 }

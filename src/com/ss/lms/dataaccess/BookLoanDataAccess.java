@@ -209,4 +209,11 @@ public class BookLoanDataAccess extends DataAccess<BookLoan>
         }
         return bookLoans;
     }
+    
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		System.err.println("Erroneous function call. generatePrimaryKey() in BookLoanDataAccess");
+		return null;
+	}
 }
