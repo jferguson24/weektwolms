@@ -247,8 +247,10 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try
 		{
+			// get the existing data for the author sent in
 			ArrayList<Author> oldData = authorDao.find( new Author(author.getAuthorId(), "%") );
 			
+			// ensure exactly one exists
 			if(oldData.size() != 1)
 			{
 				System.out.println("Unique Author ID for " + author.getAuthorId()+ " couldn't be found.");
@@ -256,9 +258,10 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(author.getAuthorName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					author.setAuthorName(oldData.get(0).getAuthorName());
 					break;
 				}
@@ -278,8 +281,10 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get the existing data for the publisher sent in
 			ArrayList<Publisher> oldData = publisherDao.find(new Publisher(publisher.getPublisherId(), "%", "%", "%"));
 			
+			// ensure only one record exists
 			if(oldData.size() != 1) 
 			{
 				System.out.println("Unique Publisher ID for " + publisher.getPublisherId()+ " couldn't be found.");
@@ -287,22 +292,23 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(publisher.getPublisherName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherName(oldData.get(0).getPublisherName());
 					break;
 				}
 
 				switch(publisher.getPublisherAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherAddress(oldData.get(0).getPublisherAddress());
 					break;
 				}
 				switch(publisher.getPublisherPhone()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherPhone(oldData.get(0).getPublisherPhone());
 					break;
 				}
@@ -335,6 +341,7 @@ public class UserAdmin implements ServiceAdmin
 				return;
 			}
 			
+			// 
 			ArrayList<Book> oldData = bookDao.find(new Book(
 					book.getBookId(),
 					"%",

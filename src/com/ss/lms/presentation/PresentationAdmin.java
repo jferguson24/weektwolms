@@ -63,7 +63,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
-//					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					Author userAuthor = createEntityAuthor("", false, true);
 					
@@ -79,7 +79,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
-//					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
 					Publisher userPublisher = createEntityPublisher("", false, true);
 
@@ -115,7 +115,7 @@ public class PresentationAdmin extends Presentation
 					break;
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
-//					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
 					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false, true);
 					
@@ -131,7 +131,7 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
-//					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
 					Borrower userBorrower= createEntityBorrower("", false, true);
 					
@@ -262,7 +262,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userAuthor.getAuthorId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -284,7 +284,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userPublisher.getPublisherId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -314,7 +314,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBook.getBookId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -337,7 +337,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userLibraryBranch.getBranchId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -361,7 +361,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBorrower.getCardNo() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -393,7 +393,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBookLoan.getBook().getBookId() == -1 ||
 						userBookLoan.getBranch().getBranchId()== -1 ||
 						userBookLoan.getBorrower().getCardNo() == -1) 
@@ -427,7 +427,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
 					if(userAuthor.getAuthorId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -449,7 +448,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userPublisher.getPublisherId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -471,7 +470,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBook.getBookId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -493,7 +492,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userLibraryBranch.getBranchId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -515,7 +514,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBorrower.getCardNo() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
