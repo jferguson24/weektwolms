@@ -25,7 +25,6 @@ public class Main {
     static PresentationBorrower borrowerMenu;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		System.out.println("Hi");
 		scanner = new Scanner(System.in);
 		
 		startMenu();

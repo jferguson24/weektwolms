@@ -44,6 +44,8 @@ public class PresentationLibrarian extends Presentation {
 					break;
 				case 2:
 					return;
+				case Integer.MIN_VALUE:
+					return;
 				default:
 					System.out.println("Enter a valid choice.");
 				}
@@ -75,7 +77,7 @@ public class PresentationLibrarian extends Presentation {
 				int branchId = getIntegerFieldFromUser("Branch ID");
 				
 				//super.scanner.nextLine();
-				if(branchId == i) {
+				if(branchId == i || branchId == Integer.MIN_VALUE) {
 					return;
 				}
 				if(branchId < i && branchId > 0) {
@@ -107,6 +109,8 @@ public class PresentationLibrarian extends Presentation {
 					check = true;
 					break;
 				case 3:
+					return;
+				case Integer.MIN_VALUE:
 					return;
 				default:
 					System.out.println("Invalid input.");
@@ -168,7 +172,7 @@ public class PresentationLibrarian extends Presentation {
 			//Creating a book with the information given to pass the supporting functions
 
 			//Checking if the entered value is the quit option
-			if(bookId == i) {
+			if(bookId == i || bookId == Integer.MIN_VALUE) {
 				return;
 			}
 			//If the entered value is within the available id's then it will go on to add copies
@@ -201,16 +205,12 @@ public class PresentationLibrarian extends Presentation {
 
 		numCopies = super.scanner.nextInt();
 		super.scanner.nextLine();
-		System.out.println("Number of Copies: " + noOfCopies);
-		System.out.println("Entered Copies: " + numCopies);
-		//bookCopy.setNoOfCopies(numCopies);
+		
 		if(numCopies == 0) {
 			System.out.println("Deleting bookCopy.");
 			librarian.deleteBookCopy(bookCopy);
 		}
 		else if (noOfCopies > 0 && numCopies > 0) {
-			System.out.println("Updating bookCopy to have this many books: " + numCopies);
-			//System.out.println("bookCopy has: " + bookCopy.getNoOfCopies());
 			bookCopy.setNoOfCopies(numCopies);
 			librarian.updateBookCopy(bookCopy);
 		}
