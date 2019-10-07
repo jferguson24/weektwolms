@@ -70,19 +70,20 @@ public class PresentationLibrarian extends Presentation {
 
 			System.out.println("Enter your branch:");
 			//super.scanner.nextLine();
-			int branchId = getIntegerFieldFromUser("Branch ID");
-			
-			//super.scanner.nextLine();
-			if(branchId == i) {
-				return;
-			}
-			for(LibraryBranch branch : branches)
-			{
-				if(branch.getBranchId() == branchId) {
-					branchOptions(branch);
+			boolean check = true;
+			while(check == true) {
+				int branchId = getIntegerFieldFromUser("Branch ID");
+				
+				//super.scanner.nextLine();
+				if(branchId == i) {
+					return;
 				}
+				if(branchId < i && branchId > 0) {
+					branchOptions(branches.get(0));
+					check = false;
+				}
+				
 			}
-			return;
 		}
 	}
 	
