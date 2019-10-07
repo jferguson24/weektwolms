@@ -53,27 +53,38 @@ public abstract class Presentation
 	
 	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
 	public Integer getIntegerFieldFromUser(String fieldName) 
-	{
-		while(true) 
-		{
-			if(scanner.hasNextInt()) 
-			{
-				return scanner.nextInt();
-			}
-			else if("N/A".equals(scanner.next())) 
-			{
-				return -1;
-			}
-			else if("quit".equals(scanner.next())) 
-			{
-				return Integer.MIN_VALUE;
-			}
-			else
-			{
-				System.out.println(fieldName + " must be an integer");
-			}
-		}
-	}
+    {
+        System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
+        String line;
+        Integer output;
+        
+        while(true) 
+        {
+            line = getNextLine().trim();
+            
+            try 
+            {
+                output = Integer.parseInt(line);
+                //System.out.println("Found: " + output);
+                return output;
+            }
+            catch(Exception e) 
+            {
+                if("quit".equals(line)) 
+                {
+                    return Integer.MIN_VALUE;
+                }
+                
+                if("N/A".equals(line)) 
+                {
+                    return -1;
+                }
+                
+                System.out.println("Input not recognized.");
+                continue;
+            }
+        }
+    }
 	
 	// returns a string representation of a 2d array, with brackets
 	public static String make2DArrayListLegible(ArrayList<ArrayList<String>> input) 

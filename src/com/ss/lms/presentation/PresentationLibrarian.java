@@ -69,9 +69,10 @@ public class PresentationLibrarian extends Presentation {
 			
 
 			System.out.println("Enter your branch:");
+			//super.scanner.nextLine();
 			int branchId = getIntegerFieldFromUser("Branch ID");
 			
-			super.scanner.nextLine();
+			//super.scanner.nextLine();
 			if(branchId == i) {
 				return;
 			}
@@ -161,14 +162,7 @@ public class PresentationLibrarian extends Presentation {
 			System.out.println("Enter your book:");
 			
 			//Getting a valid integer book ID
-			int bookId = 0;
-			while(!super.scanner.hasNextInt()) {
-				System.out.println("Please enter a valid Integer.");
-				System.out.print("Enter your book: ");
-			    super.scanner.next();
-			}
-			bookId = super.scanner.nextInt();
-			super.scanner.nextLine();
+			int bookId = getIntegerFieldFromUser("Book");
 			
 			//Creating a book with the information given to pass the supporting functions
 
