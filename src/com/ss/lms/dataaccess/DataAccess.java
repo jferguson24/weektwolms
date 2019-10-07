@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ss.lms.service.UserBorrower;
-
 public abstract class DataAccess<T>
 {
     Connection con;
@@ -28,5 +26,7 @@ public abstract class DataAccess<T>
     
     public abstract void delete(T entity) throws SQLException;
     
-    public abstract List<T> packageResultSet(ResultSet result) throws SQLException;
+    public abstract ArrayList<T> packageResultSet(ResultSet result) throws SQLException;
+    
+    public abstract Integer generatePrimaryKey() throws SQLException;
 }

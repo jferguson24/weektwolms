@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ss.lms.test;
+package com.ss.lms.test.service;
 import static org.junit.Assert.*;
 import java.sql.*;
 import java.util.ArrayList;
