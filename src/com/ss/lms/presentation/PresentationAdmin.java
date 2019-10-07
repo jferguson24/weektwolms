@@ -976,7 +976,6 @@ public class PresentationAdmin extends Presentation
 		allStringInput.setLength(0); // empty the buffer before input
 		allStringInput.append(StringUtils.leftPad(year.toString(), 4, "0") + "-" + StringUtils.leftPad(month.toString(), 2, "0")  + "-" + StringUtils.leftPad(day.toString(), 2, "0"));
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
-		System.out.println(allStringInput);
 		
 		return userBookLoan;
 	}
