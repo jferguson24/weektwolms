@@ -19,6 +19,7 @@ public class Main {
 	    Presentation pres = null;
 		
 		while(true) {
+			System.out.println("/*MAIN > USERS************************************************************************************/");
 			System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
 			System.out.println("1. Librarian");
 			System.out.println("2. Administrator");
