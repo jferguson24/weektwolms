@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.ss.lms.presentation.Presentation;
@@ -6,49 +7,52 @@ import com.ss.lms.presentation.PresentationLibrarian;
 
 public class Main {
 
-	public static void main(String[] args) 
-	{
-		Scanner scanner = new Scanner(System.in);
-		Presentation pres;
-		String input;
-		
-		try 
-		{
-			do {
-				System.out.println("/*MAIN > USERS**********************************************************************************************/");
-				System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
-				System.out.println("1. Librarian");
-				System.out.println("2. Administrator");
-				System.out.println("3. Borrower");
-				System.out.println("4. Quit");
-				System.out.println("Enter your selection:");
+	/**
+	 * @param args
+	 */
+	
 
-				scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-				input = scanner.nextLine();
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Scanner scanner = new Scanner(System.in);
+	    Presentation pres = null;
+		
+		while(true) {
+			System.out.println("Welcome to the GCIT Library Management System. Which category of a user are you?");
+			System.out.println("1. Librarian");
+			System.out.println("2. Administrator");
+			System.out.println("3. Borrower");
+			System.out.println("4. Quit");
+			System.out.println("Enter your selection:");
+			boolean check = false;
+			while(check == false) {
+				String input = scanner.nextLine();
 				
 				switch(input) {
 				case "1":
 					pres = new PresentationLibrarian();
+					//libMenu.start();
+					check = true;
 					break;
 				case "2":
 					pres = new PresentationAdmin();
+					//adminMenu.start();
+					check = true;
 					break;
 				case "3":
-					//borrowerMenu = new PresentationBorrower();
+					//pres = new PresentationBorrower();
+					//borrowerMenu.start();
+					check = true;
 					break;
 				case "4":
+					System.out.println("Exc");
+					scanner.close();
 					return;
 				default:
 					System.out.println("Enter a valid choice.");
 				}
-
 			}
-			while(scanner.hasNextLine());
-		}
-		catch(Exception e) 
-		{
-			e.printStackTrace();
 		}
 	}
+
 }
 
