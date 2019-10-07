@@ -7,7 +7,6 @@ import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ss.lms.dataaccess.AuthorDataAccess;
-import com.ss.lms.dataaccess.BookCopyDataAccess;
 import com.ss.lms.dataaccess.BookDataAccess;
 import com.ss.lms.dataaccess.BookLoanDataAccess;
 import com.ss.lms.dataaccess.BorrowerDataAccess;

@@ -2,7 +2,6 @@ package com.ss.lms.service;
 
 import java.util.ArrayList;
 
-import com.ss.lms.dataaccess.DataAccess;
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookLoan;
