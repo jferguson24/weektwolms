@@ -44,6 +44,7 @@ public class BorrowerDataAccess extends DataAccess<Borrower>  {
                     
         return packageResultSet(result);
     }
+    
     @Override
     public void update(Borrower entity) throws SQLException {
         PreparedStatement query;

@@ -770,7 +770,7 @@ public class PresentationAdmin extends Presentation
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
-		System.out.println("/n" + note);
+		System.out.println("\n" + note);
 
 		if(getPrimaryKey) 
 		{
