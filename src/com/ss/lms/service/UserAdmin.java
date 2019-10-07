@@ -78,24 +78,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Publisher> existing = publisherDao.find(new Publisher(-1,"%","%","%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Publisher pub: existing) 
-			{
-				keys.add(pub.getPublisherId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        publisher.setPublisherId(newKey);
+	        publisher.setPublisherId(publisherDao.generatePrimaryKey());
 			
 	        // creating new publisher entry
 			publisherDao.insert(publisher);
@@ -111,24 +95,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Book> existing = bookDao.find(new Book(-1,"%", new Author(-1, "%"), new Publisher(-1, "%", "%", "%")));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Book row: existing) 
-			{
-				keys.add(row.getBookId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        book.setBookId(newKey);
+	        book.setBookId(bookDao.generatePrimaryKey());
 	        
 	        // A new book much have exisiting correspinding publisher and author ID's
 	        // check the pub and auths exist
@@ -161,24 +129,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<LibraryBranch> existing = libraryBranchDao.find(new LibraryBranch(-1,"%", "%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(LibraryBranch row: existing) 
-			{
-				keys.add(row.getBranchId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        libraryBranch.setBranchId(newKey);
+	        libraryBranch.setBranchId(libraryBranchDao.generatePrimaryKey());
 			
 	        // creating new library branch
 			libraryBranchDao.insert(libraryBranch);
@@ -194,24 +146,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Borrower> existing = borrowerDao.find(new Borrower(-1,"%", "%", "%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Borrower row: existing) 
-			{
-				keys.add(row.getCardNo());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        borrower.setCardNo(newKey);
+	        borrower.setCardNo(borrowerDao.generatePrimaryKey());
 			
 	        // creating new borrower
 			borrowerDao.insert(borrower);
