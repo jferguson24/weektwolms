@@ -924,7 +924,7 @@ public class PresentationAdmin extends Presentation
 			
 			if(year < 0 || year > 10000) 
 			{
-				System.out.println("Input not recognized.");
+				System.out.println("Input not recognized." + year);
 			}
 		}
 		while(year < 0 || year > 10000);
@@ -947,7 +947,7 @@ public class PresentationAdmin extends Presentation
 			
 			if(month < 0 || month > 13) 
 			{
-				System.out.println("Input not recognized.");
+				System.out.println("Input not recognized." + month);
 			}
 		}
 		while(month < 0 || month > 13);
@@ -966,13 +966,17 @@ public class PresentationAdmin extends Presentation
 				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
 				return userBookLoan;
 			}
-			System.out.println("Input not recognized.");
+			if(day < 0 || day > 31) 
+			{
+				System.out.println("Input not recognized." + day);
+			}
 		}
 		while(day < 0 || day > 31);
 
 		allStringInput.setLength(0); // empty the buffer before input
 		allStringInput.append(StringUtils.leftPad(year.toString(), 4, "0") + "-" + StringUtils.leftPad(month.toString(), 2, "0")  + "-" + StringUtils.leftPad(day.toString(), 2, "0"));
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
+		System.out.println(allStringInput);
 		
 		return userBookLoan;
 	}
