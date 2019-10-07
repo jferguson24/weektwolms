@@ -2,22 +2,18 @@ package com.ss.lms.presentation;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-//import java.sql.SQLException;
-//import java.util.Arrays;
-import java.util.Scanner;
-//import java.util.stream.Stream;
 
 import com.ss.lms.dataaccess.BookCopyDataAccess;
 import com.ss.lms.dataaccess.BookDataAccess;
-import com.ss.lms.dataaccess.DataAccess;
 import com.ss.lms.dataaccess.LibraryBranchDataAccess;
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookCopy;
+import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 import com.ss.lms.service.UserLibrarian;
-import com.ss.lms.service.test.*;
 
 public class PresentationLibrarian extends Presentation {
-
-	private static Scanner scanner;
 
 	public PresentationLibrarian() throws SQLException, ClassNotFoundException {
 		super(new UserLibrarian(new BookDataAccess(), new LibraryBranchDataAccess(), new BookCopyDataAccess()));
@@ -25,7 +21,6 @@ public class PresentationLibrarian extends Presentation {
 		//scanner = new Scanner( System.in );
 		
 		//menu();
-		
 	}
 	//
 	//Displays librarians choices and gets the user input
@@ -39,7 +34,6 @@ public class PresentationLibrarian extends Presentation {
 			while (check == false) {
 				switch(input) {
 				case 1:
-					//TODO service layer get branches
 					branches();
 					check = true;
 					break;

@@ -16,7 +16,7 @@ public abstract class Presentation
 	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
-	protected ServiceBorrower borrower;
+	protected ServiceBorrower borrowerUser;
 	
 	public Presentation(ServiceAdmin administrator)
 	{
@@ -37,9 +37,9 @@ public abstract class Presentation
 	public Presentation(ServiceBorrower borrower)
 	{
 		this.scanner = new Scanner(System.in);
-		this.borrower = borrower;
+		this.borrowerUser = borrower;
 		this.menu();
-		this.borrower.closeConnection();
+		this.borrowerUser.closeConnection();
 	}
 	
 	public abstract void menu();

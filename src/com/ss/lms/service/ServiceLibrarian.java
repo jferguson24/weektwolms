@@ -1,9 +1,10 @@
 package com.ss.lms.service;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookCopy;
+import com.ss.lms.entity.LibraryBranch;
 
 public interface ServiceLibrarian
 {
