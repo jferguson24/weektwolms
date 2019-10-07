@@ -540,7 +540,12 @@ public class PresentationAdmin extends Presentation
 		while(true);
 	}
 	
-	// TODO document these functions properly
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
 	private Author createEntityAuthor(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Author userAuthor = new Author();
@@ -583,6 +588,12 @@ public class PresentationAdmin extends Presentation
 		return userAuthor;
 	}
 	
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
 	private Publisher createEntityPublisher(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Publisher userPublisher = new Publisher();
@@ -645,6 +656,12 @@ public class PresentationAdmin extends Presentation
 		return userPublisher;
 	}
 	
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
 	private Book createEntityBook(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Book userBook = new Book();
@@ -709,6 +726,12 @@ public class PresentationAdmin extends Presentation
 		return userBook;
 	}
 	
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
 	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		LibraryBranch userLibraryBranch = new LibraryBranch();
@@ -762,6 +785,12 @@ public class PresentationAdmin extends Presentation
 		return userLibraryBranch;
 	}
 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
 	private Borrower createEntityBorrower(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Borrower userBorrower= new Borrower();
@@ -824,6 +853,10 @@ public class PresentationAdmin extends Presentation
 		return userBorrower;
 	}
 	
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * */
 	private BookLoan createEntityBookLoan(String note) 
 	{
 		BookLoan userBookLoan = new BookLoan();
