@@ -11,17 +11,17 @@ import com.ss.lms.entity.Publisher;
 public class AuthorDataAccess extends DataAccess<Author> 
 {
 
-	public AuthorDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
+	public AuthorDataAccess() throws SQLException, ClassNotFoundException 
 	{
-		super(connectionInfo);
+		super();
 	}
 
 	@Override
 	public void insert(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "INSERT INTO tbl_author(authorId,authorName) "
-				+ "VALUES ?, ?;";
+		String sql = "INSERT INTO library.tbl_author(authorId,authorName) "
+				+ "VALUES (?, ?);";
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
@@ -36,16 +36,25 @@ public class AuthorDataAccess extends DataAccess<Author>
 		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
-
-		String sql = "SELECT * FROM tbl_author"
-				+ "WHERE authorId = ?" // index 1
-				+ "AND authorName LIKE ?;"; // index 2
+		String sql;
+		
+		if(entity.getAuthorId() == -1) 
+		{
+			sql = "SELECT * FROM library.tbl_author "
+					+ "WHERE authorId > ? " // index 1
+					+ "AND authorName LIKE ?;"; // index 2
+		}
+		else 
+		{
+			sql = "SELECT * FROM library.tbl_author "
+					+ "WHERE authorId = ? " // index 1
+					+ "AND authorName LIKE ?;"; // index 2
+		}
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
 		query.setString(2, entity.getAuthorName());
-		
-		// TODO package result into POJO ArrayList
+
 		result = query.executeQuery();
 		
 		return packageResultSet(result);
@@ -55,14 +64,14 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public void update(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "UPDATE tbl_author SET "
+		String sql = "UPDATE library.tbl_author SET "
 				+ "authorName = ? " // index 1
-				+ "WHERE publisherId = ?;"; // index 2
+				+ "WHERE authorId = ?;"; // index 2
 		
 		query = con.prepareStatement(sql);
+		query.setInt(2, entity.getAuthorId());
 		query.setString(1, entity.getAuthorName());
-		query.setInt(4, entity.getAuthorId());
-		
+
 		query.executeUpdate();
 	}
 
@@ -70,12 +79,12 @@ public class AuthorDataAccess extends DataAccess<Author>
 	public void delete(Author entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "DELETE FROM tbl_author WHERE "
+		String sql = "DELETE FROM library.tbl_author WHERE "
 				+ "authorId = ?;"; // index 1
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getAuthorId());
-		
+
 		query.executeUpdate();
 	}
 
