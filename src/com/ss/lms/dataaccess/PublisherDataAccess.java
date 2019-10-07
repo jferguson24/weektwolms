@@ -10,8 +10,6 @@ import com.ss.lms.entity.Publisher;
 
 public class PublisherDataAccess extends DataAccess<Publisher> 
 {
-	// TODO testing that any of these functions work.
-	// TODO handle Integer.MAX_VALUE cases.
 	public PublisherDataAccess() throws SQLException, ClassNotFoundException 
 	{
 		super();
@@ -36,7 +34,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	@Override
 	public ArrayList<Publisher> find(Publisher entity) throws SQLException 
 	{
-		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
 		String sql;
@@ -57,8 +54,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 					+ "AND publisherAddress LIKE ? " // index 3
 					+ "AND publisherAddress LIKE ?;"; // index 4
 		}
-		
-		
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -109,8 +104,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		ArrayList<Publisher> output = new ArrayList<Publisher>();
 		Publisher publisher;
 		
-		// TODO why dont this work?
-		// output.addAll(ResultSetUtils.getCollection(new Publisher(), result));
 		
 		while(result.next()) 
 		{
@@ -123,6 +116,9 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 			
 			output.add(publisher);
 		}
+
+		// TODO why wont this work?
+		// output.addAll(ResultSetUtils.getCollection(new Publisher(), result));
 		
 		return output;
 	}
