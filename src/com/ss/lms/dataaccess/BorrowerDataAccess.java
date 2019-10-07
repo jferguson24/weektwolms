@@ -36,31 +36,18 @@ public class BorrowerDataAccess extends DataAccess<Borrower> {
 		// ArrayList<Borrower> borrower = new ArrayList<>();
 
 		ResultSet result;
-
 		PreparedStatement query;
-
 		String strCardNo = " cardNo = ? ";
-
 		if (entity.getCardNo() == -1)
-
 		{
-
 			strCardNo = " cardNo > ? ";
-
 		}
-
 		String sql = "select * from tbl_borrower where " + strCardNo;
-
 		query = con.prepareStatement(sql);
-
 		query.setInt(1, entity.getCardNo());
-
 		result = query.executeQuery();
-
 		return packageResultSet(result);
-
 	}
-
 	@Override
 	public void update(Borrower entity) throws SQLException {
 		PreparedStatement query;

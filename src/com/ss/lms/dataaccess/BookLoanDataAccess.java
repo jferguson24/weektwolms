@@ -1,7 +1,6 @@
 package com.ss.lms.dataaccess;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.sql.*;
 import com.ss.lms.entity.*;
 
@@ -27,7 +26,7 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 		query.setInt(1,entity.getBook().getBookId());
 		query.setInt(2,entity.getBranch().getBranchId());
 		query.setInt(3,entity.getBorrower().getCardNo());
-		System.out.println(query.toString());
+		//System.out.println(query.toString());
 		query.executeUpdate();
 	}
 
@@ -79,7 +78,6 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
         query.setInt(3,entity.getBook().getBookId());
         query.setDate(4, entity.getDateOut());
         query.setDate(5, entity.getDueDate());
-        System.out.println(query.toString());
         result = query.executeQuery();
 
         return packageResultSet(result) ;
@@ -104,73 +102,32 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 	
 	@Override
 	public void delete(BookLoan entity) throws SQLException {
-		
         String sqlBookId = "bookId = ?";
-
         String sqlBranchId = " branchId = ?";
-
         String sqlCardNo = "cardNo = ?";
 
-        
-
-        if(entity.getBook().getBookId() == -1) 
-
-        {
-
+        if(entity.getBook().getBookId() == -1) {
             sqlBookId = "bookId > ?";
-
         }
 
-        if(entity.getBranch().getBranchId() == -1) 
-
-        {
-
+        if(entity.getBranch().getBranchId() == -1){
             sqlBranchId = "branchId > ?";
-
         }
 
-        if(entity.getBorrower().getCardNo() == -1) 
-
-        {
-
+        if(entity.getBorrower().getCardNo() == -1){
             sqlCardNo = "cardNo > ?";
-
         }
 
         PreparedStatement query;
-
         String sql = "delete from tbl_book_loans where " + sqlBookId 
-
                 + " and " + sqlBranchId
-
                 + " and " + sqlCardNo;
 
-        
-
-        
-
         query = con.prepareStatement(sql);
-
         query.setInt(1,entity.getBook().getBookId());
-
         query.setInt(2,entity.getBranch().getBranchId());
-
         query.setInt(3,entity.getBorrower().getCardNo());
-
-        
-
-        System.out.println("bookId to del:" + entity.getBook().getBookId());
-
-        System.out.println("branchId to del:" + entity.getBranch().getBranchId());
-
-        System.out.println("card to del:" + entity.getBorrower().getCardNo());
-
-        System.out.println(query.toString());
-
-        
-
         query.executeUpdate();
-
     }
 
 	@Override
