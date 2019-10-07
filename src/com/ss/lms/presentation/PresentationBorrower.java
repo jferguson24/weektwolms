@@ -1,7 +1,10 @@
+package com.ss.lms.presentation;
+
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import com.ss.lms.dataaccess.BookCopyDataAccess;
 import com.ss.lms.dataaccess.BookLoanDataAccess;
 import com.ss.lms.dataaccess.BorrowerDataAccess;
@@ -13,7 +16,6 @@ import com.ss.lms.entity.BookLoan;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
 import com.ss.lms.entity.Publisher;
-import com.ss.lms.service.ServiceBorrower;
 import com.ss.lms.service.UserBorrower;
 
 public class PresentationBorrower extends Presentation {
