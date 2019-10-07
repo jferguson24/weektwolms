@@ -1,4 +1,4 @@
-package com.ss.lms.service.test;
+package com.ss.lms.test.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
