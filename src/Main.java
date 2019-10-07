@@ -5,7 +5,6 @@ import com.ss.lms.presentation.Presentation;
 import com.ss.lms.presentation.PresentationAdmin;
 import com.ss.lms.presentation.PresentationBorrower;
 import com.ss.lms.presentation.PresentationLibrarian;
-import com.ss.lms.service.ServiceBorrower;
 
 public class Main {
 
