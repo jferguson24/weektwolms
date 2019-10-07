@@ -18,13 +18,6 @@ public class BookLoan {
 		this.dueDate = dueDate;
 	}
 	
-	@Override
-	public String toString() 
-	{
-		return  book.getTitle() + "\t" + branch.getBranchName() + "\t" + borrower.getName() + "\t" + dateOut.toString() + "\t" + dueDate.toString();
-	}
-	
-	
 	/**
 	 * @return the book
 	 */

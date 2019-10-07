@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.ss.lms.dataaccess.BorrowerDataAccess;
 import com.ss.lms.presentation.Presentation;
 import com.ss.lms.presentation.PresentationBorrower;
+import com.ss.lms.presentation.PresentationLibrarian;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

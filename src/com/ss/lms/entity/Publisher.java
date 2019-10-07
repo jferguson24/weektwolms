@@ -10,20 +10,13 @@ public class Publisher{
 	public Publisher() {}
 	
 	public Publisher(Integer publisherId, String publisherName, 
-			String publisherAddress, String publisherPhone) 
-	{
+			String publisherAddress, String publisherPhone) {
 		this.publisherId = publisherId;
 		this.publisherName = publisherName;
 		this.publisherAddress = publisherAddress;
 		this.publisherPhone = publisherPhone;
 	}
 
-	@Override
-	public String toString() 
-	{
-		return publisherId + "\t" + publisherName + "\t" + publisherAddress + "\t" + publisherPhone;
-	}
-	
 	/**
 	 * @return the publisherId
 	 */
