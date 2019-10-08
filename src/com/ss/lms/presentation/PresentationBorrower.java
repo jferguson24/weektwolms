@@ -8,50 +8,16 @@ import com.ss.lms.entity.*;
 import com.ss.lms.service.UserBorrower;
 
 public class PresentationBorrower extends Presentation {
-	public PresentationBorrower() throws ClassNotFoundException, SQLException {
-		super(new UserBorrower(new LibraryBranchDataAccess(), new BorrowerDataAccess(), new BookCopyDataAccess(),
-				new BookLoanDataAccess()));
+
+	public PresentationBorrower(ServiceBorrower borrower) {
+		super(borrower);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void menu() {
-		while (true) {
-			System.out.println("Enter your card number: ");
-			Borrower borr = new Borrower(-1, "%", "%", "%");
-			ArrayList<Borrower> borrowers = super.userBorrower.readBorrower(borr);
-			int input = super.getIntegerFieldFromUser("CardId");
-			for (Borrower bor : borrowers) {
-				if (bor.getCardNo() == input) {
-					borrowOptions(bor);
-				}
-			}
-			if (input == Integer.MIN_VALUE) {
-				return;
-			}
-		}
-	}
+		// TODO Auto-generated method stub
 
-	public void borrowOptions(Borrower borrower) {
-		while (true) {
-			System.out.println("1. Check out a book.");
-			System.out.println("2. Return a book.");
-			System.out.println("3. Quit to previous");
-			int input = super.getIntegerFieldFromUser("Selection");
-			switch (input) {
-			case 1:
-				borrowBranchCheckOut(borrower);
-				break;
-			case 2:
-				borrowReturnBranch(borrower);
-				break;
-			case 3:
-				return;
-			case Integer.MIN_VALUE:
-				return;
-			default:
-				System.out.println("Invalid Input.");
-			}
-		}
 	}
 
 	public void borrowBranchCheckOut(Borrower borrower) {

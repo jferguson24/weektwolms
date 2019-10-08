@@ -6,6 +6,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ss.lms.entity.Author;
@@ -13,22 +14,20 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Publisher;
 
 /**
- * 
+ * @author sj
  *
  */
 public class BookDataAccess extends DataAccess<Book>{
 	public BookDataAccess() throws SQLException, ClassNotFoundException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void insert(Book entity) throws SQLException{
-		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
 		//query = con.createStatement();
-		sql = "insert into tbl_book (bookId, title, bookId, publisherId)"
+		sql = "insert into tbl_book (bookId, title, authId, pubId)"
 				+ "values (?,?,?,?);";
 
 		query = con.prepareStatement(sql);
@@ -112,6 +111,7 @@ public class BookDataAccess extends DataAccess<Book>{
 		String newTitle = entity.getTitle();
 		int authorId = entity.getAuthor().getAuthorId();
 		int publisherId = entity.getPublisher().getPublisherId();
+		
 //		sql = "select * from tbl_book "
 //				+ "where bookId = ?";
 //		query = con.prepareStatement(sql);
@@ -140,9 +140,10 @@ public class BookDataAccess extends DataAccess<Book>{
 //			//publisherId = result.getInt(4);
 //		}
 //		
-		sql = "update tbl_book set title = ? "
-				+ "and authId = ? "
-				+ "and publId = ? "  
+		sql = "update tbl_book set "
+				+ "title = ?, "
+				+ "authId = ?, "
+				+ "pubId = ? "  
 				+ "where bookId = ?";
 		query = con.prepareStatement(sql);
 		query.setString(1, newTitle);
@@ -150,7 +151,6 @@ public class BookDataAccess extends DataAccess<Book>{
 		query.setInt(3, publisherId);
 		query.setInt(4, entity.getBookId());
 		
-
 		query.executeUpdate();
 		
 	}
@@ -198,4 +198,16 @@ public class BookDataAccess extends DataAccess<Book>{
 		}	
     	return bookList;
     }
+    
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(bookId) AS max FROM library.tbl_book;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
 }

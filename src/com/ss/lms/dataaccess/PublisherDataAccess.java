@@ -3,16 +3,14 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
-
 
 import com.ss.lms.entity.Publisher;
 
 public class PublisherDataAccess extends DataAccess<Publisher> 
 {
-	// TODO testing that any of these functions work.
-	// TODO handle Integer.MAX_VALUE cases.
-	public PublisherDataAccess(String connectionInfo) throws SQLException, ClassNotFoundException 
+	public PublisherDataAccess() throws SQLException, ClassNotFoundException 
 	{
 		super();
 	}
@@ -22,7 +20,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	{
 		PreparedStatement query;
 		String sql = "INSERT INTO tbl_publisher(publisherId,publisherName,publisherAddress,publisherPhone) "
-				+ "VALUES ?, ?, ?, ?;";
+				+ "VALUES (?, ?, ?, ?);";
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -36,17 +34,26 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	@Override
 	public ArrayList<Publisher> find(Publisher entity) throws SQLException 
 	{
-		ArrayList<Publisher> publishers = new ArrayList<Publisher>();
 		ResultSet result;
 		PreparedStatement query;
-
-		String sql = "SELECT * FROM tbl_publisher "
-				+ "WHERE publisherId = ?" // index 1
-				+ "AND publisherName LIKE ?" // index 2
-				+ "AND publisherAddress LIKE ?" // index 3
-				+ "AND publisherAddress LIKE ?;"; // index 4
+		String sql;
 		
-		
+		if(entity.getPublisherId() == -1) 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId > ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
+		else 
+		{
+			sql = "SELECT * FROM tbl_publisher "
+					+ "WHERE publisherId = ? " // index 1
+					+ "AND publisherName LIKE ? " // index 2
+					+ "AND publisherAddress LIKE ? " // index 3
+					+ "AND publisherAddress LIKE ?;"; // index 4
+		}
 		
 		query = con.prepareStatement(sql);
 		query.setInt(1, entity.getPublisherId());
@@ -54,7 +61,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		query.setString(3, entity.getPublisherAddress());
 		query.setString(4, entity.getPublisherPhone());
 		
-		// TODO package result into POJO ArrayList
 		result = query.executeQuery();
 		
 		return packageResultSet(result);
@@ -64,7 +70,7 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 	public void update(Publisher entity) throws SQLException 
 	{
 		PreparedStatement query;
-		String sql = "UPDATE tbl_publisher SET "
+		String sql = "UPDATE library.tbl_publisher SET "
 				+ "publisherName = ?, " // index 1
 				+ "publisherAddress = ?, " // index 2
 				+ "publisherPhone = ? " // index 3
@@ -98,8 +104,6 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 		ArrayList<Publisher> output = new ArrayList<Publisher>();
 		Publisher publisher;
 		
-		// TODO why dont this work?
-		// output.addAll(ResultSetUtils.getCollection(new Publisher(), result));
 		
 		while(result.next()) 
 		{
@@ -112,10 +116,25 @@ public class PublisherDataAccess extends DataAccess<Publisher>
 			
 			output.add(publisher);
 		}
+
+		// TODO why wont this work?
+		// output.addAll(ResultSetUtils.getCollection(new Publisher(), result));
 		
 		return output;
 	}
 
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(publisherId) AS max FROM library.tbl_publisher;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
+	
 }
 
 

@@ -1,7 +1,5 @@
 package com.ss.lms.presentation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import com.ss.lms.service.ServiceAdmin;
@@ -13,7 +11,7 @@ public abstract class Presentation
 	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
-	protected ServiceBorrower userBorrower;
+	protected ServiceBorrower borrower;
 	
 	public Presentation(ServiceAdmin administrator)
 	{
@@ -34,26 +32,26 @@ public abstract class Presentation
 	public Presentation(ServiceBorrower borrower)
 	{
 		this.scanner = new Scanner(System.in);
-		this.userBorrower = borrower;
+		this.borrower = borrower;
 		this.menu();
-		this.userBorrower.closeConnection();
+		this.borrower.closeConnection();
 	}
 	
-
 	public abstract void menu();
 	
 	// Forces the user to input a String. replaces "N/A" with "%"
 	public String getStringFieldFromUser(String fieldName) 
 	{
 		System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
+		
 		do
 		{
-			return getNextLine().replaceAll("N/A", "%");
+			return getNextLine().replaceAll("N/A", "%").trim();
 		}
-		while(scanner.hasNextLine());
+		while(this.scanner.hasNextLine());
 	}
 	
-	// Forces the user to input an integer, "N/A" maps to %, "quit" maps to Integer.MIN_VALUE
+	// Forces the user to input an integer, "N/A" maps to -1, "quit" maps to Integer.MIN_VALUE
 	public Integer getIntegerFieldFromUser(String fieldName) 
     {
         System.out.println("Insert data for " + fieldName + ". Enter \"quit\" to go back to operation screen");
@@ -88,28 +86,14 @@ public abstract class Presentation
         }
     }
 	
-	// returns a string representation of a 2d array, with brackets
-	public static String make2DArrayListLegible(ArrayList<ArrayList<String>> input) 
-	{	
-		StringBuilder output = new StringBuilder();
-
-		input.stream().forEach
-		(
-			row -> output.append(Arrays.toString(row.toArray()) + "\n")
-		);
-		
-		return output.toString();
+	/*
+	 * This function returns the next line while skipping over the next line feed, return carriage, etc
+	 * */
+	public String getNextLine() 
+	{
+		// regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
+		// this tells scanner to skip past the next new line for all operating systems
+		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+		return scanner.nextLine();
 	}
-	
-    /*
-     * This function returns the next line while skipping over the next line feed, return carriage, etc
-     * */
-    public String getNextLine() 
-    {
-        // regex pattern thanks to: https://archie94.github.io/blogs/skip-newline-while-reading-from-scanner-class
-        // this tells scanner to skip past the next new line for all operating systems
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-        return scanner.nextLine();
-    }
-    
 }

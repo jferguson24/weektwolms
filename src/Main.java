@@ -3,17 +3,12 @@ import java.util.Scanner;
 
 import com.ss.lms.presentation.Presentation;
 import com.ss.lms.presentation.PresentationAdmin;
-import com.ss.lms.presentation.PresentationBorrower;
 import com.ss.lms.presentation.PresentationLibrarian;
-import com.ss.lms.service.ServiceBorrower;
 
 public class Main {
-
 	/**
 	 * @param args
 	 */
-	
-
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Scanner scanner = new Scanner(System.in);
 	    Presentation pres = null;
@@ -32,21 +27,17 @@ public class Main {
 				switch(input) {
 				case "1":
 					pres = new PresentationLibrarian();
-					//libMenu.start();
 					check = true;
 					break;
 				case "2":
 					pres = new PresentationAdmin();
-					//adminMenu.start();
 					check = true;
 					break;
 				case "3":
-					pres = new PresentationBorrower();
-					//borrowerMenu.start();
+					//pres = new PresentationBorrower();
 					check = true;
 					break;
 				case "4":
-					System.out.println("Exc");
 					scanner.close();
 					return;
 				default:
@@ -57,3 +48,4 @@ public class Main {
 	}
 
 }
+
