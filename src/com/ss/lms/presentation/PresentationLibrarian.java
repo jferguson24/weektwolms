@@ -22,7 +22,6 @@ public class PresentationLibrarian extends Presentation {
 		
 		//menu();
 	}
-	//
 	//Displays librarians choices and gets the user input
 	public void menu() {
 		while(true) {
