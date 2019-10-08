@@ -14,6 +14,12 @@ public class Author {
 		this.authorId = authorId;
 		this.authorName = authorName;
 	}
+	
+	@Override
+	public String toString() 
+	{
+		return authorId + "\t" + authorName;
+	}
 
 	/**
 	 * @return the authorId

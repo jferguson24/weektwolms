@@ -1,38 +1,18 @@
 package com.ss.lms.service;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import com.ss.lms.dataaccess.*;
-import com.ss.lms.entity.*;
+import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
+import com.ss.lms.entity.BookLoan;
+import com.ss.lms.entity.Borrower;
+import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 
 public interface ServiceAdmin
 {
-	public DataAccess<Author> authorDao = null;
-	public DataAccess<Publisher> publisherDao = null;
-	public DataAccess<Book> bookDao = null;
-	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<UserBorrower> borrowerDao = null;
-	public DataAccess<BookCopy> bookCopyDao = null;
-	public DataAccess<BookLoan> bookLoanDao = null;
 	
-	default public void closeConnection() 
-	{
-		try 
-		{
-			authorDao.close();
-			publisherDao.close();
-			bookDao.close();
-			libraryBranchDao.close();
-			borrowerDao.close();
-			bookCopyDao.close();
-			bookLoanDao.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-	}
+	public void closeConnection();
 	
 	/*************************************************
 	 * 
@@ -49,10 +29,6 @@ public interface ServiceAdmin
 	public void createLibraryBranch(LibraryBranch userLibraryBranch);
 
 	public void createBorrower(Borrower borrower);
-
-	public void createBookLoan(BookLoan bookLoan);
-	
-	public void createBookCopy(BookCopy bookCopy);
 	
 	/*************************************************
 	 * 
@@ -71,8 +47,6 @@ public interface ServiceAdmin
 	public ArrayList<Borrower> readBorrower(Borrower userBorrower);
 
 	public ArrayList<BookLoan> readBookLoan(BookLoan bookLoan);
-
-	public ArrayList<BookCopy> readBookCopy(BookCopy bookCopy);
 	
 	/*************************************************
 	 * 
@@ -82,17 +56,15 @@ public interface ServiceAdmin
 	
 	public void updateAuthor(Author author);
 	
-	public void updatePublisher(LibraryBranch publisher);
+	public void updatePublisher(Publisher publisher);
 	
 	public void updateBook(Book book);
 
-	public void updateLibraryBranch(Publisher libraryBranch);
+	public void updateLibraryBranch(LibraryBranch libraryBranch);
 
-	public void updateBorrower(UserBorrower borrower);
+	public void updateBorrower(Borrower borrower);
 
 	public void updateBookLoan(BookLoan bookLoan);
-
-	public void updateBookCopy(BookLoan bookCopy);
 	
 	/*************************************************
 	 * 
@@ -102,15 +74,11 @@ public interface ServiceAdmin
 	
 	public void deleteAuthor(Author author);
 	
-	public void deletePublisher(LibraryBranch publisher);
+	public void deletePublisher(Publisher publisher);
 	
 	public void deleteBook(Book book);
 
-	public void deleteLibraryBranch(Publisher libraryBranch);
+	public void deleteLibraryBranch(LibraryBranch libraryBranch);
 
-	public void deleteBorrower(UserBorrower borrower);
-
-	public void deleteBookLoan(BookLoan bookLoan);
-
-	public void deleteBookCopy(BookLoan bookCopy);
+	public void deleteBorrower(Borrower borrower);
 }

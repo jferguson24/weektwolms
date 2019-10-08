@@ -3,13 +3,12 @@ package com.ss.lms.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ss.lms.dataaccess.BookCopyDataAccess;
-import com.ss.lms.dataaccess.BookDataAccess;
-import com.ss.lms.dataaccess.DataAccess;
-import com.ss.lms.dataaccess.LibraryBranchDataAccess;
+import com.ss.lms.dataaccess.*;
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopy;
+import com.ss.lms.entity.BookLoan;
 import com.ss.lms.entity.LibraryBranch;
+import com.ss.lms.entity.Publisher;
 
 public class UserLibrarian implements ServiceLibrarian{
 
@@ -23,7 +22,6 @@ public class UserLibrarian implements ServiceLibrarian{
 		this.bookCopyDao = bookCopyDao;
 	}
 	
-	//Closes the connection to the sql
 	@Override
 	public void closeConnection() 
 	{
@@ -39,19 +37,20 @@ public class UserLibrarian implements ServiceLibrarian{
 		}
 	}
 	
-	//Creates a copy of the bookCopy by calling the data access layer function .insert()
 	@Override
 	public void createBookCopy(BookCopy bookCopy) {
+		// TODO Auto-generated method stub
 		try {
 			bookCopyDao.insert(bookCopy);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	//Reads a book by calling the data access function .find()
 	@Override
 	public ArrayList<Book> readBook(Book book) {
+		// TODO Auto-generated method stub
 		ArrayList<Book> books = null;
 		try {
 			books = new ArrayList<Book>(bookDao.find(book));
@@ -63,9 +62,9 @@ public class UserLibrarian implements ServiceLibrarian{
 		return books;
 	}
 
-	//Reads a library branch by calling the data access function .find()
 	@Override
 	public ArrayList<LibraryBranch> readLibraryBranch(LibraryBranch libraryBranch) {
+		// TODO Auto-generated method stub
 		ArrayList<LibraryBranch> branches = null;
 		try {
 			branches = new ArrayList<LibraryBranch>(libraryBranchDao.find(libraryBranch));
@@ -77,9 +76,10 @@ public class UserLibrarian implements ServiceLibrarian{
 		return branches;
 	}
 
-	//Reads a bookCopy by calling the data access function .find()
 	@Override
 	public ArrayList<BookCopy> readBookCopy(BookCopy bookCopy) {
+		// TODO Auto-generated method stub
+		System.out.println("Reading Book Copies");
 		ArrayList<BookCopy> copies = null;
 		try {
 			copies = new ArrayList<BookCopy>(bookCopyDao.find(bookCopy));
@@ -91,10 +91,9 @@ public class UserLibrarian implements ServiceLibrarian{
 		return copies;
 	}
 
-	//Updates a library branch by calling the .update() function in the data access layer
-	//Does the business logic to not regard %'s
 	@Override
 	public void updateLibraryBranch(LibraryBranch libraryBranch) {
+		// TODO Auto-generated method stub
 		try {
 			LibraryBranch oldBranch = libraryBranchDao.find(new LibraryBranch(libraryBranch.getBranchId(), "%", "%")).get(0);
 
@@ -106,28 +105,30 @@ public class UserLibrarian implements ServiceLibrarian{
 			}
 			libraryBranchDao.update(libraryBranch);		
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 
-	//Updates a bookCopy
-	//Add data is available so no %'s need to be accounted
 	@Override
 	public void updateBookCopy(BookCopy bookCopy) {
+		// TODO Auto-generated method stub
 		try {
 			bookCopyDao.update(bookCopy);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	//Deletes a book by calling the .delete() function in the data access layer
 	@Override
 	public void deleteBookCopy(BookCopy bookCopy) {
+		// TODO Auto-generated method stub
 		try {
 			bookCopyDao.delete(bookCopy);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
