@@ -4,8 +4,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.ss.lms.dataaccess.AuthorDataAccess;
-import com.ss.lms.dataaccess.BookCopyDataAccess;
 import com.ss.lms.dataaccess.BookDataAccess;
 import com.ss.lms.dataaccess.BookLoanDataAccess;
 import com.ss.lms.dataaccess.BorrowerDataAccess;
@@ -27,20 +28,17 @@ public class PresentationAdmin extends Presentation
 	{
 		super(new UserAdmin(
 				new AuthorDataAccess(), new PublisherDataAccess(), new BookDataAccess(),
-				new LibraryBranchDataAccess(), new BorrowerDataAccess(),
-				new BookCopyDataAccess(), new BookLoanDataAccess()
+				new LibraryBranchDataAccess(), new BorrowerDataAccess(), new BookLoanDataAccess()
 				));
 	}
 	
 	public void menu() 
 	{
-		// empty the buffer before any input from the user, 
-		// then a check is performed to see if they entered "quit"
-		// use a setter to the Entity being populated
-		StringBuffer allStringInput = new StringBuffer();
-		Integer allIntegerInput;
-		
-		// these objects are used purely as input to DAO find functions which will return the entire contents of the table
+		/*
+		 * BOILER PLATE CODE AHEAD: SPEED CHECKED BY RADAR, SPEED LIMIT: 250 WPM
+		 * these objects are used purely as input to DAO find functions which will return the entire contents of the table
+		 * the state of these objects is still very mutable, final in this case only stops the reference from changing
+		 * */
 		final Author findAllAuthors = new Author(-1, "%");
 		final Publisher findAllPublishers = new Publisher(-1, "%", "%", "%");
 		final Book findAllBooks = new Book(-1, "%", findAllAuthors, findAllPublishers);
@@ -69,9 +67,9 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > CREATE > AUTHOR************************************************************************************/");
-//					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("", false);
+					Author userAuthor = createEntityAuthor("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -85,9 +83,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > CREATE > PUBLISHER************************************************************************************/");
-//					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher = createEntityPublisher("", false);
+					Publisher userPublisher = createEntityPublisher("", false, true);
 
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -103,12 +101,12 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > CREATE > BOOK************************************************************************************/");
 					
 					System.out.println("\nAuthors Table:");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
-					System.out.println("\nPublishersTable:");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					System.out.println("\nPublishers Table:");
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("", false);
+					Book userBook = createEntityBook("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -121,9 +119,9 @@ public class PresentationAdmin extends Presentation
 					break;
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > CREATE > BRANCH************************************************************************************/");
-//					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -137,9 +135,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > CREATE > BORROWER************************************************************************************/");
-//					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower= createEntityBorrower("", false);
+					Borrower userBorrower= createEntityBorrower("", false, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -169,7 +167,7 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > READ > AUTHOR************************************************************************************/");
-					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Author userAuthor = createEntityAuthor("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -177,12 +175,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readAuthor(userAuthor).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(userAuthor).forEach(row -> System.out.println(row));
 					break;
 					
 				case "2": // Publishers table
 					System.out.println("Publishers table selected");
-					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Publisher userPublisher= createEntityPublisher("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -190,12 +188,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readPublisher(userPublisher).stream().forEach(row -> System.out.println(row));;
+					administrator.readPublisher(userPublisher).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > READ > BOOK************************************************************************************/");
-					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Book userBook = createEntityBook("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -203,12 +201,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBook(userBook).stream().forEach(row -> System.out.println(row));;
+					administrator.readBook(userBook).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > READ > BRANCH************************************************************************************/");
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -216,12 +214,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readLibraryBranch(userLibraryBranch).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(userLibraryBranch).forEach(row -> System.out.println(row));
 					break;
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > READ > BORROWER************************************************************************************/");
-					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					Borrower userBorrower = createEntityBorrower("Note: Enter N/A if you aren't concerned with the value of a field", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -229,12 +227,12 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBorrower(userBorrower).stream().forEach(row -> System.out.println(row));;
+					administrator.readBorrower(userBorrower).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "6": // Book Loans table
 					System.out.println("/*MAIN > ADMIN > READ > LOAN************************************************************************************/");
-					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field", true);
+					BookLoan userBookLoan= createEntityBookLoan("Note: Enter N/A if you aren't concerned with the value of a field");
 					
 					// the user quit somewhere in the process
 					if(userBookLoan == null) 
@@ -242,7 +240,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					administrator.readBookLoan(userBookLoan).stream().forEach(row -> System.out.println(row));;
+					administrator.readBookLoan(userBookLoan).forEach(row -> System.out.println(row));;
 					break;
 					
 				case "0": // return to operation select
@@ -257,9 +255,9 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > UPDATE > AUTHOR************************************************************************************/");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Author userAuthor = createEntityAuthor("Note: The value of Author ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -268,7 +266,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userAuthor.getAuthorId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -280,9 +278,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > UPDATE > PUBLISHER************************************************************************************/");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Publisher userPublisher= createEntityPublisher("Note: The value of Publisher ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userPublisher== null) 
@@ -290,7 +288,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userPublisher.getPublisherId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -304,15 +302,15 @@ public class PresentationAdmin extends Presentation
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > UPDATE > BOOK************************************************************************************/");
 					System.out.println("\nBooks Table:");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
 
 					System.out.println("\nAuthors Table:");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
 					System.out.println("\nPublishers Table:");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Book userBook = createEntityBook("Note: The value of Book ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -320,7 +318,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBook.getBookId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -333,9 +331,9 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > BRANCH************************************************************************************/");
 
 					System.out.println("\nBranches Table:");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					LibraryBranch userLibraryBranch= createEntityLibraryBranch("Note: The value of Branch ID will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -343,7 +341,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userLibraryBranch.getBranchId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -357,9 +355,9 @@ public class PresentationAdmin extends Presentation
 					System.out.println("/*MAIN > ADMIN > UPDATE > BORROWER************************************************************************************/");
 
 					System.out.println("\nBorrowers Table:");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true);
+					Borrower userBorrower= createEntityBorrower("Note: The value of Card Number will determine the row to be updated, the following values represent the new data to overwrite with.\nEnter N/A to leave a non primary key field as-is", true, true);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -367,7 +365,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBorrower.getCardNo() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when updating.\nReturning to table select menu");
@@ -377,11 +375,21 @@ public class PresentationAdmin extends Presentation
 					administrator.updateBorrower(userBorrower);
 					break;
 					
-				case "6": // Book Loans table TODO only update due date.
+				case "6":
 					System.out.println("/*MAIN > ADMIN > UPDATE > LOAN************************************************************************************/");
-					administrator.readBookLoan(findAllBookLoans).stream().forEach(row -> System.out.println(row));
+					System.out.println("\nBook Loans Table:");
+					administrator.readBookLoan(findAllBookLoans).forEach(row -> System.out.println(row));
 					
-					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date", true);
+					System.out.println("\nBooks Table:");
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
+					
+					System.out.println("\nBranch Table:");
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
+					
+					System.out.println("\nBorrowers Loans Table:");
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
+					
+					BookLoan userBookLoan = createEntityBookLoan("Book, Branch, and Card values must exist to update a due date");
 					
 					// the user quit somewhere in the process
 					if(userBookLoan == null) 
@@ -389,7 +397,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBookLoan.getBook().getBookId() == -1 ||
 						userBookLoan.getBranch().getBranchId()== -1 ||
 						userBookLoan.getBorrower().getCardNo() == -1) 
@@ -413,9 +421,9 @@ public class PresentationAdmin extends Presentation
 				{
 				case "1": // Authors table
 					System.out.println("/*MAIN > ADMIN > DELETE > AUTHOR************************************************************************************/");
-					administrator.readAuthor(findAllAuthors).stream().forEach(row -> System.out.println(row));
+					administrator.readAuthor(findAllAuthors).forEach(row -> System.out.println(row));
 					
-					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true);
+					Author userAuthor = createEntityAuthor("Note: The Author ID you enter will determine which Author will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userAuthor == null) 
@@ -423,7 +431,6 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
 					if(userAuthor.getAuthorId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -435,9 +442,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "2": // Publishers table
 					System.out.println("/*MAIN > ADMIN > DELETE > PUBLISHER************************************************************************************/");
-					administrator.readPublisher(findAllPublishers).stream().forEach(row -> System.out.println(row));
+					administrator.readPublisher(findAllPublishers).forEach(row -> System.out.println(row));
 					
-					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true);
+					Publisher userPublisher= createEntityPublisher("Note: The Publisher ID you enter will determine which Publisher will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userPublisher == null) 
@@ -445,7 +452,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userPublisher.getPublisherId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -457,9 +464,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "3": // Books table
 					System.out.println("/*MAIN > ADMIN > DELETE > BOOK************************************************************************************/");
-					administrator.readBook(findAllBooks).stream().forEach(row -> System.out.println(row));
+					administrator.readBook(findAllBooks).forEach(row -> System.out.println(row));
 					
-					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true);
+					Book userBook = createEntityBook("Note: The Book ID you enter will determine which Book will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userBook == null) 
@@ -467,7 +474,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBook.getBookId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -479,9 +486,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "4": // Library Branches table
 					System.out.println("/*MAIN > ADMIN > DELETE > BRANCH************************************************************************************/");
-					administrator.readLibraryBranch(findAllLibraryBranches).stream().forEach(row -> System.out.println(row));
+					administrator.readLibraryBranch(findAllLibraryBranches).forEach(row -> System.out.println(row));
 					
-					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true);
+					LibraryBranch userLibraryBranch = createEntityLibraryBranch("Note: The Branch ID you enter will determine which Branch will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userLibraryBranch == null) 
@@ -489,7 +496,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userLibraryBranch.getBranchId() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -501,9 +508,9 @@ public class PresentationAdmin extends Presentation
 					
 				case "5": // Borrower table
 					System.out.println("/*MAIN > ADMIN > DELETE > BORROWER************************************************************************************/");
-					administrator.readBorrower(findAllBorrowers).stream().forEach(row -> System.out.println(row));
+					administrator.readBorrower(findAllBorrowers).forEach(row -> System.out.println(row));
 					
-					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true);
+					Borrower userBorrower = createEntityBorrower("Note: The Card Number you enter will determine which borrower will be deleted", true, false);
 					
 					// the user quit somewhere in the process
 					if(userBorrower == null) 
@@ -511,7 +518,7 @@ public class PresentationAdmin extends Presentation
 						break;
 					}
 					
-					// TODO should be in business logic
+					
 					if(userBorrower.getCardNo() == -1) 
 					{
 						System.out.println("You cannot enter N/A for a primary key value when deleting.\nReturning to operations menu");
@@ -537,8 +544,13 @@ public class PresentationAdmin extends Presentation
 		while(true);
 	}
 	
-	// TODO document these functions properly
-	private Author createEntityAuthor(String note, boolean getPrimaryKey) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
+	private Author createEntityAuthor(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Author userAuthor = new Author();
 		StringBuffer allStringInput = new StringBuffer();
@@ -561,20 +573,32 @@ public class PresentationAdmin extends Presentation
 			userAuthor.setAuthorId(-1);
 		}
 		
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Author Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Author Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userAuthor.setAuthorName(allStringInput.toString());
 		}
-		userAuthor.setAuthorName(allStringInput.toString());
+		else 
+		{
+			userAuthor.setAuthorName("%");
+		}
 		
 		return userAuthor;
 	}
 	
-	private Publisher createEntityPublisher(String note, boolean getPrimaryKey) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
+	private Publisher createEntityPublisher(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Publisher userPublisher = new Publisher();
 		StringBuffer allStringInput = new StringBuffer();
@@ -596,38 +620,53 @@ public class PresentationAdmin extends Presentation
 		{
 			userPublisher.setPublisherId(-1);
 		}
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherName(allStringInput.toString());
+			
+			// Getting Address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherAddress(allStringInput.toString());
+			
+			// Getting Phone
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Publisher Phone"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userPublisher.setPublisherPhone(allStringInput.toString());
 		}
-		userPublisher.setPublisherName(allStringInput.toString());
-		
-		// Getting Address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userPublisher.setPublisherName("%");
+			userPublisher.setPublisherAddress("%");
+			userPublisher.setPublisherPhone("%");
 		}
-		userPublisher.setPublisherAddress(allStringInput.toString());
 		
-		// Getting Phone
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Publisher Phone"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userPublisher.setPublisherPhone(allStringInput.toString());
-		
+
 		return userPublisher;
 	}
 	
-	private Book createEntityBook(String note, boolean getPrimaryKey) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
+	private Book createEntityBook(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Book userBook = new Book();
 		userBook.setAuthor(new Author());
@@ -653,35 +692,51 @@ public class PresentationAdmin extends Presentation
 			userBook.setBookId(-1);
 		}
 		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Book Name"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userBook.setTitle(allStringInput.toString());
 		
-		// Getting author ID
-		allIntegerInput = getIntegerFieldFromUser("Author ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Book Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBook.setTitle(allStringInput.toString());
+			
+			// Getting author ID
+			allIntegerInput = getIntegerFieldFromUser("Author ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBook.getAuthor().setAuthorId(allIntegerInput);
+			
+			// Getting publisher ID
+			allIntegerInput = getIntegerFieldFromUser("Publisher ID");
+			if(allIntegerInput == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			userBook.getPublisher().setPublisherId(allIntegerInput);
 		}
-		userBook.getAuthor().setAuthorId(allIntegerInput);
-		
-		// Getting publisher ID
-		allIntegerInput = getIntegerFieldFromUser("Publisher ID");
-		if(allIntegerInput == Integer.MIN_VALUE) 
+		else 
 		{
-			return null;
+			userBook.setTitle("%");
+			userBook.getAuthor().setAuthorId(-1);
+			userBook.getPublisher().setPublisherId(-1);
 		}
-		userBook.getPublisher().setPublisherId(allIntegerInput);
 		
 		return userBook;
 	}
 	
-	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
+	private LibraryBranch createEntityLibraryBranch(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		LibraryBranch userLibraryBranch = new LibraryBranch();
 		StringBuffer allStringInput = new StringBuffer();
@@ -704,35 +759,49 @@ public class PresentationAdmin extends Presentation
 			userLibraryBranch.setBranchId(-1);
 		}
 		
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Library Branch Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Library Branch Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userLibraryBranch.setBranchName(allStringInput.toString());
+			
+			// Getting address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Library Branch Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userLibraryBranch.setBranchAddress(allStringInput.toString());
+			
 		}
-		userLibraryBranch.setBranchName(allStringInput.toString());
-		
-		// Getting address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Library Branch Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userLibraryBranch.setBranchName("%");
+			userLibraryBranch.setBranchAddress("%");
 		}
-		userLibraryBranch.setBranchAddress(allStringInput.toString());
 		
 		return userLibraryBranch;
 	}
 
-	private Borrower createEntityBorrower(String note, boolean getPrimaryKey) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * getPrimaryKey - whether the user is asked to enter their own primary key, false for create operations, true for read
+	 * getNonPrimaryKeyValues - whether to ask the user to enter any non-PK fields, useful for delete operations
+	 * */
+	private Borrower createEntityBorrower(String note, boolean getPrimaryKey, boolean getNonPrimaryKeyValues) 
 	{
 		Borrower userBorrower= new Borrower();
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
-		System.out.println("/n" + note);
+		System.out.println("\n" + note);
 
 		if(getPrimaryKey) 
 		{
@@ -749,48 +818,63 @@ public class PresentationAdmin extends Presentation
 			userBorrower.setCardNo(-1);
 		}
 
-		
-		// Getting name
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Name"));
-		if("quit".equals(allStringInput.toString())) 
+		if(getNonPrimaryKeyValues) 
 		{
-			return null;
+			// Getting name
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Name"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setName(allStringInput.toString());
+			
+			// Getting address
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Address"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setAddress(allStringInput.toString());
+			
+			// Getting phone number
+			allStringInput.setLength(0); // empty the buffer before input
+			allStringInput.append(getStringFieldFromUser("Borrower Phone Number"));
+			if("quit".equals(allStringInput.toString())) 
+			{
+				return null;
+			}
+			userBorrower.setPhone(allStringInput.toString());
 		}
-		userBorrower.setName(allStringInput.toString());
-		
-		// Getting address
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Address"));
-		if("quit".equals(allStringInput.toString())) 
+		else 
 		{
-			return null;
+			userBorrower.setName("%");
+			userBorrower.setAddress("%");
+			userBorrower.setPhone("%");
 		}
-		userBorrower.setAddress(allStringInput.toString());
-		
-		// Getting phone number
-		allStringInput.setLength(0); // empty the buffer before input
-		allStringInput.append(getStringFieldFromUser("Borrower Phone Number"));
-		if("quit".equals(allStringInput.toString())) 
-		{
-			return null;
-		}
-		userBorrower.setPhone(allStringInput.toString());
 		
 		return userBorrower;
 	}
 	
-	private BookLoan createEntityBookLoan(String note, boolean onlyAskIdsAndDueDate) 
+	/*
+	 * This function returns an object created via user input. 
+	 * note - will print the note before asking for input, mostly for advising input
+	 * */
+	private BookLoan createEntityBookLoan(String note) 
 	{
 		BookLoan userBookLoan = new BookLoan();
-		userBookLoan.setBook(new Book());
-		userBookLoan.setBranch(new LibraryBranch());
-		userBookLoan.setBorrower(new Borrower());;
-		
+			userBookLoan.setBook(new Book());
+				userBookLoan.getBook().setAuthor(new Author());
+				userBookLoan.getBook().setPublisher(new Publisher());
+			userBookLoan.setBranch(new LibraryBranch());
+			userBookLoan.setBorrower(new Borrower());
+			
 		StringBuffer allStringInput = new StringBuffer();
 		Integer allIntegerInput;
 		
 		System.out.println("\n" + note);
+		
 		// Getting book ID
 		allIntegerInput = getIntegerFieldFromUser("Book ID");
 		if(allIntegerInput == Integer.MIN_VALUE) 
@@ -798,6 +882,7 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBook().setBookId(allIntegerInput);
+		System.out.println("setting bookId: " + userBookLoan.getBook().getBookId());
 		
 		// Getting Branch ID
 		allIntegerInput = getIntegerFieldFromUser("Branch ID");
@@ -806,6 +891,7 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBranch().setBranchId(allIntegerInput);
+		System.out.println("setting branchId: " + userBookLoan.getBranch().getBranchId());
 		
 		// Getting card number
 		allIntegerInput = getIntegerFieldFromUser("Card Number");
@@ -814,33 +900,81 @@ public class PresentationAdmin extends Presentation
 			return null;
 		}
 		userBookLoan.getBorrower().setCardNo(allIntegerInput);
+		System.out.println("setting cardNo: " + userBookLoan.getBorrower().getCardNo());
 		
 		// cannot change dateOut
 		userBookLoan.setDateOut(Date.valueOf("0001-01-01"));
 
 		// Getting due date
-		allStringInput.setLength(0); // empty the buffer before input
-		
 		// get year:
-		Integer year = getIntegerFieldFromUser("Due Year (YYYY)");
-		if(year == Integer.MIN_VALUE) 
+		Integer year;
+		do 
 		{
-			return null;
+			year = getIntegerFieldFromUser("Due Year (YYYY)");
+			if(year == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			
+			if(year < 0 || year > 10000) 
+			{
+				System.out.println("Input not recognized." + year);
+			}
 		}
-		// get month
-		Integer month = getIntegerFieldFromUser("Due Month (MM)");
-		if(month == Integer.MIN_VALUE) 
-		{
-			return null;
-		}
-		// get day
-		Integer day = getIntegerFieldFromUser("Due Day (DD)");
-		if(day == Integer.MIN_VALUE) 
-		{
-			return null;
-		}
-		allStringInput.append(year + "-" + month + "-" + day);
+		while(year < 0 || year > 10000);
 		
+		// get month
+		Integer month;
+		do 
+		{
+			month = getIntegerFieldFromUser("Due Month (MM)");
+			if(month == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			
+			if(month < 0 || month > 13) 
+			{
+				System.out.println("Input not recognized." + month);
+			}
+		}
+		while(month < 0 || month > 13);
+		
+		// get day
+		Integer day; 
+		do 
+		{
+			day = getIntegerFieldFromUser("Due Day (DD)");
+			if(day == Integer.MIN_VALUE) 
+			{
+				return null;
+			}
+			if(year == -1) 
+			{
+				userBookLoan.setDueDate(Date.valueOf("0001-01-01"));
+				return userBookLoan;
+			}
+			if(day < 0 || day > 31) 
+			{
+				System.out.println("Input not recognized." + day);
+			}
+		}
+		while(day < 0 || day > 31);
+
+		allStringInput.setLength(0); // empty the buffer before input
+		allStringInput.append(StringUtils.leftPad(year.toString(), 4, "0") + "-" + StringUtils.leftPad(month.toString(), 2, "0")  + "-" + StringUtils.leftPad(day.toString(), 2, "0"));
 		userBookLoan.setDueDate(Date.valueOf(allStringInput.toString()));
 		
 		return userBookLoan;

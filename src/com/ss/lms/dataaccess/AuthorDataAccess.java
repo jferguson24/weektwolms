@@ -3,6 +3,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ss.lms.entity.Author;
@@ -15,7 +16,7 @@ public class AuthorDataAccess extends DataAccess<Author>
 	{
 		super();
 	}
-
+	
 	@Override
 	public void insert(Author entity) throws SQLException 
 	{
@@ -111,4 +112,15 @@ public class AuthorDataAccess extends DataAccess<Author>
 		return output;
 	}
 
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(authorId) AS max FROM library.tbl_author;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
 }

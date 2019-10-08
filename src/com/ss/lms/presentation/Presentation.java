@@ -1,7 +1,5 @@
 package com.ss.lms.presentation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import com.ss.lms.service.ServiceAdmin;
@@ -13,7 +11,7 @@ public abstract class Presentation
 	protected Scanner scanner;
 	protected ServiceAdmin administrator;
 	protected ServiceLibrarian librarian;
-	protected ServiceBorrower borrowerUser;
+	protected ServiceBorrower borrower;
 	
 	public Presentation(ServiceAdmin administrator)
 	{
@@ -34,9 +32,9 @@ public abstract class Presentation
 	public Presentation(ServiceBorrower borrower)
 	{
 		this.scanner = new Scanner(System.in);
-		this.borrowerUser = borrower;
+		this.borrower = borrower;
 		this.menu();
-		this.borrowerUser.closeConnection();
+		this.borrower.closeConnection();
 	}
 	
 	public abstract void menu();
@@ -87,19 +85,6 @@ public abstract class Presentation
             }
         }
     }
-	
-	// returns a string representation of a 2d array, with brackets
-	public static String make2DArrayListLegible(ArrayList<ArrayList<String>> input) 
-	{	
-		StringBuilder output = new StringBuilder();
-
-		input.stream().forEach
-		(
-			row -> output.append(Arrays.toString(row.toArray()) + "\n")
-		);
-		
-		return output.toString();
-	}
 	
 	/*
 	 * This function returns the next line while skipping over the next line feed, return carriage, etc

@@ -3,6 +3,7 @@ package com.ss.lms.dataaccess;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ss.lms.entity.*;
@@ -118,7 +119,7 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		// TODO Auto-generated method stub
 		PreparedStatement query;
 		String sql;
-		sql = "delete from tbl_tbl_library_branch where branchId = ?";
+		sql = "delete from tbl_library_branch where branchId = ?";
 		query = con.prepareStatement(sql);
 
 		query.setInt(1, entity.getBranchId());
@@ -134,4 +135,16 @@ public class LibraryBranchDataAccess extends DataAccess<LibraryBranch> {
 		}	
     	return branchList;
     }
+    
+	@Override
+	public Integer generatePrimaryKey() throws SQLException 
+	{
+		String sql = "SELECT MAX(branchId) AS max FROM library.tbl_library_branch;";
+		Statement query = con.createStatement();
+		
+		ResultSet result = query.executeQuery(sql);
+		result.next();
+		
+		return (result.getInt("max") + 1);
+	}
 }

@@ -4,10 +4,15 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ss.lms.dataaccess.*;
+import com.ss.lms.dataaccess.AuthorDataAccess;
+import com.ss.lms.dataaccess.BookDataAccess;
+import com.ss.lms.dataaccess.BookLoanDataAccess;
+import com.ss.lms.dataaccess.BorrowerDataAccess;
+import com.ss.lms.dataaccess.DataAccess;
+import com.ss.lms.dataaccess.LibraryBranchDataAccess;
+import com.ss.lms.dataaccess.PublisherDataAccess;
 import com.ss.lms.entity.Author;
 import com.ss.lms.entity.Book;
-import com.ss.lms.entity.BookCopy;
 import com.ss.lms.entity.BookLoan;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.LibraryBranch;
@@ -24,8 +29,7 @@ public class UserAdmin implements ServiceAdmin
 	
 	public UserAdmin(
 			AuthorDataAccess authorDao, PublisherDataAccess publisherDao, BookDataAccess bookDao,
-			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao,
-			BookCopyDataAccess bookCopyDao, BookLoanDataAccess bookLoanDao) 
+			LibraryBranchDataAccess libraryBranchDao, BorrowerDataAccess borrowerDao, BookLoanDataAccess bookLoanDao) 
 	{
 		this.authorDao = authorDao;
 		this.publisherDao = publisherDao;
@@ -52,29 +56,19 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 	
+	/*************************************************
+	 * 
+	 * ALL CREATE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void createAuthor(Author author) 
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Author> existing = authorDao.find(new Author(-1,"%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Author auth: existing) 
-			{
-				keys.add(auth.getAuthorId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        author.setAuthorId(newKey);
+	        author.setAuthorId(authorDao.generatePrimaryKey());
 			
 	        // creating new author entry
 			authorDao.insert(author);
@@ -90,24 +84,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Publisher> existing = publisherDao.find(new Publisher(-1,"%","%","%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Publisher pub: existing) 
-			{
-				keys.add(pub.getPublisherId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        publisher.setPublisherId(newKey);
+	        publisher.setPublisherId(publisherDao.generatePrimaryKey());
 			
 	        // creating new publisher entry
 			publisherDao.insert(publisher);
@@ -123,24 +101,25 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Book> existing = bookDao.find(new Book(-1,"%", new Author(-1, "%"), new Publisher(-1, "%", "%", "%")));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Book row: existing) 
-			{
-				keys.add(row.getBookId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        book.setBookId(newKey);
+	        book.setBookId(bookDao.generatePrimaryKey());
+	        
+	        // A new book much have exisiting correspinding publisher and author ID's
+	        // check the pub and auths exist
+	        
+	        ArrayList<Author> authorResult = authorDao.find(new Author(book.getAuthor().getAuthorId(), "%"));
+	        if(authorResult.size() != 1) 
+	        {
+	        	System.out.println("Unique Author ID for " + book.getAuthor().getAuthorId()+ " couldn't be found.");
+	        	return;
+	        }
+	        
+	        ArrayList<Publisher> publisherResult = publisherDao.find(new Publisher(book.getPublisher().getPublisherId(), "%", "%", "%"));
+	        if(publisherResult.size() != 1) 
+	        {
+	        	System.out.println("Unique Publisher ID for " + book.getPublisher().getPublisherId()+ " couldn't be found.");
+	        	return;
+	        }
 			
 	        // creating new book entry
 			bookDao.insert(book);
@@ -156,24 +135,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<LibraryBranch> existing = libraryBranchDao.find(new LibraryBranch(-1,"%", "%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(LibraryBranch row: existing) 
-			{
-				keys.add(row.getBranchId());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        libraryBranch.setBranchId(newKey);
+	        libraryBranch.setBranchId(libraryBranchDao.generatePrimaryKey());
 			
 	        // creating new library branch
 			libraryBranchDao.insert(libraryBranch);
@@ -189,24 +152,8 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
-			// get a unique primary key
-			ArrayList<Borrower> existing = borrowerDao.find(new Borrower(-1,"%", "%", "%"));
-			ArrayList<Integer> keys = new ArrayList<Integer>();
-			Integer newKey = 0;
-			
-			for(Borrower row: existing) 
-			{
-				keys.add(row.getCardNo());
-			}
-			
-	        do 
-	        {
-	            newKey++;
-	        }
-	        while(keys.contains(newKey));
-	        
 	        // assigning new key
-	        borrower.setCardNo(newKey);
+	        borrower.setCardNo(borrowerDao.generatePrimaryKey());
 			
 	        // creating new borrower
 			borrowerDao.insert(borrower);
@@ -217,6 +164,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL READ OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public ArrayList<Author> readAuthor(Author author) 
 	{
@@ -301,13 +254,21 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL UPDATE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void updateAuthor(Author author) 
 	{
 		try
 		{
+			// get the existing data for the author sent in
 			ArrayList<Author> oldData = authorDao.find( new Author(author.getAuthorId(), "%") );
 			
+			// ensure exactly one exists
 			if(oldData.size() != 1)
 			{
 				System.out.println("Unique Author ID for " + author.getAuthorId()+ " couldn't be found.");
@@ -315,9 +276,10 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(author.getAuthorName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					author.setAuthorName(oldData.get(0).getAuthorName());
 					break;
 				}
@@ -337,8 +299,10 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get the existing data for the publisher sent in
 			ArrayList<Publisher> oldData = publisherDao.find(new Publisher(publisher.getPublisherId(), "%", "%", "%"));
 			
+			// ensure only one record exists
 			if(oldData.size() != 1) 
 			{
 				System.out.println("Unique Publisher ID for " + publisher.getPublisherId()+ " couldn't be found.");
@@ -346,22 +310,23 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(publisher.getPublisherName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherName(oldData.get(0).getPublisherName());
 					break;
 				}
 
 				switch(publisher.getPublisherAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherAddress(oldData.get(0).getPublisherAddress());
 					break;
 				}
 				switch(publisher.getPublisherPhone()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					publisher.setPublisherPhone(oldData.get(0).getPublisherPhone());
 					break;
 				}
@@ -394,6 +359,7 @@ public class UserAdmin implements ServiceAdmin
 				return;
 			}
 			
+			// get exisitng data for the book sent in
 			ArrayList<Book> oldData = bookDao.find(new Book(
 					book.getBookId(),
 					"%",
@@ -407,6 +373,7 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(book.getTitle()) 
 				{
 				case "%":
@@ -415,14 +382,14 @@ public class UserAdmin implements ServiceAdmin
 				
 				switch(book.getAuthor().getAuthorId()) 
 				{
-				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
+				case -1:
 					book.setAuthor(oldData.get(0).getAuthor());
 					break;
 				}
 				
 				switch(book.getPublisher().getPublisherId())
 				{
-				case -1: // if the user sent in a -1, leave the old data as is, else use the user's data
+				case -1:
 					book.setPublisher(oldData.get(0).getPublisher());
 					break;
 				}
@@ -441,6 +408,7 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get existing data for the branch sent in
 			ArrayList<LibraryBranch> oldData = libraryBranchDao.find( new LibraryBranch(libraryBranch.getBranchId(), "%", "%") );
 			
 			if(oldData.size() != 1)
@@ -450,16 +418,17 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(libraryBranch.getBranchName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					libraryBranch.setBranchName(oldData.get(0).getBranchName());
 					break;
 				}
 				
 				switch(libraryBranch.getBranchAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					libraryBranch.setBranchAddress(oldData.get(0).getBranchAddress());
 					break;
 				}
@@ -478,6 +447,7 @@ public class UserAdmin implements ServiceAdmin
 	{
 		try 
 		{
+			// get existing data for borrower sent in
 			ArrayList<Borrower> oldData = borrowerDao.find( new Borrower(borrower.getCardNo(), "%", "%", "%") );
 			
 			if(oldData.size() != 1)
@@ -487,23 +457,24 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
+				// substitute %'s, -1's, and 0001-01-01 with the existing data for this record
 				switch(borrower.getName()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setName(oldData.get(0).getName());
 					break;
 				}
 				
 				switch(borrower.getAddress()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setAddress(oldData.get(0).getAddress());
 					break;
 				}
 				
 				switch(borrower.getPhone()) 
 				{
-				case "%": // if the user sent in a %, leave the old data as is, else use the user's data
+				case "%":
 					borrower.setPhone(oldData.get(0).getPhone());
 					break;
 				}
@@ -518,7 +489,6 @@ public class UserAdmin implements ServiceAdmin
 	}
 
 	@Override
-	// TODO needs big testing
 	public void updateBookLoan(BookLoan bookLoan) 
 	{
 		try 
@@ -563,7 +533,7 @@ public class UserAdmin implements ServiceAdmin
 			}
 			else 
 			{
-				// if the user sent a due date 0001-01-01, leave use existing data 
+				// if the user sent a due date 0001-01-01, use existing data 
 				if(Date.valueOf("0001-01-01").equals(bookLoan.getDueDate()))
 				{
 					bookLoan.setDueDate(oldData.get(0).getDueDate());
@@ -580,6 +550,12 @@ public class UserAdmin implements ServiceAdmin
 		}
 	}
 
+	/*************************************************
+	 * 
+	 * ALL DELETE OPERATIONS
+	 * 
+	 *************************************************/
+	
 	@Override
 	public void deleteAuthor(Author author) 
 	{

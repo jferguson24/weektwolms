@@ -1,32 +1,13 @@
 package com.ss.lms.service;
 
-import java.sql.SQLException;
 import java.util.*;
 
-import com.ss.lms.dataaccess.*;
 import com.ss.lms.entity.*;
 
 public interface ServiceBorrower
 {
-	public DataAccess<LibraryBranch> libraryBranchDao = null;
-	public DataAccess<UserBorrower> borrowerDao = null;
-	public DataAccess<BookCopy> bookCopyDao = null;
-	public DataAccess<BookLoan> bookLoanDao = null;
 	
-	default public void closeConnection() 
-	{
-		try 
-		{
-			libraryBranchDao.close();
-			borrowerDao.close();
-			bookCopyDao.close();
-			bookLoanDao.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-	}
+	public void closeConnection();
 	
 	/*************************************************
 	 * 
@@ -57,4 +38,12 @@ public interface ServiceBorrower
 	 *************************************************/
 
 	public void updateBookCopy(BookLoan bookCopy);
+	
+	/*************************************************
+	 * 
+	 * ALL DLETE OPERATIONS
+	 * 
+	 *************************************************/
+
+	public void returnBookLoan(BookLoan bookLoan);
 }
