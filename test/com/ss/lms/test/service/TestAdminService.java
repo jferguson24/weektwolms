@@ -20,7 +20,7 @@ class TestAdminService
 	public static ServiceAdmin admin;
 
 	/*
-	 * BOILER PLATE CODE AHEAD: SPEED CHECKED BY RADAR, SPEED LIMIT: 250 WPM
+	 * BOILER PLATE CODE AHEAD:
 	 * these objects are used purely as input to DAO find functions which will return the entire contents of the table
 	 * the state of these objects is still very mutable, final in this case only stops the reference from changing
 	 * for some reason JUint is enforcing my class level fields to be static.
