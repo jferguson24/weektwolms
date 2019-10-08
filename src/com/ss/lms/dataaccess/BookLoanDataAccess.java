@@ -26,7 +26,6 @@ public class BookLoanDataAccess extends DataAccess<BookLoan> {
 		query.setInt(1,entity.getBook().getBookId());
 		query.setInt(2,entity.getBranch().getBranchId());
 		query.setInt(3,entity.getBorrower().getCardNo());
-		//System.out.println(query.toString());
 		query.executeUpdate();
 	}
 
